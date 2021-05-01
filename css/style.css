@@ -1,0 +1,57 @@
+
+.container {
+  width: 1500px;
+
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: black;
+  color: white;
+}
+
+
+#sections {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.step {
+  margin-bottom: 200px;
+  font-family: "Courier";
+  font-size: 16px;
+  line-height: 23px;
+  height: 100%;
+  color: white;
+  padding-top: 500px;
+  padding-bottom: 500px;
+  text-align: center;
+}
+
+#sections .title {
+  font-family: "Press Start 2P", sans-serif;
+  
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 2px;
+  color: white;
+  line-height: 1.2em;
+  text-align: center;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #666;
+  shape-rendering: crispEdges;
+}
+
+.highlight {
+  fill: #008080;
+  font-weight: bold;
+}
+
