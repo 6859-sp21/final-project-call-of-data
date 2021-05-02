@@ -74,12 +74,14 @@
 
     <!-- Button to select player -->
       <div id="button-wrap">
-              <button class="player_button" id="player1" style="margin-right: 80px;">Player One</button>
-              <button class="player_button" id="player2" style="margin-right: 60px;">Player Two</button>
+              <button class="player_button" id="player1" style="margin-right: 80px;" onclick="picture1()"><a href="#section5">Player One</a></button>
+              <button class="player_button" id="player2" style="margin-right: 60px;" onclick="picture2()"><a href="#section5">Player Two</a></button></a>
               <!-- Sources: spaceman: http://pixelartmaker.com/art/2e706281b590321 -->
+              <!-- Sources: https://64.media.tumblr.com/3e58fc8d7586a9631569a8f582052692/tumblr_pmg7d7niX91xftn3lo1_540.png -->
+
         </div>
 
-    <br><br><br>
+        <br><br><br>
 
     <a href="#section5" class="next">PROCEED</a>
   </section>
@@ -89,8 +91,13 @@
 
   <!-- Choice Screens  -->
       <section class="step" id ="section5">
+
         <div class="title">action number one: Data</div>
         Choice one vs. Choice two
+        <div>
+          <img id="player1_image" src="player1_image" style="height:200px; display:none;" />
+          <img id="player2_image" src="player2_image" style="height:200px; display:none;" />
+        </div>
           <br><br><br>
           
         <a href="#section6" class="next">VIEW MISSION RESULTS</a>

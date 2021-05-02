@@ -61,4 +61,18 @@ function reveal_text() {
 
 
 
-// PLAYER BUTTON
+// PLAYER BUTTONS
+// Sources: https://codepen.io/davidcochran/pen/WbWXoa
+// https://stackoverflow.com/questions/6957443/how-to-display-div-after-click-the-button-in-javascript
+
+function picture1(){ 
+    var pic = "data/science_cat.png"
+    document.getElementById('player1_image').src = pic.replace('30x30', '100x100');
+    document.getElementById('player1_image').style.display='block';
+}
+
+function picture2(){ 
+    var pic = "data/spaceperson.png"
+    document.getElementById('player2_image').src = pic.replace('30x30', '100x100');
+    document.getElementById('player2_image').style.display='block';
+}
