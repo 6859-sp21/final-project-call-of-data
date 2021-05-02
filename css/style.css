@@ -1,21 +1,16 @@
 
-.container {
-  width: 1500px;
-
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   background-color: black;
   color: white;
+  display: flex;
+  justify-content: center;
 }
 
 
+
+/* Full screen sections */
 #sections {
-  position: relative;
+  /* position: relative; */
   display: inline-block;
   width: 100%;
 }
@@ -27,8 +22,8 @@ body {
   line-height: 23px;
   height: 100%;
   color: white;
-  padding-top: 500px;
-  padding-bottom: 500px;
+  padding-top: 200px;
+  padding-bottom: 200px;
   text-align: center;
 }
 
@@ -43,15 +38,126 @@ body {
   text-align: center;
 }
 
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #666;
-  shape-rendering: crispEdges;
+
+
+/* Section links */
+html {
+  scroll-behavior: smooth;
 }
 
-.highlight {
-  fill: #008080;
+a:link {
+  font-family: "Courier";
+  font-size: 18px;
+  color: white;
   font-weight: bold;
 }
+
+/* visited link */
+a:visited {
+  color: green;
+}
+
+/* mouse over link */
+a:hover {
+  color: hotpink;
+}
+
+
+
+
+/* ANIMATIONS */
+/* for type writer effect */
+/* following https://stackoverflow.com/questions/61614210/css-typewriter-effect-with-text-always-in-the-center */
+
+#typewriter{
+  font-family: "Courier";
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+  /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid green;
+  /* The typwriter cursor */
+  white-space: nowrap;
+  /* Keeps the content on a single line */
+  margin-left: 0;
+  margin-right: 100px;
+  /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em;
+}
+
+
+.animate{
+  animation: typing 5s steps(40, end),
+             blink-caret .75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The blinking cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: green; }
+}
+
+
+
+/* for the reveal effect */
+/* following https://blog.hubspot.com/website/css-fade-in */
+#fade-in-text {
+  display: inline-block;
+  font-family: "Courier";
+  font-size: 20px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.reveal_animate{
+  animation: fadeIn linear 6s;
+    -webkit-animation: fadeIn linear 6s;
+    -moz-animation: fadeIn linear 6s;
+    -o-animation: fadeIn linear 6s;
+    -ms-animation: fadeIn linear 6s;
+}
+
+@keyframes fadeIn {
+  0% {opacity:0;}
+  /* for delay */
+  95% { opacity:0; } 
+  100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  95% { opacity:0; } 
+  100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  95% { opacity:0; } 
+  100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+  0% {opacity:0;}
+  95% { opacity:0; } 
+  100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+  0% {opacity:0;}
+  95% { opacity:0; } 
+  100% {opacity:1;}
+}
+
+
+
+
+
+
 

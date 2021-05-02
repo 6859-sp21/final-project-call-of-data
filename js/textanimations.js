@@ -1,0 +1,55 @@
+// Following this tutorial to animate text as it comes into view:
+// https://codepen.io/jr-cologne/pen/zdYdmx
+
+// FOR THE TYPE WRITER
+
+// get the element to animate
+var element1 = document.getElementById('typewriter');
+var elementHeight1 = element1.clientHeight;
+
+// listen for scroll event and call animate function
+document.addEventListener('scroll', animate_text);
+
+// check if element is in view
+function inView(element, elementHeight) {
+  // get window height
+  var windowHeight = window.innerHeight;
+  // get number of pixels that the document is scrolled
+  var scrollY = window.scrollY || window.pageYOffset;
+  
+  // get current scroll position (distance from the top of the page to the bottom of the current viewport)
+  var scrollPosition = scrollY + windowHeight;
+  // get element position (distance from the top of the page to the bottom of the element)
+  var elementPosition = element.getBoundingClientRect().top + scrollY + elementHeight;
+  
+  // is scroll position greater than element position? (is element in view?)
+  if (scrollPosition > elementPosition) {
+    return true;
+  }
+  
+  return false;
+}
+
+// animate element when it is in view
+function animate_text() {
+  // is element in view?
+  if (inView(element1, elementHeight1)) {
+      // element is in view, add class to element
+      element1.classList.add('animate');
+  }
+}
+
+
+
+
+// FOR THE REVEAL
+var element2 = document.getElementById('fade-in-text');
+var elementHeight2 = element2.clientHeight;
+
+document.addEventListener('scroll', reveal_text);
+
+function reveal_text() {
+  if (inView(element2, elementHeight2)) {
+      element2.classList.add('reveal_animate');
+  }
+}
