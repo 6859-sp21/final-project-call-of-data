@@ -54,6 +54,22 @@ em {
 }
 
 
+#sections .choice_title {
+  font-family: "Courier";
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 2px;
+  color: white;
+  line-height: 1.2em;
+  text-align: center;
+}
+
+.center {
+  height:120px; 
+  margin-left: auto;
+  margin-right: auto;
+}
+
 
 /* Section links */
 html {
@@ -76,6 +92,9 @@ a:visited {
 a:hover {
   color: hotpink;
 }
+
+
+
 
 
 
