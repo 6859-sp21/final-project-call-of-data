@@ -11,6 +11,15 @@ em {
   font-style: normal;
 }
 
+.disclaimer {
+  font-weight: lighter;
+  word-spacing: 1.5px;
+  font-size: 18px;
+  text-align: center;
+  margin: 250px !important;
+  color: white;
+
+}
 
 /* Full screen sections */
 #sections {
@@ -31,6 +40,10 @@ em {
   text-align: center;
 }
 
+.next {
+  font-size: 40px
+}
+
 .step {
   margin-bottom: 200px;
   font-family: "Courier";
@@ -40,6 +53,16 @@ em {
   color: white;
   padding-top: 100px;
   padding-bottom: 200px;
+  text-align: center;
+}
+
+#sections .maintitle {
+  font-family: "Press Start 2P", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 2px;
+  color: white;
+  line-height: 1.2em;
   text-align: center;
 }
 
@@ -120,7 +143,6 @@ a:hover {
 }
 
 
-
 /* for the reveal effect */
 /* following https://blog.hubspot.com/website/css-fade-in */
 #fade-in-text {
@@ -141,31 +163,31 @@ a:hover {
 @keyframes fadeIn {
   0% {opacity:0;}
   /* for delay */
-  95% { opacity:0; } 
+  95% { opacity:0; }
   100% {opacity:1;}
 }
 
 @-moz-keyframes fadeIn {
   0% {opacity:0;}
-  95% { opacity:0; } 
+  95% { opacity:0; }
   100% {opacity:1;}
 }
 
 @-webkit-keyframes fadeIn {
   0% {opacity:0;}
-  95% { opacity:0; } 
+  95% { opacity:0; }
   100% {opacity:1;}
 }
 
 @-o-keyframes fadeIn {
   0% {opacity:0;}
-  95% { opacity:0; } 
+  95% { opacity:0; }
   100% {opacity:1;}
 }
 
 @-ms-keyframes fadeIn {
   0% {opacity:0;}
-  95% { opacity:0; } 
+  95% { opacity:0; }
   100% {opacity:1;}
 }
 
@@ -178,7 +200,7 @@ a:hover {
 #button-wrap {
   color: black;
   font-weight: bold;
-  padding-left: 45px; 
+  padding-left: 45px;
 }
 
 
@@ -189,7 +211,7 @@ a:hover {
   background-color: #D2E8E5;
   color: black;
   cursor: pointer;
-} 
+}
 
 
 button:hover{
@@ -205,9 +227,3 @@ button.selected{
   cursor: pointer;
 
 }
-
-
-
-
-
-
