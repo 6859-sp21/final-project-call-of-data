@@ -6,6 +6,10 @@ body {
   justify-content: center;
 }
 
+em {
+  font-weight: bold;
+  font-style: normal;
+}
 
 
 /* Full screen sections */
@@ -165,6 +169,42 @@ a:hover {
   100% {opacity:1;}
 }
 
+
+
+
+
+/* Button Fomatting */
+
+#button-wrap {
+  color: black;
+  font-weight: bold;
+  padding-left: 45px; 
+}
+
+
+
+
+.button.active {
+  display: block;
+  background-color: #D2E8E5;
+  color: black;
+  cursor: pointer;
+} 
+
+
+button:hover{
+  box-shadow: inset 0px 0px 7px rgba(0,0,0,0.18);
+  background-color: #9dc9c3;
+  color: black;
+  cursor: pointer;
+}
+
+button.selected{
+  background-color: rgba(0,0,0,0.18);
+  color: red;
+  cursor: pointer;
+
+}
 
 
 

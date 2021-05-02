@@ -1,3 +1,7 @@
+
+// TEXT ANIMATIONS
+
+
 // Following this tutorial to animate text as it comes into view:
 // https://codepen.io/jr-cologne/pen/zdYdmx
 
@@ -53,3 +57,8 @@ function reveal_text() {
       element2.classList.add('reveal_animate');
   }
 }
+
+
+
+
+// PLAYER BUTTON
