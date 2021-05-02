@@ -1,0 +1,111 @@
+<!-- Source: https://github.com/vlandham/scroll_demo/tree/gh-pages/lib -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Scrolling Sections</title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Press+Start+2P">
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+    <div id='sections'>
+
+    <!-- Story Building Screens  -->
+      <section class="step" id ="section1">
+        <div class="title" style="font-size: 35px;">Call of Data</div>
+          Insert images here
+          
+          <br>
+          <br>
+          <br>
+
+          <a href="#section2">ENTER</a>
+        </section>
+
+  <!-- Choice Screens  -->
+      <section class="step"  id ="section2">
+        <div class="title">Hello [Data Scientist]<br/>you’ve been recruited
+          </div>
+          I, the president of the united states, need you to help me tackle our Earth’s deadliest enemy:
+          
+          <br>
+          <br>
+          <br>
+
+          <a href="#section3">Proceed to Mission</a>
+
+      </section>
+      <section class="step" id ="section3">
+        <div class="title">Mission Objectives</div>
+        blah blah blah.
+          
+          <br>
+          <br>
+          <br>
+
+        <a href="#section4">Start mission</a>
+
+      </section>
+      <section class="step" id ="section4">
+        <div class="title">action number one: Data</div>
+        Here are all 5,040 words of my talk.
+          
+          <br>
+          <br>
+          <br>
+          
+        <a href="#section5">View mission results</a>
+
+      </section>
+
+  <!-- Dashboard Screens  -->
+
+      <section class="step" id ="section5">
+        <div class="title">Final Dashboard </div>
+        Final dashboard will be here
+      </section>
+
+    </div>
+    
+    <div id='vis'>
+    </div>
+    <div id="extra-space">
+</div>
+
+
+<script src="lib/d3.js"></script>
+<script src="js/clicknext.js"></script>
+
+
+<!-- Scroll to next section (from: https://www.w3schools.com/howto/howto_css_smooth_scroll.asp#section2) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  // Add smooth scrolling to all links
+  $("a").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+});
+</script>
+
+</body>
+</html>
