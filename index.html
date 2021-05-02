@@ -12,56 +12,48 @@
     <div id='sections'>
 
     <!-- Story Building Screens  -->
-      <section class="step" id ="section1">
-        <div class="title" style="font-size: 35px;">Call of Data</div>
-          Insert images here
+      <section class="opening" id ="section1">
+        <div class="title" style="font-size: 35px;">Call of Data</div><br>
+        <img src="data/flowchart.png" alt="flowchart" style="width:50px;height:60px;">
+        <img src="data/computer.png" alt="computer" style="width:50px;height:60px;">
+        <img src="data/flask.png" alt="flask" style="width:50px;height:60px;">
           
-          <br>
-          <br>
-          <br>
+          <br><br><br>
 
-          <a href="#section2" class="next">ENTER</a>
+          <a href="#section2" class="next">PLAY</a>
         </section>
 
-  <!-- Choice Screens  -->
       <section class="step"  id ="section2">
-        <div class="title">Hello [Data Scientist]<br/>you’ve been recruited</div>
+        <div class="title">Hello [Data Scientist]<br/>you’ve been recruited</div><br><br>
+        
+        <img src="data/president.png" alt="president" style="height:200px;">
         <div id="typewriter">
-          I, the president of the united states, need you to help me tackle our Earth’s deadliest enemy:
-       </div> 
-       <br>
-       <br>
-       <br>
-       <div id="fade-in-text">CLIMATE CHANGE</div>
-    
-          <br>
-          <br>
-          <br>
-
-          <a href="#section3" class="next">Proceed to Mission</a>
-
+            I, the president of the united states, need you to help me tackle our Earth’s deadliest enemy:
+        </div> 
+        <br><br><br>
+        <div id="fade-in-text">climate change. </div>
+        <br><br><br>
+        <a href="#section3" class="next">Proceed to Mission</a>
       </section>
+
+
       <section class="step" id ="section3">
         <div class="title">Mission Objectives</div>
         blah blah blah.
           
-          <br>
-          <br>
-          <br>
+          <br><br><br>
 
         <a href="#section4" class="next">Start mission</a>
-
       </section>
+
+
+  <!-- Choice Screens  -->
       <section class="step" id ="section4">
         <div class="title">action number one: Data</div>
         Choice one vs. Choice two
-          
-          <br>
-          <br>
-          <br>
+          <br><br><br>
           
         <a href="#section5" class="next">View mission results</a>
-
       </section>
 
   <!-- Dashboard Screens  -->
@@ -71,46 +63,10 @@
         Final dashboard will be here
       </section>
 
-    </div>
-    
-    <div id='vis'>
-    </div>
-    <div id="extra-space">
 </div>
 
 
 <script src="lib/d3.js"></script>
 <script src="js/textanimations.js"></script>
-
-
-<!-- Scroll to next section (from: https://www.w3schools.com/howto/howto_css_smooth_scroll.asp#section2) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-  // Add smooth scrolling to all links
-  $("a").on('click', function(event) {
-
-    // Make sure this.hash has a value before overriding default behavior
-    if (this.hash !== "") {
-      // Prevent default anchor click behavior
-      event.preventDefault();
-
-      // Store hash
-      var hash = this.hash;
-
-      // Using jQuery's animate() method to add smooth page scroll
-      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top
-      }, 800, function(){
-
-        // Add hash (#) to URL when done scrolling (default click behavior)
-        window.location.hash = hash;
-      });
-    } // End if
-  });
-});
-</script>
-
 </body>
 </html>

@@ -15,6 +15,18 @@ body {
   width: 100%;
 }
 
+.opening {
+  margin-bottom: 200px;
+  font-family: "Courier";
+  font-size: 16px;
+  line-height: 23px;
+  height: 100%;
+  color: white;
+  padding-top: 250px;
+  padding-bottom: 200px;
+  text-align: center;
+}
+
 .step {
   margin-bottom: 200px;
   font-family: "Courier";
@@ -22,14 +34,13 @@ body {
   line-height: 23px;
   height: 100%;
   color: white;
-  padding-top: 200px;
+  padding-top: 100px;
   padding-bottom: 200px;
   text-align: center;
 }
 
 #sections .title {
   font-family: "Press Start 2P", sans-serif;
-  
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 2px;
@@ -71,7 +82,7 @@ a:hover {
 
 #typewriter{
   font-family: "Courier";
-  font-size: 16px;
+  font-size: 18px;
   color: #fff;
   text-align: center;
   overflow: hidden;
@@ -83,7 +94,7 @@ a:hover {
   margin-left: 0;
   margin-right: 100px;
   /* Gives that scrolling effect as the typing happens */
-  letter-spacing: .15em;
+  padding-left: 150px;
 }
 
 
@@ -95,7 +106,7 @@ a:hover {
 /* The typing effect */
 @keyframes typing {
   from { width: 0 }
-  to { width: 100% }
+  to { width: 80% }
 }
 
 /* The blinking cursor effect */
@@ -111,9 +122,8 @@ a:hover {
 #fade-in-text {
   display: inline-block;
   font-family: "Courier";
-  font-size: 20px;
+  font-size: 18px;
   color: #fff;
-  font-weight: bold;
 }
 
 .reveal_animate{
