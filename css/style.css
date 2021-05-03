@@ -77,10 +77,11 @@ p {
 .disclaimer {
   font-weight: lighter;
   word-spacing: 1.5px;
-  font-size: 18px;
+  font-size: 14px;
   text-align: center;
-  margin: 250px !important;
+  margin: 100px !important;
   color: white;
+  justify-content: center;
 }
 
 .choice_title {
