@@ -100,6 +100,18 @@ p {
   margin-right: auto;
 }
 
+.dashboard {
+  display: "block";
+  height: 9%; 
+  margin-top: 0px; 
+  padding-top: 0px;
+  padding-bottom: 0px;
+  /* margin-left: auto;
+  margin-right: auto; */
+}
+
+
+
 
 /* Section links */
 html {
