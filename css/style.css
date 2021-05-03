@@ -337,11 +337,11 @@ p4 {
 }
 
 .reveal_animate{
-  animation: fadeIn linear 16s;
-    -webkit-animation: fadeIn linear 16s;
-    -moz-animation: fadeIn linear 16s;
-    -o-animation: fadeIn linear 16s;
-    -ms-animation: fadeIn linear 16s;
+  animation: fadeIn linear 14s;
+    -webkit-animation: fadeIn linear 14s;
+    -moz-animation: fadeIn linear 14s;
+    -o-animation: fadeIn linear 14s;
+    -ms-animation: fadeIn linear 14s;
 }
 
 
