@@ -76,3 +76,20 @@ function picture2(){
     document.getElementById('player2_image').src = pic.replace('30x30', '100x100');
     document.getElementById('player2_image').style.display='block';
 }
+
+
+
+// FINAL DASHBOARD BUTTONS
+function picture3(){ 
+  var pic = "data/honest_scientist.jpg"
+  document.getElementById('honest_scientist').src = pic;
+  document.getElementById('honest_scientist').style.display='block';
+}
+
+function picture4(){ 
+  var pic = "data/oil_tycoon.jpg"
+  document.getElementById('oil_tycoon').src = pic;
+  document.getElementById('oil_tycoon').style.display='block';
+}
+
+

@@ -33,13 +33,13 @@ p {
   line-height: 23px;
   height: 100%;
   color: white;
-  padding-top: 250px;
-  padding-bottom: 200px;
+  padding-top: 175px;
+  padding-bottom: 250px;
   text-align: center;
 }
 
 .next {
-  font-size: 40px
+  font-size: 30px
 }
 
 .step {
@@ -77,10 +77,11 @@ p {
 .disclaimer {
   font-weight: lighter;
   word-spacing: 1.5px;
-  font-size: 18px;
+  font-size: 14px;
   text-align: center;
-  margin: 250px !important;
+  margin: 150px !important;
   color: white;
+  justify-content: center;
 }
 
 .choice_title {
@@ -98,6 +99,18 @@ p {
   margin-left: auto;
   margin-right: auto;
 }
+
+.dashboard {
+  display: "block";
+  height: 7%;
+  margin-top: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  /* margin-left: auto;
+  margin-right: auto; */
+}
+
+
 
 
 /* Section links */
@@ -170,13 +183,6 @@ a:hover {
   color: #fff;
 }
 
-.reveal_animate{
-  animation: fadeIn linear 12.2s;
-    -webkit-animation: fadeIn linear 12.2s;
-    -moz-animation: fadeIn linear 12.2s;
-    -o-animation: fadeIn linear 12.2s;
-    -ms-animation: fadeIn linear 12.2s;
-}
 
 @keyframes fadeIn {
   0% {opacity:0;}
@@ -304,7 +310,7 @@ p4 {
   -webkit-animation: type2 4.2s steps(40, end);
   animation: type2 4.2s steps(40, end);
   -webkit-animation-fill-mode: forwards;
-  animation-delay: 0.1s;
+  animation-delay: 4.1s;
   animation-fill-mode: forwards;
 }
 
@@ -313,21 +319,29 @@ p4 {
   opacity: 0;
   -webkit-animation: type2 4s steps(40, end);
   animation: type2 4s steps(40, end);
-  -webkit-animation-delay: 5.1s;
-  animation-delay: 4.4s;
+  -webkit-animation-delay: 8.5s;
+  animation-delay: 8.5s;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
 
 .css-typing p1:nth-child(3) {
-  width: 9em;
+  width: 9.5em;
   opacity: 0;
   -webkit-animation: type3 2.8s steps(20, end), blink .5s step-end infinite alternate;
   animation: type3 2.8s steps(20, end), blink .5s step-end infinite alternate;
-  -webkit-animation-delay: 8.7s;
-  animation-delay: 8.7s;
+  -webkit-animation-delay: 12.8s;
+  animation-delay: 12.8s;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
+}
+
+.reveal_animate{
+  animation: fadeIn linear 16s;
+    -webkit-animation: fadeIn linear 16s;
+    -moz-animation: fadeIn linear 16s;
+    -o-animation: fadeIn linear 16s;
+    -ms-animation: fadeIn linear 16s;
 }
 
 
@@ -336,7 +350,7 @@ p4 {
   -webkit-animation: type2 4.2s steps(40, end);
   animation: type2 4.2s steps(40, end);
   -webkit-animation-fill-mode: forwards;
-  animation-delay: 0.1s;
+  animation-delay: 16.1s;
   animation-fill-mode: forwards;
 }
 
@@ -345,8 +359,8 @@ p4 {
   opacity: 0;
   -webkit-animation: type2 4s steps(40, end);
   animation: type2 4s steps(40, end);
-  -webkit-animation-delay: 5.1s;
-  animation-delay: 4.4s;
+  -webkit-animation-delay:21.2s;
+  animation-delay: 21.2s;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
@@ -359,8 +373,8 @@ p4 {
   opacity: 0;
   -webkit-animation: type2 3.8s steps(40, end);
   animation: type2 3.8s steps(40, end);
-  -webkit-animation-delay: 9.6s;
-  animation-delay: 9.6s;
+  -webkit-animation-delay: 25.2s;
+  animation-delay: 25.2s;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
@@ -372,8 +386,8 @@ p4 {
   opacity: 0;
   -webkit-animation: type3 3.8s steps(40, end), blink .5s step-end infinite alternate;
   animation: type3 3.8s steps(40, end), blink .5s step-end infinite alternate;
-  -webkit-animation-delay: 13.6s;
-  animation-delay: 13.6s;
+  -webkit-animation-delay: 29s;
+  animation-delay: 29s;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
@@ -393,7 +407,7 @@ p4 {
 
 @keyframes type2 {
   0% { width: 0; }
-  1% { opacity: 1; }
+  1% { opacity: 1; border-right: .15em solid green;}
   99.9% { border-right: .15em solid green; }
   100% {
     opacity: 1;
@@ -402,7 +416,7 @@ p4 {
 
 @-webkit-keyframes type2 {
   0% { width: 0; }
-  1% { opacity: 1; }
+  1% { opacity: 1; border-right: .15em solid green;}
   99.9% { border-right: .15em solid green; }
   100% {
     opacity: 1;
