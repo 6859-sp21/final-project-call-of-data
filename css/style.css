@@ -151,6 +151,7 @@ a:hover {
 .output h1 {
   font-size: 23px;
   font-weight: bold;
+  margin-left:15px;
 }
 
 /* Cursor Styling */
