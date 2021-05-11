@@ -125,7 +125,7 @@ a:link {
   font-weight: bold;
 }
 
-/* visited link */
+
 a:visited {
   color: green;
 }
@@ -136,43 +136,56 @@ a:hover {
 }
 
 
-/* ANIMATIONS */
+/* TEXT ANIMATIONS */
 /* for type writer effect */
 /* following https://stackoverflow.com/questions/61614210/css-typewriter-effect-with-text-always-in-the-center */
-#typewriter {
-  font-family: monospace;
-  font-size: 24px;
-  color: #fff;
+.output {
+  font-family: "Courier";
+  font-size: 25px;
+  line-height: 23px;
+  height: 100%;
   text-align: left;
-  /*overflow: hidden;
-  /* Ensures the content is not revealed until the animation */
-  border-right: .15em solid green;
-  /* The typwriter cursor */
-  white-space: nowrap;
-  /* Keeps the content on a single line */
-  margin-left: 0;
-  margin-right: 100px;
-  /* Gives that scrolling effect as the typing happens */
-  padding-left: 150px;
+  color: white;
+}
+.output h1 {
+  font-size: 25px;
 }
 
-.animate{
-  animation: typing 3s steps(40, end),
-             blink-caret .5s step-end infinite;
+/* Cursor Styling */
+.cursor::after {
+  content: '';
+  display: inline-block;
+  margin-left: 3px;
+  background-color: white;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
 }
 
-/* The typing effect */
-@keyframes typing {
-  from { width: 0 }
-  to { width: 80% }
+h1.cursor::after {
+  height: 24px;
+  width: 13px;
 }
 
-/* The blinking cursor effect */
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: green; }
+p.cursor::after {
+  height: 13px;
+  width: 6px;
 }
 
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  49% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 
 /* for the reveal effect */
 /* following https://blog.hubspot.com/website/css-fade-in */
@@ -216,7 +229,19 @@ a:hover {
 }
 
 
-/* Button Fomatting */
+.reveal_animate{
+  animation: fadeIn linear 5s;
+    -webkit-animation: fadeIn linear 5s;
+    -moz-animation: fadeIn linear 5s;
+    -o-animation: fadeIn linear 5s;
+    -ms-animation: fadeIn linear 5s;
+}
+
+
+
+
+
+/* BUTTON FORMATTING */
 
 #button-wrap {
   color: black;
@@ -246,203 +271,5 @@ button.selected{
 }
 
 
-p1 {
-  margin-top: 34px;
-  display: flex;
-  margin-bottom: 5px;
-  padding: 5px
-}
-
-p3 {
-  margin: 8px;
-  display: flex;
-  padding: 5px
-}
-
-p4 {
-  margin-top: 28px;
-  margin-bottom: 0px;
-  color: blue;
-  padding: 5px;
-}
-
-.css-typing p {
-  font-family: "Courier";
-  font-size: 26px;
-  white-space: nowrap;
-  overflow: hidden;
-
-}
-
-.css-typing p1 {
-  border-right: .16em solid green;
-  font-family: "Courier";
-  font-size: 28px;
-  font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden;
-
-}
-
-.css-typing p3 {
-  border-right: .16em solid green;
-  font-family: "Courier";
-  font-size: 26px;
-  font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden;
-
-}
-
-.css-typing p4 {
-  border-right: .16em solid green;
-  font-family: "Courier";
-  font-size: 28px;
-  font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden;
-
-}
 
 
-.css-typing p:nth-child(1) {
-  width: 31em;
-  -webkit-animation: type2 4.2s steps(40, end);
-  animation: type2 4.2s steps(40, end);
-  -webkit-animation-fill-mode: forwards;
-  animation-delay: 4.1s;
-  animation-fill-mode: forwards;
-}
-
-.css-typing p:nth-child(2) {
-  width: 34em;
-  opacity: 0;
-  -webkit-animation: type2 4s steps(40, end);
-  animation: type2 4s steps(40, end);
-  -webkit-animation-delay: 8.5s;
-  animation-delay: 8.5s;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-}
-
-.css-typing p1:nth-child(3) {
-  width: 9.5em;
-  opacity: 0;
-  -webkit-animation: type3 2.8s steps(20, end), blink .5s step-end infinite alternate;
-  animation: type3 2.8s steps(20, end), blink .5s step-end infinite alternate;
-  -webkit-animation-delay: 12.8s;
-  animation-delay: 12.8s;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-}
-
-.reveal_animate{
-  animation: fadeIn linear 12s;
-    -webkit-animation: fadeIn linear 12s;
-    -moz-animation: fadeIn linear 12s;
-    -o-animation: fadeIn linear 12s;
-    -ms-animation: fadeIn linear 12s;
-}
-
-
-.css-typing p3:nth-child(1) {
-  width: 38em;
-  -webkit-animation: type2 4.2s steps(40, end);
-  animation: type2 4.2s steps(40, end);
-  -webkit-animation-fill-mode: forwards;
-  animation-delay: 16.1s;
-  animation-fill-mode: forwards;
-}
-
-.css-typing p3:nth-child(2) {
-  width: 30em;
-  opacity: 0;
-  -webkit-animation: type2 4s steps(40, end);
-  animation: type2 4s steps(40, end);
-  -webkit-animation-delay:21.2s;
-  animation-delay: 21.2s;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-}
-
-.css-typing p3:nth-child(3) {
-  margin-top: 30px;
-  font-size: 29px;
-  color: lightblue;
-  width: 26.4em;
-  opacity: 0;
-  -webkit-animation: type2 3.8s steps(40, end);
-  animation: type2 3.8s steps(40, end);
-  -webkit-animation-delay: 25.2s;
-  animation-delay: 25.2s;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-}
-
-.css-typing p3:nth-child(4) {
-  color: lightblue;
-  font-size: 29px;
-  width: 30em;
-  opacity: 0;
-  -webkit-animation: type3 3.8s steps(40, end), blink .5s step-end infinite alternate;
-  animation: type3 3.8s steps(40, end), blink .5s step-end infinite alternate;
-  -webkit-animation-delay: 29s;
-  animation-delay: 29s;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-}
-
-
-@keyframes type {
-  0% { width: 0; }
-  99.9% { border-right: .15em solid green; }
-  100% { border: none; }
-}
-
-@-webkit-keyframes type {
-  0% { width: 0; }
-  99.9% { border-right: .15em solid green; }
-  100% { border: none; }
-}
-
-@keyframes type2 {
-  0% { width: 0; }
-  1% { opacity: 1; border-right: .15em solid green;}
-  99.9% { border-right: .15em solid green; }
-  100% {
-    opacity: 1;
-    border: none; }
-}
-
-@-webkit-keyframes type2 {
-  0% { width: 0; }
-  1% { opacity: 1; border-right: .15em solid green;}
-  99.9% { border-right: .15em solid green; }
-  100% {
-    opacity: 1;
-    border: none;
-  }
-}
-
-@keyframes type3 {
-  0% { width: 0; }
-  1% { opacity: 1; }
-  100% { opacity: 1; }
-}
-
-@-webkit-keyframes type3 {
-  0% { width: 0; }
-  1% { opacity: 1; }
-  100% { opacity: 1; }
-}
-
-@keyframes blink {
-  50% {
-    border-color: transparent;
-  }
-}
-@-webkit-keyframes blink {
-  50% {
-    border-color: tranparent;
-  }
-}

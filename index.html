@@ -26,7 +26,7 @@
 
           <br><br><br><br>
 
-          <a href="#section2" class="next" style="font-family: 'Press Start 2P', sans-serif; font-size: 30px;">PLAY</a>
+          <a href="#section2" class="next" onclick="animate_text1()" style="font-family: 'Press Start 2P', sans-serif; font-size: 30px;">PLAY</a>
 
         <p class = 'disclaimer'>
         The story, names, characters, and incidents portrayed in this production are fictitious.<br>
@@ -49,13 +49,12 @@
       </div>
 
       <div class="row col-sm-6" style="margin-left: 0px; margin-right: 20px;">
-          <div class="css-typing">
-              <p> I, Joe Button, the president of the United Plates, </p>
-              <p> need you to help me tackle our Earth’s deadliest enemy: </p>
 
-              <p1> Climate Change. </p1>
-          </div>
-          <br><br><br>
+        <div class="output" id="output">
+          <h1 class="cursor"></h1>
+          <p></p>
+        </div>
+
       </div>
        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
@@ -214,32 +213,15 @@
 
   <!-- SCRIPTS  -->
 
-<script src="lib/d3.js"></script>
-<script src="js/textanimations.js"></script>
-
-		<script type="text/javascript">
-
-
-    // Fade-In Text
-
-    var element2 = document.getElementById('fade-in-text');
-    var elementHeight2 = element2.clientHeight;
-
-    document.addEventListener('scroll', reveal_text);
-
-    function reveal_text() {
-      if (inView(element2, elementHeight2)) {
-        element2.classList.add('reveal_animate');
-      }
-    }
-
-    // TODO: Typewriter Effect
-    // source: https://codepen.io/daviddcarr/pen/XVyQMM
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stupidtable/0.0.1/stupidtable.min.js"></script>
+  
+  <script src="lib/d3.js"></script>
+  <script src="js/textanimations.js"></script>
+  <script src="script.js"></script>
 
 
-
-
-    </script>
 
 </body>
 </html>

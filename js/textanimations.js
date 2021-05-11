@@ -2,17 +2,113 @@
 // TEXT ANIMATIONS
 
 
-// Following this tutorial to animate text as it comes into view:
-// https://codepen.io/jr-cologne/pen/zdYdmx
 
-// FOR THE TYPE WRITER
+// TYPEWRITER FUNCTIONALITY ADAPTED FROM: https://codepen.io/daviddcarr/pen/XVyQMM
 
-// get the element to animate
-var element1 = document.getElementById('typewriter');
-var elementHeight1 = element1.clientHeight;
+// values to keep track of the number of letters typed, which quote to use. etc. Don't change these values.
+var i = 0,
+    a = 0,
+    isBackspacing = false,
+    isParagraph = false;
 
-// listen for scroll event and call animate function
-document.addEventListener('scroll', animate_text);
+// Typerwrite text content. Use a pipe to indicate the start of the second line "|".  
+var textArray = [
+  "I, Joe Button, the president of the United Plates,", 
+  "Need you to help me tackle our Earth’s deadliest enemy:|Climate Change."
+];
+
+// Speed (in milliseconds) of typing.
+var speedForward = 50, //Typing Speed
+    speedWait = 1000, // Wait between typing and backspacing
+    speedBetweenLines = 1000, //Wait between first and second lines
+    speedBackspace = 50; //Backspace Speed
+
+// animate element when it is in view
+  function animate_text1() {
+      // On click, run typewriter function
+      typeWriter("output", textArray);
+  
+}
+
+
+
+
+
+// TYPEWRITER FUNCTION
+function typeWriter(id, ar) {
+  var element = $("#" + id),
+      aString = ar[a],
+      eHeader = element.children("h1"), //Header element
+      eParagraph = element.children("p"); //Subheader element
+  
+  // Determine if animation should be typing or backspacing
+  if (!isBackspacing) {
+    
+    // If full string hasn't yet been typed out, continue typing
+    if (i < aString.length) {
+      
+      // If character about to be typed is a pipe, switch to second line and continue.
+      if (aString.charAt(i) == "|") {
+        isParagraph = true;
+        eHeader.removeClass("cursor");
+        eParagraph.addClass("cursor");
+        i++;
+        setTimeout(function(){ typeWriter(id, ar); }, speedBetweenLines);
+        
+      // If character isn't a pipe, continue typing.
+      } else {
+        // Type header or subheader depending on whether pipe has been detected
+        if (!isParagraph) {
+          eHeader.text(eHeader.text() + aString.charAt(i));
+        } else {
+          eParagraph.text(eParagraph.text() + aString.charAt(i));
+        }
+        i++;
+        setTimeout(function(){ typeWriter(id, ar); }, speedForward);
+      }
+      
+    // If full string has been typed, switch to backspace mode.
+    } else if (i == aString.length) {
+      
+      isBackspacing = true;
+      setTimeout(function(){ typeWriter(id, ar); }, speedWait);
+      
+    }
+    
+  // If backspacing is enabled
+  } else {
+    
+    // If either the header or the paragraph still has text, continue backspacing
+    if (eHeader.text().length > 0 || eParagraph.text().length > 0) {
+      
+      // If paragraph still has text, continue erasing, otherwise switch to the header.
+      if (eParagraph.text().length > 0) {
+        eParagraph.text(eParagraph.text().substring(0, eParagraph.text().length - 1));
+      } else if (eHeader.text().length > 0) {
+        eParagraph.removeClass("cursor");
+        eHeader.addClass("cursor");
+        eHeader.text(eHeader.text().substring(0, eHeader.text().length - 1));
+      }
+      setTimeout(function(){ typeWriter(id, ar); }, speedBackspace);
+    
+    // If neither head or paragraph still has text, switch to next quote in array and start typing.
+    } else { 
+      
+      isBackspacing = false;
+      i = 0;
+      isParagraph = false;
+      a = (a + 1) % ar.length; //Moves to next position in array, always looping back to 0
+      setTimeout(function(){ typeWriter(id, ar); }, 10);
+      
+    }
+  }
+}
+
+
+
+
+// ADD AN EVENT LISTENER TO ONLY ANIMATE TEXT WHEN IN VIEW:
+// CODE ADAPTED FROM: https://codepen.io/jr-cologne/pen/zdYdmx
 
 // check if element is in view
 function inView(element, elementHeight) {
@@ -34,18 +130,6 @@ function inView(element, elementHeight) {
   return false;
 }
 
-// animate element when it is in view
-function animate_text() {
-  // is element in view?
-  if (inView(element1, elementHeight1)) {
-      // element is in view, add class to element
-      element1.classList.add('animate');
-  }
-}
-
-
-
-
 // FOR THE REVEAL
 var element2 = document.getElementById('fade-in-text');
 var elementHeight2 = element2.clientHeight;
@@ -57,6 +141,9 @@ function reveal_text() {
       element2.classList.add('reveal_animate');
   }
 }
+
+
+
 
 
 
