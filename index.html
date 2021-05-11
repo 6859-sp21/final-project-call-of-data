@@ -11,7 +11,20 @@
 <body>
     <div id='sections'>
 
+    <!-- Sidebar  -->
+    <div id="mySidebar1" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="#section1">Home</a>
+      <a href="#section2">The President</a>
+      <a href="#section3">Your Mission</a>
+      <a href="#section4">Players</a>
+    </div>
+    
+    <button class="openbtn" onclick="openNav()">&#9776; Open Menu</button>
+
+
     <!-- Story Building Screens  -->
+
     <!-- Section 1: Intro to Game -->
       <section class="opening" id ="section1">
         <div class="maintitle" style="font-size: 50px;">Call of Data</div><br>
@@ -38,7 +51,10 @@
 
       <!-- Section 2: Introducing the President -->
       <section class="step"  id ="section2">
+      <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
+     
 
+      <!-- Text -->
       <div class="title" style="margin-left: 250px text-align: left;">
        Hello [ Human ], <br> You’ve been recruited.
       </div><br><br><br><br>
@@ -70,6 +86,7 @@
 
       <!-- Section 3: Your Mission Objective -->
       <section class="step" id ="section3">
+      <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
 
       <div class="title">Your Mission Objective<br>
       </div><br><br><br><br>
@@ -97,6 +114,7 @@
   <!-- Section 4: Select Player  -->
 
     <section class="step"  id ="section4">
+      <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
 
       <div class="title" style="font-size: 34px">Select Your Player</div><br><br><br><br>
 
@@ -121,6 +139,7 @@
 
   <!-- Choice Screens  -->
     <section class="step" id ="section5">
+      <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
 
       <div class="title">action number one: Data</div>
       <br>
@@ -152,6 +171,8 @@
   <!-- Dashboard Screens  -->
 
       <section class="step" id ="section6">
+        <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
+
           <img id="honest_scientist" src="data/honest_scientist.jpg"  class = "dashboard"/>
 
           <br><br><br><br>
@@ -162,6 +183,8 @@
 
 
       <section class="step" id ="section7">
+        <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
+
           <img id="oil_tycoon" src="data/oil_tycoon.jpg" class = "dashboard"/>
 
           <br><br><br><br>
@@ -173,6 +196,8 @@
   <!-- Sources  -->
 
         <section class="step" id ="section8">
+          <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
+
           <div class="title">Sources</div>
           <br>
           <em>Images</em> <br>
@@ -215,7 +240,7 @@
   
   <script src="lib/d3.js"></script>
   <script src="js/textanimations.js"></script>
-  <script src="script.js"></script>
+  <script src="js/sidebar.js"></script>
 
 
 
