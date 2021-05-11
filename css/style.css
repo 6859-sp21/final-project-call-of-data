@@ -141,14 +141,16 @@ a:hover {
 /* following https://stackoverflow.com/questions/61614210/css-typewriter-effect-with-text-always-in-the-center */
 .output {
   font-family: "Courier";
-  font-size: 25px;
+  font-size: 23px;
   line-height: 23px;
   height: 100%;
   text-align: left;
   color: white;
+  font-weight: bold;
 }
 .output h1 {
-  font-size: 25px;
+  font-size: 23px;
+  font-weight: bold;
 }
 
 /* Cursor Styling */
@@ -164,11 +166,11 @@ a:hover {
 
 h1.cursor::after {
   height: 24px;
-  width: 13px;
+  width: 6px;
 }
 
 p.cursor::after {
-  height: 13px;
+  height: 24px;
   width: 6px;
 }
 
@@ -230,11 +232,11 @@ p.cursor::after {
 
 
 .reveal_animate{
-  animation: fadeIn linear 5s;
-    -webkit-animation: fadeIn linear 5s;
-    -moz-animation: fadeIn linear 5s;
-    -o-animation: fadeIn linear 5s;
-    -ms-animation: fadeIn linear 5s;
+  animation: fadeIn linear 10s;
+    -webkit-animation: fadeIn linear 10s;
+    -moz-animation: fadeIn linear 10s;
+    -o-animation: fadeIn linear 10s;
+    -ms-animation: fadeIn linear 10s;
 }
 
 

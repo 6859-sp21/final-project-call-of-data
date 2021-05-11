@@ -11,17 +11,13 @@ var i = 0,
     isBackspacing = false,
     isParagraph = false;
 
-// Typerwrite text content. Use a pipe to indicate the start of the second line "|".  
-var textArray = [
-  "I, Joe Button, the president of the United Plates,", 
-  "Need you to help me tackle our Earth’s deadliest enemy:|Climate Change."
-];
 
-// Speed (in milliseconds) of typing.
-var speedForward = 50, //Typing Speed
-    speedWait = 1000, // Wait between typing and backspacing
-    speedBetweenLines = 1000, //Wait between first and second lines
-    speedBackspace = 50; //Backspace Speed
+// JOE BUTTON INTRO TEXT: 
+// Pipe indicates the start of the second line "|".  
+var textArray = [
+  "I, Joe Button, the president of the United Plates,|Need you to help me tackle our Earth’s deadliest enemy:", 
+  "|Climate Change."
+];
 
 // animate element when it is in view
   function animate_text1() {
@@ -32,9 +28,28 @@ var speedForward = 50, //Typing Speed
 
 
 
+// MISSION DESCRIPTION TEXT: 
+var textArray2 = [
+  "I have a meeting with our planet's biggest polluters in 1 week,|and I need to convince them to Save The Planet!", 
+  "Your mission is to create an unbiased visual|that tells the true story about climate change."
+];
+
+// animate element when it is in view
+function animate_text2() {
+  // On click, run typewriter function
+  typeWriter("output2", textArray2);
+}
+
 
 
 // TYPEWRITER FUNCTION
+// Speed (in milliseconds) of typing.
+var speedForward = 50, //Typing Speed
+    speedWait = 1500, // Wait between typing and backspacing
+    speedBetweenLines = 100, //Wait between first and second lines
+    speedBackspace = 15; //Backspace Speed
+
+
 function typeWriter(id, ar) {
   var element = $("#" + id),
       aString = ar[a],
