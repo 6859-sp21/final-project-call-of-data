@@ -87,11 +87,9 @@ function typeWriter(id, ar) {
       }
       
     // If full string has been typed, switch to backspace mode.
-    } else if (i == aString.length) {
-      
+    } else if (i == aString.length) {      
       isBackspacing = true;
-      setTimeout(function(){ typeWriter(id, ar); }, speedWait);
-      
+      setTimeout(function(){ typeWriter(id, ar); }, speedWait);      
     }
     
   // If backspacing is enabled
@@ -111,17 +109,16 @@ function typeWriter(id, ar) {
       setTimeout(function(){ typeWriter(id, ar); }, speedBackspace);
     
     // If neither head or paragraph still has text, switch to next quote in array and start typing.
-    } else { 
-      
+    } else {       
       isBackspacing = false;
       i = 0;
       isParagraph = false;
       a = (a + 1) % ar.length; //Moves to next position in array, always looping back to 0
-      setTimeout(function(){ typeWriter(id, ar); }, 10);
-      
+      setTimeout(function(){ typeWriter(id, ar); }, 10);      
     }
   }
 }
+
 
 // FUNCTION 2: (Otherwise: indexes overlap and it's a mess)
 function typeWriter2(id, ar) {
