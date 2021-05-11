@@ -1,10 +1,14 @@
-
-// TEXT ANIMATIONS
-
-
-
 // TYPEWRITER FUNCTIONALITY ADAPTED FROM: https://codepen.io/daviddcarr/pen/XVyQMM
 
+// Speed (in milliseconds) of typing.
+var speedForward = 50, //Typing Speed
+    speedWait = 1500, // Wait between typing and backspacing
+    speedBetweenLines = 100, //Wait between first and second lines
+    speedBackspace = 15; //Backspace Speed
+
+
+
+// PART 1 - JOE BUTTON INTRO TEXT: 
 // values to keep track of the number of letters typed, which quote to use. etc. Don't change these values.
 var i = 0,
     a = 0,
@@ -12,7 +16,6 @@ var i = 0,
     isParagraph = false;
 
 
-// JOE BUTTON INTRO TEXT: 
 // Pipe indicates the start of the second line "|".  
 var textArray = [
   "I, Joe Button, the president of the United Plates,|Need you to help me tackle our Earth’s deadliest enemy:", 
@@ -28,7 +31,13 @@ var textArray = [
 
 
 
-// MISSION DESCRIPTION TEXT: 
+//  PART 2 - MISSION DESCRIPTION TEXT: 
+// values to keep track of the number of letters typed, which quote to use. etc. Don't change these values.
+var j = 0,
+    b = 0,
+    Backspacing = false,
+    Paragraph = false;
+
 var textArray2 = [
   "I have a meeting with our planet's biggest polluters in 1 week,|and I need to convince them to Save The Planet!", 
   "Your mission is to create an unbiased visual|that tells the true story about climate change."
@@ -37,19 +46,14 @@ var textArray2 = [
 // animate element when it is in view
 function animate_text2() {
   // On click, run typewriter function
-  typeWriter("output2", textArray2);
+  typeWriter2("output2", textArray2);
 }
 
 
 
-// TYPEWRITER FUNCTION
-// Speed (in milliseconds) of typing.
-var speedForward = 50, //Typing Speed
-    speedWait = 1500, // Wait between typing and backspacing
-    speedBetweenLines = 100, //Wait between first and second lines
-    speedBackspace = 15; //Backspace Speed
+// PART 2 - TYPEWRITER FUNCTIONS
 
-
+// FUNCTION 1:
 function typeWriter(id, ar) {
   var element = $("#" + id),
       aString = ar[a],
@@ -118,6 +122,62 @@ function typeWriter(id, ar) {
     }
   }
 }
+
+// FUNCTION 2: (Otherwise: indexes overlap and it's a mess)
+function typeWriter2(id, ar) {
+  var element = $("#" + id),
+      aString = ar[b],
+      eHeader = element.children("h1"), 
+      eParagraph = element.children("p"); //Subheader element
+  
+  if (!Backspacing) {
+    if (j < aString.length) {      
+      if (aString.charAt(j) == "|") {
+        Paragraph = true;
+        eHeader.removeClass("cursor");
+        eParagraph.addClass("cursor");
+        j++;
+        setTimeout(function(){ typeWriter2(id, ar); }, speedBetweenLines);
+        
+      } else {
+        if (!Paragraph) {
+          eHeader.text(eHeader.text() + aString.charAt(j));
+        } else {
+          eParagraph.text(eParagraph.text() + aString.charAt(j));
+        }
+        j++;
+        setTimeout(function(){ typeWriter2(id, ar); }, speedForward);
+      }
+      
+    } else if (j == aString.length) {      
+      Backspacing = true;
+      setTimeout(function(){ typeWriter2(id, ar); }, speedWait);      
+    }
+    
+  } else {    
+    if (eHeader.text().length > 0 || eParagraph.text().length > 0) {      
+      if (eParagraph.text().length > 0) {
+        eParagraph.text(eParagraph.text().substring(0, eParagraph.text().length - 1));
+      } else if (eHeader.text().length > 0) {
+        eParagraph.removeClass("cursor");
+        eHeader.addClass("cursor");
+        eHeader.text(eHeader.text().substring(0, eHeader.text().length - 1));
+      }
+      setTimeout(function(){ typeWriter2(id, ar); }, speedBackspace);
+    
+    } else {       
+      Backspacing = false;
+      j = 0;
+      Paragraph = false;
+      b = (b + 1) % ar.length; 
+      setTimeout(function(){ typeWriter2(id, ar); }, 10);      
+    }
+  }
+}
+
+
+
+
 
 
 
