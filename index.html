@@ -14,10 +14,10 @@
     <!-- Sidebar  -->
     <div id="mySidebar1" class="sidebar">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <a href="#section1" style="background-color: #111;">Home</a>
-      <a href="#section2" style="background-color: #111;">The President</a>
-      <a href="#section3" style="background-color: #111;">Your Mission</a>
-      <a href="#section4" style="background-color: #111;">Players</a>
+      <a href="#homepage" style="background-color: #111;">Home</a>
+      <a href="#button_intro" style="background-color: #111;">The President</a>
+      <a href="#mission_objective" style="background-color: #111;">Your Mission</a>
+      <a href="#player_selection" style="background-color: #111;">Players</a>
     </div>
     
     <button class="openbtn" onclick="openNav()">&#9776; Open Menu</button>
@@ -26,7 +26,7 @@
     <!-- Story Building Screens  -->
 
     <!-- Section 1: Intro to Game -->
-      <section class="opening" id ="section1">
+      <section class="opening" id ="homepage">
         <div class="maintitle" style="font-size: 50px;">Call of Data</div><br>
 
         <img src="data/flowchart.png" alt="flowchart" style="margin: 5pt; margin-top: 20pt;  width:80px; height:80px;">
@@ -39,7 +39,7 @@
 
           <br><br><br><br>
 
-          <a href="#section2" class="next" onclick="animate_text1()" style="font-family: 'Press Start 2P', sans-serif; font-size: 30px;">PLAY</a>
+          <a href="#button_intro" class="next" onclick="animate_text1()" style="font-family: 'Press Start 2P', sans-serif; font-size: 30px;">PLAY</a>
 
         <p class = 'disclaimer'>
         The story, names, characters, and incidents portrayed in this production are fictitious.<br>
@@ -50,7 +50,7 @@
 
 
       <!-- Section 2: Introducing the President -->
-      <section class="step"  id ="section2">
+      <section class="step"  id ="button_intro">
       <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
      
 
@@ -75,7 +75,7 @@
 
        <div class="row col-sm-12">
           <div id="fade-in-text">
-              <a href="#section3"  onclick="animate_text2()" style="font-size: 30px; text-align: center; font-family: 'Press Start 2P', sans-serif;">ACCEPT MISSION</a>
+              <a href="#mission_objective"  onclick="animate_text2()" style="font-size: 30px; text-align: center; font-family: 'Press Start 2P', sans-serif;">ACCEPT MISSION</a>
           </div>
       </div>
 
@@ -85,7 +85,7 @@
 
 
       <!-- Section 3: Your Mission Objective -->
-      <section class="step" id ="section3">
+      <section class="step" id ="mission_objective">
       <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
 
       <div class="title">Your Mission Objective<br>
@@ -106,14 +106,14 @@
       <br><br><br><br><br><br><br><br><br><br><br><br><br>
 
       <div class="row col-sm-12">
-         <a href="#section4" style="font-size: 30px; text-align: center; font-family: 'Press Start 2P', sans-serif;">START MISSION</a>
+         <a href="#player_selection" style="font-size: 30px; text-align: center; font-family: 'Press Start 2P', sans-serif;">START MISSION</a>
       </div>
       </section>
 
 
   <!-- Section 4: Select Player  -->
 
-    <section class="step"  id ="section4">
+    <section class="step"  id ="player_selection">
       <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
 
       <div class="title" style="font-size: 34px">Select Your Player</div><br><br><br><br>
@@ -126,8 +126,8 @@
 
     <!-- Button to select player -->
       <div id="button-wrap">
-              <button class="player_button" id="player1" style="margin-right: 80px;" onclick="picture1()"><a href="#section5">Player One</a></button>
-              <button class="player_button" id="player2" style="margin-right: 60px;" onclick="picture2()"><a href="#section5">Player Two</a></button>
+              <button class="player_button" id="player1" style="margin-right: 80px;" onclick="picture1()"><a href="#choice_screen1">Player One</a></button>
+              <button class="player_button" id="player2" style="margin-right: 60px;" onclick="picture2()"><a href="#choice_screen1">Player Two</a></button>
 
         </div>
     <!-- Button to select player -->
@@ -137,43 +137,125 @@
 
 
 
-  <!-- Choice Screens  -->
-    <section class="step" id ="section5">
-      <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
+  <!-- CHOICE SCREENS -->
 
+ 
+  <!-- CHOICE SCREENS -->
+  <form  id="form1">
+
+    <!-- Choice Screen 1 -->
+    
+      <section class="step" id ="choice_screen1">
+      <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
+    
       <div class="title">action number one: Data</div>
       <br>
         <img id="player1_image" src="player1_image"  class="center" style="display:none;" />
         <img id="player2_image" src="player2_image"  class="center" style="display:none; " />
-
+    
         <br><br>
         There are currently two possible variables with which to measure X. <br>
         your first task is to choose which of these will most help president joe button.
         <br><br>
-
+    
         <div class="row col-sm-5 col-sm-offset-1" style="margin-left: 110px; margin-right: 20px; border-style: solid;">
-          <div class="choice_title"><br>Choice one</div>
-          Compelling argument for variable 1 <br><br>
-          <button class="choice_button" id="choice1a"><a href="#section6">Make choice one</a></button>
-          <br><br>
+        <div class="choice_title"><br>Choice one</div>
+        Compelling argument for variable 1 <br><br>
+        <label><input type="radio" name="age" id="choice1a" value="quiet"/>Make choice one</label>
+        <br><br>
         </div>
-
+    
         <div class="row col-sm-5" style="margin-top: 0px; border-style: solid;">
-          <div class="choice_title"><br>Choice two</div>
-          Compelling argument for variable 2 <br><br>
-          <button class="choice_button" id="choice1b"><a href="#section7">Make choice two</a></button>
-          <br><br>
+        <div class="choice_title"><br>Choice two</div>
+        Compelling argument for variable 2 <br><br>
+        <label><input type="radio" name="age" id="choice1b" value="spoon"/>Make choice one</label>
+        <br><br>
         </div>
         <br><br><br>
-    </section>
+      </section>
+    
+    
+    
+      <!-- Choice Screen 2 -->
+      <section class="step" id ="choice_screen2">
+      <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
+    
+      <div class="title">action number two: Data</div>
+      <br>
+        <img id="player1_image" src="player1_image"  class="center" style="display:none;" />
+        <img id="player2_image" src="player2_image"  class="center" style="display:none; " />
+    
+        <br><br>
+        There are currently two possible variables with which to measure X. <br>
+        your first task is to choose which of these will most help president joe button.
+        <br><br>
+    
+        <div class="row col-sm-5 col-sm-offset-1" style="margin-left: 110px; margin-right: 20px; border-style: solid;">
+        <div class="choice_title"><br>Choice one</div>
+        Compelling argument for variable 1 <br><br>
+        <label><input type="radio" name="activity" id="choice2a" value="quiet"/>Make choice one</label>
+        <br><br>
+        </div>
+    
+        <div class="row col-sm-5" style="margin-top: 0px; border-style: solid;">
+        <div class="choice_title"><br>Choice two</div>
+        Compelling argument for variable 2 <br><br>
+        <label><input type="radio" name="activity" id="choice2b" value="spoon"/>Make choice one</label>
+        <br><br>
+        </div>
+        <br><br><br>
+      </section>
+    
+    
+    
+        <!-- Choice Screen 3 -->
+        <section class="step" id ="choice_screen3">
+        <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
+      
+        <div class="title">action number two: Data</div>
+        <br>
+          <img id="player1_image" src="player1_image"  class="center" style="display:none;" />
+          <img id="player2_image" src="player2_image"  class="center" style="display:none; " />
+      
+          <br><br>
+          There are currently two possible variables with which to measure X. <br>
+          your first task is to choose which of these will most help president joe button.
+          <br><br>
+      
+          <div class="row col-sm-5 col-sm-offset-1" style="margin-left: 110px; margin-right: 20px; border-style: solid;">
+          <div class="choice_title"><br>Choice one</div>
+          Compelling argument for variable 1 <br><br>
+          <label><input type="radio" name="genre" id="choice3a" value="quiet"/>Make choice one</label>
+          <br><br>
+          </div>
+      
+          <div class="row col-sm-5" style="margin-top: 0px; border-style: solid;">
+          <div class="choice_title"><br>Choice two</div>
+          Compelling argument for variable 2 <br><br>
+          <label><input type="radio" name="genre" id="choice3b" value="spoon"/>Make choice two</label>
+          <br><br>
+          </div>            <br><br><br>
+    
+          
+          <!-- Submit Button at last choice screen -->
+          <div class="row col-sm-12" style="padding-top: 300px;">
+          <button type="submit" value="Submit">Submit</button>
+          </div> 
+        </section>
+    
+      <!-- End Choice Screen Div -->
+      </form>
 
 
-  <!-- Dashboard Screen -->
 
-      <section class="step" id ="section6">
+
+  <!-- Final Dashboard Screen -->
+
+      <section class="step" id ="final_dashboard">
         <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
 
         <div class="title">Mission Results</div><br><br>
+        
 
 
           <div  class="row col-sm-12" style="width: 100%;">
@@ -181,8 +263,8 @@
             <!-- Left Hand Panel -->
             <div style="width: 65%; float: left; padding-left: 75px;"> 
               
-                <div class="title_dashboard">You got: [Dynamic]</div>
-                <p style="text-align: left; color: #39ff14; font-weight: bold;"> Your biases succesfully convinced Earth's leaders to [Dynamic]!</p> 
+                <div class="title_dashboard" id="response">You got <span id="answer" style="color: #39ff14;"></span></div>
+                <p style="text-align: left; color: #39ff14; font-weight: bold;" id="response2"> Your biases succesfully convinced Earth's leaders to <span id="answer2" style="color: #39ff14;"></span>!</p> 
                 
                 <div class="title_dashboard">Your Resulting Visualization:</div>
                 <br><br><br> PLACEHOLDER SVG
@@ -227,26 +309,26 @@
 
           <br><br><br><br>
           <div  class="row col-sm-12">
-          <a href="#section8" class="next" style="font-family: 'Press Start 2P', sans-serif; font-size: 15px;"> View Sources </a>
+          <a href="#sources" class="next" style="font-family: 'Press Start 2P', sans-serif; font-size: 15px;"> View Sources </a>
           </div>
       </section>
 
 
 
-      <section class="step" id ="section7">
+      <section class="step" id ="mock">
         <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
 
           <img id="oil_tycoon" src="data/oil_tycoon.jpg" class = "dashboard"/>
 
           <br><br><br><br>
-          <a href="#section8" class="next" style="font-family: 'Press Start 2P', sans-serif; font-size: 20px;">View Sources</a>
+          <a href="#sources" class="next" style="font-family: 'Press Start 2P', sans-serif; font-size: 20px;">View Sources</a>
 
       </section>
 
 
   <!-- Sources  -->
 
-        <section class="step" id ="section8">
+        <section class="step" id ="sources">
           <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
 
           <div class="title">Sources</div>
@@ -293,6 +375,8 @@
   <script src="js/textanimations.js"></script>
   <script src="js/sidebar.js"></script>
   <script src="js/dashboard.js"></script>
+  <script src="js/quiz.js"></script>
+
 
 
 
