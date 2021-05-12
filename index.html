@@ -168,16 +168,43 @@
     </section>
 
 
-  <!-- Dashboard Screens  -->
+  <!-- Dashboard Screen -->
 
       <section class="step" id ="section6">
         <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
 
-          <img id="honest_scientist" src="data/honest_scientist.jpg"  class = "dashboard"/>
+        <div class="title">Mission Results</div><br>
+
+
+          <div  class="row col-sm-12" style="width: 100%;">
+
+            <!-- Left Hand Panel -->
+            <div style="width: 65%; float: left; padding-right: 0px;"> 
+              
+                <div class="title_dashboard">You got: [Dynamic]</div>
+                Your biases succesfully convinced Earth's keaders to [Dynamic]!
+                
+                <div class="title_dashboard">Your Resulting Visualization:</div>
+
+                <div id="viz"></div>
+
+            </div>
+
+            <!-- Right Hand Panel -->
+            <div style="margin-left: 65%; padding-right: 15px;"> 
+
+              <div class="title_dashboard">Toggle your decisions to view how wach of them biased the final visualization</div>
+
+
+              
+            </div>
+
+          </div>
 
           <br><br><br><br>
+          <div  class="row col-sm-12">
           <a href="#section8" class="next" style="font-family: 'Press Start 2P', sans-serif; font-size: 20px;"> View Sources </a>
-
+          </div>
       </section>
 
 
@@ -241,6 +268,8 @@
   <script src="lib/d3.js"></script>
   <script src="js/textanimations.js"></script>
   <script src="js/sidebar.js"></script>
+  <script src="js/dashboard.js"></script>
+
 
 
 

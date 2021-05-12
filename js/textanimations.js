@@ -29,31 +29,7 @@ var textArray = [
   
 }
 
-
-
-//  PART 2 - MISSION DESCRIPTION TEXT: 
-// values to keep track of the number of letters typed, which quote to use. etc. Don't change these values.
-var j = 0,
-    b = 0,
-    Backspacing = false,
-    Paragraph = false;
-
-var textArray2 = [
-  "I have a meeting with our planet's biggest polluters in 1 week,|and I need to convince them to Save The Planet!", 
-  "Your mission is to create an unbiased visual|that tells the true story about climate change."
-];
-
-// animate element when it is in view
-function animate_text2() {
-  // On click, run typewriter function
-  typeWriter2("output2", textArray2);
-}
-
-
-
-// PART 2 - TYPEWRITER FUNCTIONS
-
-// FUNCTION 1:
+// TYPEWRITER FUNCTION 1:
 function typeWriter(id, ar) {
   var element = $("#" + id),
       aString = ar[a],
@@ -118,6 +94,30 @@ function typeWriter(id, ar) {
     }
   }
 }
+
+
+//  PART 2 - MISSION DESCRIPTION TEXT: 
+// values to keep track of the number of letters typed, which quote to use. etc. Don't change these values.
+var j = 0,
+    b = 0,
+    Backspacing = false,
+    Paragraph = false;
+
+var textArray2 = [
+  "I have a meeting with our planet's biggest polluters in 1 week,|and I need to convince them to Save The Planet!", 
+  "Your mission is to create an unbiased visual|that tells the true story about climate change."
+];
+
+// animate element when it is in view
+function animate_text2() {
+  // On click, run typewriter function
+  typeWriter2("output2", textArray2);
+}
+
+
+
+// PART 2 - TYPEWRITER FUNCTIONS
+
 
 
 // FUNCTION 2: (Otherwise: indexes overlap and it's a mess)
