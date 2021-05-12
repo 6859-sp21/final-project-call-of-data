@@ -132,6 +132,22 @@ p {
 }
 
 
+/* Choice buttons */
+input[type=radio] {
+  display: block;
+  margin: 0 auto;
+}
+
+label {
+  display: inline-block;
+  margin-top: 10px;
+  background:#444;
+  color:#39ff14;
+  border:1px solid green;
+  padding:2px 15px;
+}
+
+
 
 
 /* Section links */
@@ -378,6 +394,19 @@ p.cursor::after {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+
+.submit_button{
+  background-color: black !important; 
+  border: 1px solid green;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: "Courier";
+  font-size: 18px;
+  color: #39ff14;
+  font-weight: bold;
 }
 
 .db_button{

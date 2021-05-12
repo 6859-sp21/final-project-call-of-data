@@ -138,9 +138,7 @@
 
 
   <!-- CHOICE SCREENS -->
-
  
-  <!-- CHOICE SCREENS -->
   <form  id="form1">
 
     <!-- Choice Screen 1 -->
@@ -150,8 +148,8 @@
     
       <div class="title">action number one: Data</div>
       <br>
-        <img id="player1_image" src="player1_image"  class="center" style="display:none;" />
-        <img id="player2_image" src="player2_image"  class="center" style="display:none; " />
+        <img id="player1_image1" src="player1_image"  class="center" style="display:none;" />
+        <img id="player2_image1" src="player2_image"  class="center" style="display:none; " />
     
         <br><br>
         There are currently two possible variables with which to measure X. <br>
@@ -168,10 +166,12 @@
         <div class="row col-sm-5" style="margin-top: 0px; border-style: solid;">
         <div class="choice_title"><br>Choice two</div>
         Compelling argument for variable 2 <br><br>
-        <label><input type="radio" name="age" id="choice1b" value="science"/>Make choice one</label>
+        <label><input type="radio" name="age" id="choice1b" value="science"/>Make choice two</label>
         <br><br>
         </div>
-        <br><br><br>
+        <div class="row col-sm-12" style="padding-top: 150px;" >
+          <a href="#choice_screen2" style="font-size: 20px; text-align: center; font-family: 'Press Start 2P', sans-serif;">Next</a>
+       </div>
       </section>
     
     
@@ -182,8 +182,8 @@
     
       <div class="title">action number two: Data</div>
       <br>
-        <img id="player1_image" src="player1_image"  class="center" style="display:none;" />
-        <img id="player2_image" src="player2_image"  class="center" style="display:none; " />
+        <img id="player1_image2" src="player1_image"  class="center" style="display:none;" />
+        <img id="player2_image2" src="player2_image"  class="center" style="display:none; " />
     
         <br><br>
         There are currently two possible variables with which to measure X. <br>
@@ -200,10 +200,12 @@
         <div class="row col-sm-5" style="margin-top: 0px; border-style: solid;">
         <div class="choice_title"><br>Choice two</div>
         Compelling argument for variable 2 <br><br>
-        <label><input type="radio" name="activity" id="choice2b" value="science"/>Make choice one</label>
+        <label><input type="radio" name="activity" id="choice2b" value="science"/>Make choice two</label>
         <br><br>
         </div>
-        <br><br><br>
+        <div class="row col-sm-12" style="padding-top: 150px;" >
+          <a href="#choice_screen3" style="font-size: 20px; text-align: center; font-family: 'Press Start 2P', sans-serif;">Next</a>
+       </div>
       </section>
     
     
@@ -214,8 +216,8 @@
       
         <div class="title">action number two: Data</div>
         <br>
-          <img id="player1_image" src="player1_image"  class="center" style="display:none;" />
-          <img id="player2_image" src="player2_image"  class="center" style="display:none; " />
+          <img id="player1_image3" src="player1_image"  class="center" style="display:none;" />
+          <img id="player2_image3" src="player2_image"  class="center" style="display:none; " />
       
           <br><br>
           There are currently two possible variables with which to measure X. <br>
@@ -238,9 +240,10 @@
     
           
           <!-- Submit Button at last choice screen -->
-          <div class="row col-sm-12" style="padding-top: 300px;">
-          <button type="submit" value="Submit">Submit</button>
+          <div class="row col-sm-12" style="padding-top: 150px;">
+          <button class="submit_button" type="submit" value="Submit" onclick="window.location.href='#final_dashboard'">Submit All and View Results</button>
           </div> 
+
         </section>
     
       <!-- End Choice Screen Div -->
@@ -313,17 +316,6 @@
           </div>
       </section>
 
-
-
-      <section class="step" id ="mock">
-        <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
-
-          <img id="oil_tycoon" src="data/oil_tycoon.jpg" class = "dashboard"/>
-
-          <br><br><br><br>
-          <a href="#sources" class="next" style="font-family: 'Press Start 2P', sans-serif; font-size: 20px;">View Sources</a>
-
-      </section>
 
 
   <!-- Sources  -->

@@ -226,29 +226,24 @@ function reveal_text() {
 
 function picture1(){ 
     var pic = "data/science_cat.png"
-    document.getElementById('player1_image').src = pic.replace('30x30', '100x100');
-    document.getElementById('player1_image').style.display='block';
+    document.getElementById('player1_image1').src = pic.replace('30x30', '100x100');
+    document.getElementById('player1_image1').style.display='block';
+    
+    document.getElementById('player1_image2').src = pic.replace('30x30', '100x100');
+    document.getElementById('player1_image2').style.display='block';
+
+    document.getElementById('player1_image3').src = pic.replace('30x30', '100x100');
+    document.getElementById('player1_image3').style.display='block';
 }
 
 function picture2(){ 
     var pic = "data/spaceperson.png"
-    document.getElementById('player2_image').src = pic.replace('30x30', '100x100');
-    document.getElementById('player2_image').style.display='block';
+    document.getElementById('player2_image1').src = pic.replace('30x30', '100x100');
+    document.getElementById('player2_image1').style.display='block';
+
+    document.getElementById('player2_image2').src = pic.replace('30x30', '100x100');
+    document.getElementById('player2_image2').style.display='block';
+
+    document.getElementById('player2_image3').src = pic.replace('30x30', '100x100');
+    document.getElementById('player2_image3').style.display='block';
 }
-
-
-
-// FINAL DASHBOARD BUTTONS
-function picture3(){ 
-  var pic = "data/honest_scientist.jpg"
-  document.getElementById('honest_scientist').src = pic;
-  document.getElementById('honest_scientist').style.display='block';
-}
-
-function picture4(){ 
-  var pic = "data/oil_tycoon.jpg"
-  document.getElementById('oil_tycoon').src = pic;
-  document.getElementById('oil_tycoon').style.display='block';
-}
-
-
