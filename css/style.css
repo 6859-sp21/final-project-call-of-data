@@ -49,7 +49,7 @@ p {
   line-height: 23px;
   height: 100%;
   color: white;
-  padding-top: 100px;
+  padding-top: 50px;
   padding-bottom: 200px;
   text-align: center;
 }
@@ -68,7 +68,7 @@ p {
   font-family: "Press Start 2P", sans-serif;
   font-size: 26px;
   font-weight: bold;
-  margin-bottom:4px;
+  margin-bottom: 5px;
   color: white;
   line-height: 1.2em;
   text-align: center;
@@ -111,9 +111,32 @@ p {
 }
 
 
+.title_dashboard{
+  font-family: "Courier";
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 2px;
+  color: white;
+  line-height: 1.2em;
+  text-align: left;
+}
+
+.action_dashboard{
+  font-family: "Courier";
+  font-size: 16px;
+  font-weight: bolder;
+  margin-bottom: 2px;
+  color: #39ff14;
+  line-height: 1.2em;
+  text-align: left;
+}
+
+
 
 
 /* Section links */
+/* Note this formatting causes problems for the buttons. Fix later */
+
 html {
   scroll-behavior: smooth;
 }
@@ -123,11 +146,14 @@ a:link {
   font-size: 18px;
   color: white;
   font-weight: bold;
-}
+  background-color: black;
+
+  }
 
 
 a:visited {
-  color: green;
+  color: #39ff14;
+  background-color: black;
 }
 
 /* mouse over link */
@@ -187,7 +213,7 @@ a:hover {
   font-size: 25px;
   cursor: pointer;
   background-color: #111;
-  color: green;
+  color: #39ff14;
   padding: 10px 15px;
   margin-bottom: 100px;
   border: none;
@@ -327,22 +353,56 @@ p.cursor::after {
 /* BUTTON FORMATTING */
 
 #button-wrap {
-  color: black;
+  /* color: #312f30; */
   font-weight: bold;
   padding-left: 45px;
 }
 
+.player_button {
+  background-color: black !important; 
+  border: 1px solid green;
+  color: black !important; 
+  padding: 2px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.choice_button {
+  background-color: black !important; 
+  border: 1px solid green;
+  color: black; 
+  padding: 2px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.db_button{
+  background-color: white; 
+  border: 2px solid green;
+  color: black; 
+  font-weight: bold;
+  padding: 2px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
 .button.active {
   display: block;
-  background-color: #D2E8E5;
+  background-color: black;
   color: black;
   cursor: pointer;
 }
 
 button:hover{
   box-shadow: inset 0px 0px 7px rgba(0,0,0,0.18);
-  background-color: #9dc9c3;
-  color: black;
+  background-color: #8f8c8d;
+  /* color: black; */
   cursor: pointer;
 }
 

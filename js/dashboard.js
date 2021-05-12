@@ -20,4 +20,4 @@ var sampleSVG = d3.select("#viz")
     .style("fill", "black")
     .attr("r", 100)
     .attr("cx", 200)
-    .attr("cy", 200);
+    .attr("cy", 150);

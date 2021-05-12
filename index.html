@@ -14,10 +14,10 @@
     <!-- Sidebar  -->
     <div id="mySidebar1" class="sidebar">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <a href="#section1">Home</a>
-      <a href="#section2">The President</a>
-      <a href="#section3">Your Mission</a>
-      <a href="#section4">Players</a>
+      <a href="#section1" style="background-color: #111;">Home</a>
+      <a href="#section2" style="background-color: #111;">The President</a>
+      <a href="#section3" style="background-color: #111;">Your Mission</a>
+      <a href="#section4" style="background-color: #111;">Players</a>
     </div>
     
     <button class="openbtn" onclick="openNav()">&#9776; Open Menu</button>
@@ -173,19 +173,19 @@
       <section class="step" id ="section6">
         <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div>
 
-        <div class="title">Mission Results</div><br>
+        <div class="title">Mission Results</div><br><br>
 
 
           <div  class="row col-sm-12" style="width: 100%;">
 
             <!-- Left Hand Panel -->
-            <div style="width: 65%; float: left; padding-right: 0px;"> 
+            <div style="width: 65%; float: left; padding-left: 75px;"> 
               
                 <div class="title_dashboard">You got: [Dynamic]</div>
-                Your biases succesfully convinced Earth's keaders to [Dynamic]!
+                <p style="text-align: left; color: #39ff14; font-weight: bold;"> Your biases succesfully convinced Earth's leaders to [Dynamic]!</p> 
                 
                 <div class="title_dashboard">Your Resulting Visualization:</div>
-
+                <br><br><br> PLACEHOLDER SVG
                 <div id="viz"></div>
 
             </div>
@@ -193,17 +193,41 @@
             <!-- Right Hand Panel -->
             <div style="margin-left: 65%; padding-right: 15px;"> 
 
-              <div class="title_dashboard">Toggle your decisions to view how wach of them biased the final visualization</div>
-
-
+              <div class="title_dashboard">Toggle your decisions to view how wach of them biased the final visualization</div><br>
               
+              <div class="action_dashboard">Action one: X</div><br>
+
+                  <div style="width: 50%; float: left; padding-left: 5px;"><button class="db_button" id="choice1a_d">Choice 1</button></div>
+                  <div style="margin-left: 50%; padding-right: 5px;"><button class="db_button" id="choice2a_d">Choice 2</button></div><br>
+
+              <div class="action_dashboard">Action two: Y</div><br>
+
+                  <div style="width: 50%; float: left; padding-left: 5px;"><button class="db_button" id="choice1b_d">Choice 1</button></div>
+                  <div style="margin-left: 50%; padding-right: 5px;"><button class="db_button" id="choice2b_d">Choice 2</button></div><br>
+
+              <div class="action_dashboard">Action three: Z</div><br>
+
+                  <div style="width: 50%; float: left; padding-left: 5px;"><button class="db_button" id="choice1c_d">Choice 1</button></div>
+                  <div style="margin-left: 50%; padding-right: 5px;"><button class="db_button" id="choice2c_d">Choice 2</button></div><br>
+
+              <div class="action_dashboard">Action four: AA</div><br>
+
+                  <div style="width: 50%; float: left; padding-left: 5px;"><button class="db_button" id="choice1d_d">Choice 1</button></div>
+                  <div style="margin-left: 50%; padding-right: 5px;"><button class="db_button" id="choice2d_d">Choice 2</button></div><br>
+
+              <div class="action_dashboard">Action five: BB</div><br>
+
+                  <div style="width: 50%; float: left; padding-left: 5px;"><button class="db_button" id="choice1e_d">Choice 1</button></div>
+                  <div style="margin-left: 50%; padding-right: 5px;"><button class="db_button" id="choice2e_d">Choice 2</button></div><br>
+
+             
             </div>
 
           </div>
 
           <br><br><br><br>
           <div  class="row col-sm-12">
-          <a href="#section8" class="next" style="font-family: 'Press Start 2P', sans-serif; font-size: 20px;"> View Sources </a>
+          <a href="#section8" class="next" style="font-family: 'Press Start 2P', sans-serif; font-size: 15px;"> View Sources </a>
           </div>
       </section>
 
@@ -245,7 +269,7 @@
           <em>Motivating Literature</em><br>
             <a style="font-size: 10px;">“What Gets Counted Counts” by Catherine D’Ignazio</a><br>
             <a style="font-size: 10px;">“Viral Visualizations: How Coronavirus Skeptics Use Orthodox Data Practices to Promote Unorthodox Science Online” - Crystal Lee et al.</a><br>
-            <a style="font-size: 10px;">"E"thical Dimensions of Visualization Research by Michael Correll"</a><br>
+            <a style="font-size: 10px;">"Ethical Dimensions of Visualization Research by Michael Correll"</a><br>
             <a style="font-size: 10px;">"Why Authors Don’t Visualize Uncertainty" - Jessica Hullman </a><br><br><br>
 
           <em>Coding</em><br>
