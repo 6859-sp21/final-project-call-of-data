@@ -46,7 +46,13 @@ document.getElementById("form1").onsubmit=function() {
  scorez = [{index:0, feedback: "SAVE THE PLANET"},
            {index:1, feedback: "DESTROY THE PLANET"},
            {index:2, feedback: "SAVE THE UNITED PLATES"}];
- 
+
+
+// // Could make this an object holding graphs here:
+// scorez = [{index:0, feedback: "SAVE THE PLANET"},
+//           {index:1, feedback: "DESTROY THE PLANET"},
+//           {index:2, feedback: "SAVE THE UNITED PLATES"}];
+            
  //figure out which index # holds the max score 
  for(i_prime=0; i_prime<all.length; i_prime++) {
  if(all[i_prime]==maxscore) {
