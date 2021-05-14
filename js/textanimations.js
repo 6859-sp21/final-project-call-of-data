@@ -251,9 +251,3 @@ function picture2(){
 
 
 
-// FUNCTION FOR RELOAD AND RE_DIRECT TO PLAYER SELECTION
-// Sources" https://stackoverflow.com/questions/22033384/refresh-the-page-and-then-go-to-a-specific-div
-function gototab(reload){
-    window.location.hash = '#button-wrap';
-    window.location.reload();
- }
