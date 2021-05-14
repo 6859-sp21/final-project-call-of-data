@@ -36,14 +36,14 @@
         <div id="viz">
           <div class='header'>
             <div class="form-check-inline">
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="A" checked>A</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="I">I</label>
-              <label class="form-check-label"><input type="radio" name="Group" value="F">F</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="A" checked>Starts with A</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="I">Starts with I</label>
+              <label class="form-check-label"><input type="radio" name="Group" value="F">Starts with F</label>
             </div>
 
             <div class="form-check-inline-2">
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Population" value="1324516992" checked>Max Population</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Population" value="16321000">Median Population</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group2" value="a" checked>Ends in A</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group2" value="d">Median Ends in D</label>
             </div>
 
           </div>
@@ -91,6 +91,7 @@
             date : parseDate(d.Year),
             Location : d.Location,
             Group : d.Group,
+            Group2 : d.Group2,
             Population : d.Population,
             GDP : +d.GDP,
             Metric : d.Metric,
@@ -201,15 +202,15 @@
 
 
   // SET DEFAULT PARAMETERS HERE
-        renderChart("A", 1324516992) // inital chart render (set default to choice of default data)
+        renderChart("A", "a") // inital chart render (set default to choice of default data)
 
         // Update chart when radio button is selected - Group 1
         d3.selectAll(("input[name='Group']")).on('change', function(){
           updateChartGroup1(this.value)
         })
 
-        // Update chart when radio button is selected - Group 1
-        d3.selectAll(("input[name='Population']")).on('change', function(){
+        // Update chart when radio button is selected - Group 2
+        d3.selectAll(("input[name='Group2']")).on('change', function(){
           updateChartGroup2(this.value)
         })
 
@@ -219,7 +220,10 @@
   // FUNCTION TO UPDATE CHART WITH  RADIO BUTTON
         function updateChartGroup1(Group) {
 
-          var resNew = res.filter(d=>d.Group == Group)
+          // Filter for the value on the other radio button
+          var group2_val = d3.select('input[name="Group2"]:checked').property("value");
+          var res1 = res.filter(d=>d.Group2 == group2_val)
+          var resNew = res1.filter(d=>d.Group == Group)
 
           var res_nested = d3.nest()
             .key(d=>d.Metric)
@@ -244,9 +248,12 @@
 
 
       // FUNCTION TO UPDATE CHART WITH  RADIO BUTTON
-        function updateChartGroup2(Population) {
+        function updateChartGroup2(Group2) {
 
-          var resNew = res.filter(d=>d.Population <= Population)
+          // Filter for the value on the other radio button
+          var group1_val = d3.select('input[name="Group"]:checked').property("value");
+          var res1 = res.filter(d=>d.Group == group1_val)
+          var resNew = res1.filter(d=>d.Group2 == Group2)
 
           var res_nested = d3.nest()
             .key(d=>d.Metric)
@@ -272,10 +279,10 @@
 
 
    // FUNCTION TO INITIATE CHART WITH RADIO BUTTON
-        function renderChart(Group, Population) {
+        function renderChart(Group, Group2) {
 
           var res1 = res.filter(d=>d.Group == Group)
-          var resNew = res1.filter(d=>d.Population <= Population)
+          var resNew = res1.filter(d=>d.Group2 == Group2)
 
 
           var res_nested = d3.nest() // necessary to nest data so that keys represent each category
