@@ -36,11 +36,16 @@
         <div id="viz">
           <div class='header'>
             <div class="form-check-inline">
-              <label class="form-check-label"><input style="display: inline" type="radio" name="data_subset" value="OWID_WRL" checked>Data Subset Option 1</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="A" checked>A</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="I">I</label>
+              <label class="form-check-label"><input type="radio" name="Group" value="F">F</label>
             </div>
-            <div class="form-check-inline">
-              <label class="form-check-label"><input type="radio" name="data_subset" value="notWorld">Data Subset Option 2 (Fake)</label>
+
+            <div class="form-check-inline-2">
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Population" value="1324516992" checked>Max Population</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Population" value="16321000">Median Population</label>
             </div>
+
           </div>
         </div>
       </div>
@@ -79,25 +84,28 @@
 
 
 // START OF D3 CSV CHART FUNCTION
-      d3.csv("data/ReshapedSubstitutionData.csv", data => {
+      d3.csv("data/output/reshaped_country_data.csv", data => {
 
         var res = data.map((d,i) => {
           return {
             date : parseDate(d.Year),
-            data_subset : d.Code,
-            energy_type : d.type,
-            premium : +d.TWh
+            Location : d.Location,
+            Group : d.Group,
+            Population : d.Population,
+            GDP : +d.GDP,
+            Metric : d.Metric,
+            Value : +d.Value
           }
         })
 
-        var category = d3.map(res, function(d){return d.energy_type;}).keys()
+        var category = d3.map(res, function(d){return d.Metric;}).keys()
 
         var xScale = d3.scaleTime()
           .domain(d3.extent(res, d=>d.date))
           .range([0, width])
 
         var yScale = d3.scaleLinear()
-          .domain([d3.min(res, d => d.premium), d3.max(res, d => d.premium)])
+          .domain([d3.min(res, d => d.Value), d3.max(res, d => d.Value)])
           .range([height, 0]);
 
         var color = d3.scaleOrdinal()
@@ -189,24 +197,32 @@
         // line generator 
         var line = d3.line()
           .x(d => xScale(d.date))
-          .y(d => yScale(d.premium))
+          .y(d => yScale(d.Value))
 
-        renderChart("OWID_WRL") // inital chart render (set default to choice of default data)
 
-        // Update chart when radio button is selected
-        d3.selectAll(("input[name='data_subset']")).on('change', function(){
-          updateChart(this.value)
+  // SET DEFAULT PARAMETERS HERE
+        renderChart("A", 1324516992) // inital chart render (set default to choice of default data)
+
+        // Update chart when radio button is selected - Group 1
+        d3.selectAll(("input[name='Group']")).on('change', function(){
+          updateChartGroup1(this.value)
+        })
+
+        // Update chart when radio button is selected - Group 1
+        d3.selectAll(("input[name='Population']")).on('change', function(){
+          updateChartGroup2(this.value)
         })
 
 
 
-        // FUNCTION TO UPDATE CHART WITH data_subset RADIO BUTTON
-        function updateChart(data_subset) {
 
-          var resNew = res.filter(d=>d.data_subset == data_subset)
+  // FUNCTION TO UPDATE CHART WITH  RADIO BUTTON
+        function updateChartGroup1(Group) {
+
+          var resNew = res.filter(d=>d.Group == Group)
 
           var res_nested = d3.nest()
-            .key(d=>d.energy_type)
+            .key(d=>d.Metric)
             .entries(resNew)
 
           glines.select('.line') //select line path within line-group (which represents a category), then bind new data 
@@ -227,14 +243,43 @@
 
 
 
-    // FUNCTION TO INITIATE CHART WITH data_subset RADIO BUTTON
-        function renderChart(data_subset) {
+      // FUNCTION TO UPDATE CHART WITH  RADIO BUTTON
+        function updateChartGroup2(Population) {
 
-          var resNew = res.filter(d=>d.data_subset == data_subset)
+          var resNew = res.filter(d=>d.Population <= Population)
+
+          var res_nested = d3.nest()
+            .key(d=>d.Metric)
+            .entries(resNew)
+
+          glines.select('.line') //select line path within line-group (which represents a category), then bind new data 
+            .data(res_nested)
+            .transition().duration(750)
+            .attr('d', function(d) {
+              return line(d.values)
+            })
+
+          mouseG.selectAll('.mouse-per-line')
+            .data(res_nested)
+
+          mouseG.on('mousemove', function () { 
+              var mouse = d3.mouse(this)
+              updateTooltipContent(mouse, res_nested)
+            })
+        }
+
+
+
+
+   // FUNCTION TO INITIATE CHART WITH RADIO BUTTON
+        function renderChart(Group, Population) {
+
+          var res1 = res.filter(d=>d.Group == Group)
+          var resNew = res1.filter(d=>d.Population <= Population)
 
 
           var res_nested = d3.nest() // necessary to nest data so that keys represent each category
-            .key(d=>d.energy_type)
+            .key(d=>d.Metric)
             .entries(resNew)
 
           // APPEND MULTIPLE LINES //
@@ -329,7 +374,7 @@
                       data += " " + xScale(d.values[idx].date) + "," + 0;
                       return data;
                     });
-                  return "translate(" + xScale(d.values[idx].date) + "," + yScale(d.values[idx].premium) + ")";
+                  return "translate(" + xScale(d.values[idx].date) + "," + yScale(d.values[idx].Value) + ")";
 
                 });
 
@@ -349,13 +394,13 @@
           var xDate = xScale.invert(mouse[0])
           var bisect = d3.bisector(function (d) { return d.date; }).left
           var idx = bisect(d.values, xDate)
-          sortingObj.push({key: d.values[idx].energy_type, premium: d.values[idx].premium, data_subset: d.values[idx].data_subset, year: d.values[idx].date.getFullYear(), month: d.values[idx].date.getMonth()})
+          sortingObj.push({key: d.values[idx].Metric, Value: d.values[idx].Value, Group: d.values[idx].Group, year: d.values[idx].date.getFullYear(), month: d.values[idx].date.getMonth()})
         })
 
 
         
         sortingObj.sort(function(x, y){
-           return d3.descending(x.premium, y.premium);
+           return d3.descending(x.Value, y.Value);
         })
 
         var sortingArr = sortingObj.map(d=> d.key)
@@ -364,7 +409,7 @@
           return sortingArr.indexOf(a.key) - sortingArr.indexOf(b.key) // rank energy category based on TWh
         })
 
-        tooltip.html(sortingObj[0].year + " (Data Subset: " + sortingObj[0].data_subset + ')')
+        tooltip.html(sortingObj[0].year + " (Data Subset: " + sortingObj[0].Group + ')')
           .style('display', 'block')
           .style('left', d3.event.pageX + 20)
           .style('top', d3.event.pageY - 20)
@@ -380,7 +425,7 @@
             var xDate = xScale.invert(mouse[0])
             var bisect = d3.bisector(function (d) { return d.date; }).left
             var idx = bisect(d.values, xDate)
-            return d.key.substring(0, 3) + ": " + d.values[idx].premium.toString() + " TWh"
+            return d.key.substring(0, 3) + ": " + d.values[idx].Value.toString() + " TWh"
           })
       }
 
