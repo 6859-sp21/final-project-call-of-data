@@ -247,3 +247,7 @@ function picture2(){
     document.getElementById('player2_image3').src = pic.replace('30x30', '100x100');
     document.getElementById('player2_image3').style.display='block';
 }
+
+
+
+
