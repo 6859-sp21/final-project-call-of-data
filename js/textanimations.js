@@ -247,3 +247,13 @@ function picture2(){
     document.getElementById('player2_image3').src = pic.replace('30x30', '100x100');
     document.getElementById('player2_image3').style.display='block';
 }
+
+
+
+
+// FUNCTION FOR RELOAD AND RE_DIRECT TO PLAYER SELECTION
+// Sources" https://stackoverflow.com/questions/22033384/refresh-the-page-and-then-go-to-a-specific-div
+function gototab(reload){
+    window.location.hash = '#button-wrap';
+    window.location.reload();
+ }
