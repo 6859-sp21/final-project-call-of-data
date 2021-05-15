@@ -29,6 +29,9 @@
         margin-right: 20px;
       }
     </style>
+
+
+<!-- HTML -->
   </head>
   <body>
     <div class ='container-fluid'>
@@ -36,14 +39,13 @@
         <div id="viz">
           <div class='header'>
             <div class="form-check-inline">
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="A" checked>Starts with A</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="I">Starts with I</label>
-              <label class="form-check-label"><input type="radio" name="Group" value="F">Starts with F</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="1" checked>Starts with a vowel</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="0">Ends with a consonent</label>
             </div>
 
             <div class="form-check-inline-2">
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Group2" value="a" checked>Ends in A</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Group2" value="d">Median Ends in D</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group2" value="1" checked>Starts with a vowel</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group2" value="0">Ends with a consonent</label>
             </div>
 
           </div>
@@ -59,11 +61,11 @@
 
 
 
-// VARIABLES FOR THE CHART
+// GLOBAL VARIABLES FOR THE CHART
       var glines
       var mouseG
       var tooltip
-
+      
       var parseDate = d3.timeParse("%Y-%m-%d")
 
       var margin = {top: 80, right: 200, bottom: 40, left: 80}
@@ -76,14 +78,20 @@
       var axisPad = 6 // axis formatting
       var R = 6 //legend marker
 
-      // var category = ["Wind", "Oil", "Nuclear", "Hydropower", "Traditional.bimass", "Other.renewables", "Biofuels", "Solar", "Coal", "Gas"]
-      
-      // var color = d3.scaleOrdinal()
-      //   .domain(category)
-      //   .range(["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"])
+    // SVG should be a global variable if we want axes to update
+    // Source for responsive axes: https://www.d3-graph-gallery.com/graph/scatter_buttonXlim.html
+      var svg = d3.select("#viz")
+          .append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+          .append('g')
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      var yScale = d3.scaleLinear()
+      var yAxis
 
 
-// START OF D3 CSV CHART FUNCTION
+  // START OF D3 CSV CHART FUNCTION
       d3.csv("data/output/reshaped_country_data.csv", data => {
 
         var res = data.map((d,i) => {
@@ -105,71 +113,41 @@
           .domain(d3.extent(res, d=>d.date))
           .range([0, width])
 
-        var yScale = d3.scaleLinear()
-          .domain([d3.min(res, d => d.Value), d3.max(res, d => d.Value)])
+        yScale.domain([d3.min(res, d => d.Value), d3.max(res, d => d.Value)])
           .range([height, 0]);
 
         var color = d3.scaleOrdinal()
           .domain(category)
           .range(["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"])
 
-        var svg = d3.select("#viz").append("svg")
-          .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom)
-          .append('g')
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-
-        // CREATE AXES // 
+    // CREATE AXES // 
         // render axis first before lines so that lines will overlay the horizontal ticks
         var xAxis = d3.axisBottom(xScale)
-        var yAxis = d3.axisLeft(yScale).ticks(10, "s").tickSize(-width) //horizontal ticks across svg width
+        // var yAxis = d3.axisLeft(yScale).ticks(10, "s").tickSize(-width) //horizontal ticks across svg width
 
         svg.append("g")
           .attr("class", "x axis")
           .attr("transform", `translate(0, ${height})`)
           .call(xAxis)
           .call(g => {
-            var years = xScale.ticks(d3.timeYear.every(1))
-            var xshift = (width/(years.length))/2 
-            g.selectAll("text").attr("transform", `translate(${xshift}, 0)`) //shift tick labels to middle of interval
-              .style("text-anchor", "middle")
-              .attr("y", axisPad)
-              .attr('fill', '#A9A9A9')
+              var years = xScale.ticks(d3.timeYear.every(1))
+              var xshift = (width/(years.length))/2 
+              g.selectAll("text").attr("transform", `translate(${xshift}, 0)`) //shift tick labels to middle of interval
+                .style("text-anchor", "middle")
+                .attr("y", axisPad)
+                .attr('fill', '#A9A9A9')
 
-            g.selectAll("line")
-              .attr('stroke', '#A9A9A9')
-  
-            g.select(".domain")
-              .attr('stroke', '#A9A9A9')
+              g.selectAll("line")
+                .attr('stroke', '#A9A9A9')
+    
+              g.select(".domain")
+                .attr('stroke', '#A9A9A9')
 
           })
 
-        svg.append("g")
-          .attr("class", "y axis")
-          .call(yAxis)
-          .call(g => {
-            g.selectAll("text")
-            .style("text-anchor", "middle")
-            .attr("x", -axisPad*2)
-            .attr('fill', '#A9A9A9')
 
-            g.selectAll("line")
-              .attr('stroke', '#A9A9A9')
-              .attr('stroke-width', 0.7) // make horizontal tick thinner and lighter so that line paths can stand out
-              .attr('opacity', 0.3)
-
-            g.select(".domain").remove()
-
-           })
-          .append('text')
-            .attr('x', 50)
-            .attr("y", -10)
-            .attr("fill", "#A9A9A9")
-            .text("TWh (Substituted Energy)")
-
-
-        // CREATE LEGEND // 
+   // CREATE LEGEND // 
         var svgLegend = svg.append('g')
             .attr('class', 'gLegend')
             .attr("transform", "translate(" + (width + 20) + "," + 0 + ")")
@@ -202,7 +180,7 @@
 
 
   // SET DEFAULT PARAMETERS HERE
-        renderChart("A", "a") // inital chart render (set default to choice of default data)
+        renderChart("1", "1") // inital chart render (set default to choice of default data)
 
         // Update chart when radio button is selected - Group 1
         d3.selectAll(("input[name='Group']")).on('change', function(){
@@ -220,15 +198,38 @@
   // FUNCTION TO UPDATE CHART WITH  RADIO BUTTON
         function updateChartGroup1(Group) {
 
-          // Filter for the value on the other radio button
+        // Don't forget to filter for the value on the other radio button(s)
           var group2_val = d3.select('input[name="Group2"]:checked').property("value");
           var res1 = res.filter(d=>d.Group2 == group2_val)
           var resNew = res1.filter(d=>d.Group == Group)
 
+      // Define and Update Y axis
+      yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
+
+      svg.select('.y.axis')
+          .call(d3.axisLeft(yScale))
+          .call(g => {
+                    g.selectAll("text")
+                    .style("text-anchor", "middle")
+                    .attr("x", -axisPad*2)
+                    .attr('fill', '#A9A9A9')
+
+                    g.selectAll("line")
+                      .attr('stroke', '#A9A9A9')
+                      .attr('stroke-width', 0.7) // make horizontal tick thinner and lighter so that line paths can stand out
+                      .attr('opacity', 0.3)
+
+                    g.select(".domain").remove()
+
+                  })
+          .transition().duration(750)
+
+       // Nest Data:
           var res_nested = d3.nest()
             .key(d=>d.Metric)
             .entries(resNew)
 
+        // Update the other elements
           glines.select('.line') //select line path within line-group (which represents a category), then bind new data 
             .data(res_nested)
             .transition().duration(750)
@@ -250,15 +251,38 @@
       // FUNCTION TO UPDATE CHART WITH  RADIO BUTTON
         function updateChartGroup2(Group2) {
 
-          // Filter for the value on the other radio button
+          // Don't forget to filter for the value on the other radio button(s)
           var group1_val = d3.select('input[name="Group"]:checked').property("value");
           var res1 = res.filter(d=>d.Group == group1_val)
           var resNew = res1.filter(d=>d.Group2 == Group2)
 
-          var res_nested = d3.nest()
-            .key(d=>d.Metric)
-            .entries(resNew)
+      // Define and Update Y axis
+          yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
 
+          svg.select('.y.axis')
+              .call(d3.axisLeft(yScale))
+              .call(g => {
+                    g.selectAll("text")
+                    .style("text-anchor", "middle")
+                    .attr("x", -axisPad*2)
+                    .attr('fill', '#A9A9A9')
+
+                    g.selectAll("line")
+                      .attr('stroke', '#A9A9A9')
+                      .attr('stroke-width', 0.7) // make horizontal tick thinner and lighter so that line paths can stand out
+                      .attr('opacity', 0.3)
+
+                    g.select(".domain").remove()
+
+                  })
+              .transition().duration(750)
+
+       // Nest Data:
+              var res_nested = d3.nest()
+                .key(d=>d.Metric)
+                .entries(resNew)
+
+            // Update the other elements
           glines.select('.line') //select line path within line-group (which represents a category), then bind new data 
             .data(res_nested)
             .transition().duration(750)
@@ -284,7 +308,6 @@
           var res1 = res.filter(d=>d.Group == Group)
           var resNew = res1.filter(d=>d.Group2 == Group2)
 
-
           var res_nested = d3.nest() // necessary to nest data so that keys represent each category
             .key(d=>d.Metric)
             .entries(resNew)
@@ -306,6 +329,33 @@
               .style('fill', 'none')
               .style('opacity', lineOpacity)
               .style('stroke-width', lineStroke)
+
+          
+          // APPEND Y AXIS //
+          yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
+
+          yAxis = svg.append("g")
+              .attr("class", "y axis")
+              .call(d3.axisLeft(yScale))
+              .call(g => {
+                    g.selectAll("text")
+                    .style("text-anchor", "middle")
+                    .attr("x", -axisPad*2)
+                    .attr('fill', '#A9A9A9')
+
+                    g.selectAll("line")
+                      .attr('stroke', '#A9A9A9')
+                      .attr('stroke-width', 0.7) // make horizontal tick thinner and lighter so that line paths can stand out
+                      .attr('opacity', 0.3)
+
+                    g.select(".domain").remove()
+
+                  })
+              .append('text')
+                .attr('x', 50)
+                .attr("y", -10)
+                .attr("fill", "#A9A9A9")
+                .text("TWh (Substituted Energy)")
 
 
           // CREATE HOVER TOOLTIP WITH VERTICAL LINE //
