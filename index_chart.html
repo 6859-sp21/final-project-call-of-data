@@ -52,14 +52,16 @@
             </div>
 
             <div class="form-check-inline">
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Year" value="2015" checked>All Years</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Year" value="2016" checked>All Years</label>
               <label class="form-check-label"><input style="display: inline" type="radio" name="Year" value="1990">Stop at 1990</label>
             </div>
 
-            <!-- <div class="form-check-inline-2">
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Group2" value="1" checked>Ends with a vowel</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Group2" value="0">Ends with a consonent</label>
-            </div> -->
+            <div class="form-check-inline-2">
+              <label class="form-check-label"><input style="display: inline" type="radio" name="GDP" value="1" checked>GDP: Lowest Quartile</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="GDP" value="2">GDP: 2nd Lowest Quartile</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="GDP" value="3">GDP: 3nd Lowest Quartile</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="GDP" value="4">GDP: Highest Quartile</label>
+            </div>
 
           </div>
         </div>
@@ -115,17 +117,15 @@
             date : parseDate(d.Year),
             Year : +d.Year_num,
             Location : d.Location,
-            Group : d.Group,
-            Group2 : d.Group2,
-            Group3 : +d.Group3,
-            Population : d.Population,
-            GDP : +d.GDP,
+            GDP_qt : +d.GDP_Quartile,
+            Pop_qt : +d.Pop_Quartile,
+            // Population : d.Population,
+            // GDP : +d.GDP,
             Metric : d.Metric, 
             Value : +d.Value
           }
         })
         
-        var category = d3.map(res, function(d){return d.Location;}).keys()
 
         xScale.domain(d3.extent(res, d=>d.date))
           .range([0, width])
@@ -133,34 +133,12 @@
         yScale.domain([d3.min(res, d => d.Value), d3.max(res, d => d.Value)])
           .range([height, 0]);
 
+
+   // Maybe this being here is what prevents proper updating ?
+        var category = d3.map(res, function(d){return d.Location;}).keys()
         var color = d3.scaleOrdinal()
           .domain(category)
           .range(d3.schemePaired)
-
-
-    // CREATE AXES // 
-        // render axis first before lines so that lines will overlay the horizontal ticks
-        // var xAxis = d3.axisBottom(xScale)
-
-        // svg.append("g")
-        //   .attr("class", "x axis")
-        //   .attr("transform", `translate(0, ${height})`)
-        //   .call(xAxis)
-        //   .call(g => {
-        //       var years = xScale.ticks(d3.timeYear.every(1))
-        //       var xshift = (width/(years.length))/2 
-        //       g.selectAll("text").attr("transform", `translate(${xshift}, 0)`) //shift tick labels to middle of interval
-        //         .style("text-anchor", "middle")
-        //         .attr("y", axisPad)
-        //         .attr('fill', '#A9A9A9')
-
-        //       g.selectAll("line")
-        //         .attr('stroke', '#A9A9A9')
-    
-        //       g.select(".domain")
-        //         .attr('stroke', '#A9A9A9')
-
-        //   })
 
 
    // CREATE LEGEND // 
@@ -196,11 +174,9 @@
 
 
   // SET DEFAULT PARAMETERS HERE
-        renderChart("CO2", "2015") // inital chart render (set default to choice of default data)
+        renderChart("CO2", "2015", "1") // inital chart render (set default to choice of default data)
 
-
-
-  // / CALL FUNCTIONS TO UPDATE ON CHANGE HERE
+  // CALL FUNCTIONS TO UPDATE ON CHANGE HERE
 
         // Update chart when radio button is selected - Metric
         d3.selectAll(("input[name='Metric']")).on('change', function(){
@@ -213,10 +189,10 @@
           updateChartYear(this.value)
         })
 
-        // // Update chart when radio button is selected - Group 2
-        // d3.selectAll(("input[name='Group2']")).on('change', function(){
-        //   updateChartGroup2(this.value)
-        // })
+        // Update chart when radio button is selected - GDP
+        d3.selectAll(("input[name='GDP']")).on('change', function(){
+          updateChartGDP(this.value)
+        })
 
 
 
@@ -229,12 +205,12 @@
           var year_val = d3.select('input[name="Year"]:checked').property("value");
           var res1 = res.filter(d=>d.Year <= parseInt(year_val))
 
-          // // Group 2 filter
-          // var group2_val = d3.select('input[name="Group2"]:checked').property("value");
-          // var res2 = res1.filter(d=>d.Group2 == group2_val)
+          // Group 2 filter
+          var gdp_val = d3.select('input[name="GDP"]:checked').property("value");
+          var res2 = res1.filter(d=>d.GDP_qt == parseInt(gdp_val))
 
           // Current Filter
-          var resNew = res1.filter(d=>d.Metric == Metric)
+          var resNew = res2.filter(d=>d.Metric == Metric)
 
 
         // Define and Update Y axis
@@ -313,12 +289,12 @@
           var metric_val = d3.select('input[name="Metric"]:checked').property("value");
           var res1 = res.filter(d=>d.Metric == metric_val)
 
-          // // Group 2 filter
-          // var group2_val = d3.select('input[name="Group2"]:checked').property("value");
-          // var res2 = res.filter(d=>d.Group2 == group2_val)
+          // Group 2 filter
+          var gdp_val = d3.select('input[name="GDP"]:checked').property("value");
+          var res2 = res1.filter(d=>d.GDP_qt == parseInt(gdp_val))
 
           // Current Filter
-          var resNew = res1.filter(d=>d.Year <= parseInt(Year))
+          var resNew = res2.filter(d=>d.Year <= parseInt(Year))
 
 
       // Define and Update Y axis
@@ -388,78 +364,77 @@
 
 
 
-      // // FUNCTION TO UPDATE CHART WITH  RADIO BUTTON
-      //   function updateChartGroup2(Group2) {
+      // FUNCTION TO UPDATE CHART WITH  RADIO BUTTON
+        function updateChartGDP(GDP) {
 
 
-      //   // Filter for the value on the other radio button(s)
-      //     // // Metric 1 filter
-      //     // var metric_val = d3.select('input[name="Metric"]:checked').property("value");
-      //     // var res1 = res.filter(d=>d.Metric == metric_val)
+        // Filter for the value on the other radio button(s)
+          // Metric 1 filter
+          var metric_val = d3.select('input[name="Metric"]:checked').property("value");
+          var res1 = res.filter(d=>d.Metric == metric_val)
 
-      //     // Group 1 filter
-      //     var group1_val = d3.select('input[name="Group"]:checked').property("value");
-      //     var res2 = res.filter(d=>d.Group == group1_val)
+          // Year 1 filter
+          var year_val = d3.select('input[name="Year"]:checked').property("value");
+          var res2 = res1.filter(d=>d.Year <= parseInt(year_val))
 
-      //     // Current Filter
-      //     var resNew = res2.filter(d=>d.Group2 == Group2)
+          // Current Filter
+          var resNew = res2.filter(d=>d.GDP_qt == parseInt(GDP))
 
 
-      // // Define and Update Y axis
-      //     yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
+      // Define and Update Y axis
+          yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
 
-      //     svg.select('.y.axis')
-			//       	.transition().duration(750)
-      //         .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
-      //         .call(g => {
-      //               g.selectAll("text")
-      //               .style("text-anchor", "middle")
-      //               .attr("x", -axisPad*2)
-      //               .attr('fill', '#A9A9A9')
+          svg.select('.y.axis')
+			      	.transition().duration(750)
+              .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
+              .call(g => {
+                    g.selectAll("text")
+                    .style("text-anchor", "middle")
+                    .attr("x", -axisPad*2)
+                    .attr('fill', '#A9A9A9')
 
-      //               g.selectAll("line")
-      //                 .attr('stroke', '#A9A9A9')
-      //                 .attr('stroke-width', 0.7) 
-      //                 .attr('opacity', 0.3)
+                    g.selectAll("line")
+                      .attr('stroke', '#A9A9A9')
+                      .attr('stroke-width', 0.7) 
+                      .attr('opacity', 0.3)
 
-      //               g.select(".domain").remove()
+                    g.select(".domain").remove()
 
-      //             })
+                  })
 
-      //       // Nest Data:
-      //         var res_nested = d3.nest()
-      //           .key(d=>d.Location)
-      //           .entries(resNew)
+            // Nest Data:
+              var res_nested = d3.nest()
+                .key(d=>d.Location)
+                .entries(resNew)
 
-      //       // Update the other elements
-      //     glines.select('.line') //select line path within line-group (which represents a category), then bind new data 
-      //       .data(res_nested)
-      //       .transition().duration(750)
-      //       .attr('d', function(d) {
-      //         return line(d.values)
-      //       })
+            // Update the other elements
+          glines.select('.line') //select line path within line-group (which represents a category), then bind new data 
+            .data(res_nested)
+            .transition().duration(750)
+            .attr('d', function(d) {
+              return line(d.values)
+            })
 
-      //     mouseG.selectAll('.mouse-per-line')
-      //       .data(res_nested)
+          mouseG.selectAll('.mouse-per-line')
+            .data(res_nested)
 
-      //     mouseG.on('mousemove', function () { 
-      //         var mouse = d3.mouse(this)
-      //         updateTooltipContent(mouse, res_nested)
-      //       })
-      //   }
+          mouseG.on('mousemove', function () { 
+              var mouse = d3.mouse(this)
+              updateTooltipContent(mouse, res_nested)
+            })
+        }
 
 
 
 
    // FUNCTION TO INITIATE CHART WITH RADIO BUTTON
-        function renderChart(Metric, Year) {
+        function renderChart(Metric, Year, GDP) {
 
           // Implement Filters: 
-          var res1 = res.filter(d=>d.Year == parseInt(Year))
-          var resNew = res1.filter(d=>d.Metric == Metric)
+          var res1 = res.filter(d=>d.Year <= parseInt(Year))
+          var res2 = res1.filter(d=>d.GDP_qt == parseInt(GDP))
+          var resNew = res2.filter(d=>d.Metric == Metric)
 
-          // var res2 = res.filter(d=>d.Group == Group)
-          // var resNew = res2.filter(d=>d.Group2 == Group2)
 
         // necessary to nest data so that keys represent each category
           var res_nested = d3.nest() 
@@ -663,7 +638,6 @@
             var xDate = xScale.invert(mouse[0])
             var bisect = d3.bisector(function (d) { return d.date; }).left
             var idx = bisect(d.values, xDate)
-            // return d.key.substring(0, 3) + ": " + d.values[idx].Value.toString() + " TWh"
             return d.key + ": " + f(d.values[idx].Value).toString() + " TWh"
 
           })
