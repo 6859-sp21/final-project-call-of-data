@@ -100,9 +100,11 @@
             Location : d.Location,
             Group : d.Group,
             Group2 : d.Group2,
+            Group3 : +d.Group3,
             Population : d.Population,
             GDP : +d.GDP,
-            Metric : d.Metric,
+          // Note: Currently this is the variable that gets color-coded and fed into the tool tip
+            Metric : d.Metric, 
             Value : +d.Value
           }
         })
@@ -124,7 +126,6 @@
     // CREATE AXES // 
         // render axis first before lines so that lines will overlay the horizontal ticks
         var xAxis = d3.axisBottom(xScale)
-        // var yAxis = d3.axisLeft(yScale).ticks(10, "s").tickSize(-width) //horizontal ticks across svg width
 
         svg.append("g")
           .attr("class", "x axis")
@@ -198,7 +199,7 @@
   // FUNCTION TO UPDATE CHART WITH  RADIO BUTTON
         function updateChartGroup1(Group) {
 
-        // Don't forget to filter for the value on the other radio button(s)
+      // Don't forget to filter for the value on the other radio button(s)
           var group2_val = d3.select('input[name="Group2"]:checked').property("value");
           var res1 = res.filter(d=>d.Group2 == group2_val)
           var resNew = res1.filter(d=>d.Group == Group)
@@ -207,7 +208,8 @@
       yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
 
       svg.select('.y.axis')
-          .call(d3.axisLeft(yScale))
+          .transition().duration(750)
+          .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
           .call(g => {
                     g.selectAll("text")
                     .style("text-anchor", "middle")
@@ -216,13 +218,13 @@
 
                     g.selectAll("line")
                       .attr('stroke', '#A9A9A9')
-                      .attr('stroke-width', 0.7) // make horizontal tick thinner and lighter so that line paths can stand out
+                      .attr('stroke-width', 0.7)
                       .attr('opacity', 0.3)
 
                     g.select(".domain").remove()
 
                   })
-          .transition().duration(750)
+
 
        // Nest Data:
           var res_nested = d3.nest()
@@ -260,7 +262,8 @@
           yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
 
           svg.select('.y.axis')
-              .call(d3.axisLeft(yScale))
+			      	.transition().duration(750)
+              .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
               .call(g => {
                     g.selectAll("text")
                     .style("text-anchor", "middle")
@@ -269,18 +272,19 @@
 
                     g.selectAll("line")
                       .attr('stroke', '#A9A9A9')
-                      .attr('stroke-width', 0.7) // make horizontal tick thinner and lighter so that line paths can stand out
+                      .attr('stroke-width', 0.7) 
                       .attr('opacity', 0.3)
 
                     g.select(".domain").remove()
 
                   })
-              .transition().duration(750)
 
        // Nest Data:
               var res_nested = d3.nest()
                 .key(d=>d.Metric)
                 .entries(resNew)
+
+                console.log(res_nested)
 
             // Update the other elements
           glines.select('.line') //select line path within line-group (which represents a category), then bind new data 
@@ -336,7 +340,7 @@
 
           yAxis = svg.append("g")
               .attr("class", "y axis")
-              .call(d3.axisLeft(yScale))
+              .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
               .call(g => {
                     g.selectAll("text")
                     .style("text-anchor", "middle")
@@ -485,7 +489,6 @@
             return d.key.substring(0, 3) + ": " + d.values[idx].Value.toString() + " TWh"
           })
       }
-
     })
 
 // END OF D3 CSV CHART FUNTION
