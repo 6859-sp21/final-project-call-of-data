@@ -57,8 +57,8 @@
             </div>
 
             <div class="form-check-inline-2">
-              <label class="form-check-label"><input style="display: inline" type="radio" name="GDP" value="1" checked>GDP: Lowest Quartile</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="GDP" value="2">GDP: 2nd Lowest Quartile</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="GDP" value="1">GDP: Lowest Quartile</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="GDP" value="2" checked>GDP: 2nd Lowest Quartile</label>
               <label class="form-check-label"><input style="display: inline" type="radio" name="GDP" value="3">GDP: 3nd Lowest Quartile</label>
               <label class="form-check-label"><input style="display: inline" type="radio" name="GDP" value="4">GDP: Highest Quartile</label>
             </div>
@@ -73,6 +73,17 @@
 <!-- JAVASCRIPT -->
 
     <script>
+
+// Current bug list:
+  // BUG 1 
+      // If filtering by a variable that affects the number of lines (e.g. the number of countries shown at any one time)
+      // and there isn't the same number of countries in each bucket/choice of that grouping variable,
+      // then the number of countries in the default choice dictates the number of lines available for the remainder of the choices.
+      // If other choices have fewer countries, the extra line(s) stays behind when alternating between choices for that filter.
+      // If other choices have more countries, the extra line(s) do not get created.
+  
+  // BUG 2
+      // Legend does not update
 
 
 
@@ -101,6 +112,8 @@
           .attr("height", height + margin.top + margin.bottom)
           .append('g')
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+   
+    // In general, any element we want to update should be globally set
 
       var yScale = d3.scaleLinear()
       var xScale = d3.scaleTime()
@@ -108,6 +121,12 @@
 
       var yAxis
       var xAxis
+  
+     var svgLegend = svg.append('g')
+            .attr('class', 'gLegend')
+            .attr("transform", "translate(" + (width + 20) + "," + 0 + ")")
+    
+     var legend
 
   // START OF D3 CSV CHART FUNCTION
       d3.csv("data/output/reshaped_country_data.csv", data => {
@@ -132,47 +151,39 @@
           .range([height, 0]);
 
 
-   // Maybe this being here is what prevents proper updating ?
-        var legend_category = d3.map(res, function(d){return d.Location;}).keys()
-        // var color = d3.scaleOrdinal()
-        //   .domain(category)
-        //   .range(d3.schemePaired)
-
-
-   // CREATE LEGEND // 
-        var svgLegend = svg.append('g')
-            .attr('class', 'gLegend')
-            .attr("transform", "translate(" + (width + 20) + "," + 0 + ")")
-
-        var legend = svgLegend.selectAll('.legend')
-          .data(legend_category)
-          .enter().append('g')
-            .attr("class", "legend")
-            .attr("transform", function (d, i) {return "translate(0," + i * 20 + ")"})
-
-        legend.append("circle")
-            .attr("class", "legend-node")
-            .attr("cx", 0)
-            .attr("cy", 0)
-            .attr("r", R)
-            // .style("fill", d=>color(d))
-
-        legend.append("text")
-            .attr("class", "legend-text")
-            .attr("x", R*2)
-            .attr("y", R/2)
-            .style("fill", "#A9A9A9")
-            .style("font-size", 12)
-            .text(d=>d)
-
-        // line generator 
+    // line generator 
         var line = d3.line()
           .x(d => xScale(d.date))
           .y(d => yScale(d.Value))
 
+  //  // CREATE LEGEND // 
+  //       var legend_category = d3.map(res, function(d){return d.Location;}).keys()
+
+  //       var legend = svgLegend.selectAll('.legend')
+  //         .data(legend_category)
+  //         .enter().append('g')
+  //           .attr("class", "legend")
+  //           .attr("transform", function (d, i) {return "translate(0," + i * 20 + ")"})
+
+  //       legend.append("circle")
+  //           .attr("class", "legend-node")
+  //           .attr("cx", 0)
+  //           .attr("cy", 0)
+  //           .attr("r", R)
+  //           // .style("fill", d=>color(d))
+
+  //       legend.append("text")
+  //           .attr("class", "legend-text")
+  //           .attr("x", R*2)
+  //           .attr("y", R/2)
+  //           .style("fill", "#A9A9A9")
+  //           .style("font-size", 12)
+  //           .text(d=>d)
+
+
 
   // SET DEFAULT PARAMETERS HERE
-        renderChart("CO2", "2015", "1") // inital chart render (set default to choice of default data)
+        renderChart("CO2", "2016", "2") // inital chart render (set default to choice of default data)
 
   // CALL FUNCTIONS TO UPDATE ON CHANGE HERE
 
@@ -213,6 +224,8 @@
         var category = d3.map(resNew, function(d){return d.Location;}).keys()
         color.domain(category).range(d3.schemePaired)
 
+
+        
         // Define and Update Y axis
         yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
 
@@ -389,6 +402,29 @@
           var category = d3.map(resNew, function(d){return d.Location;}).keys()
           color.domain(category).range(d3.schemePaired)
 
+        // Define and update legend
+          svgLegend.selectAll('.legend').remove();
+
+          var legend = svgLegend.selectAll('.legend')
+                .data(category)
+                .enter().append('g')
+                  .attr("class", "legend")
+                  .attr("transform", function (d, i) {return "translate(0," + i * 20 + ")"})
+
+            legend.append("circle")
+                .attr("class", "legend-node")
+                .attr("cx", 0)
+                .attr("cy", 0)
+                .attr("r", R)
+                .style("fill", d=>color(d))
+
+            legend.append("text")
+                .attr("class", "legend-text")
+                .attr("x", R*2)
+                .attr("y", R/2)
+                .style("fill", "#A9A9A9")
+                .style("font-size", 12)
+                .text(d=>d)
 
       // Define and Update Y axis
           yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
@@ -453,6 +489,29 @@
           // APPEND COLOR AXIS //
           var category = d3.map(resNew, function(d){return d.Location;}).keys()
           color.domain(category).range(d3.schemePaired)
+
+
+             // CREATE LEGEND // 
+            legend = svgLegend.selectAll('.legend')
+                .data(category)
+                .enter().append('g')
+                  .attr("class", "legend")
+                  .attr("transform", function (d, i) {return "translate(0," + i * 20 + ")"})
+
+            legend.append("circle")
+                .attr("class", "legend-node")
+                .attr("cx", 0)
+                .attr("cy", 0)
+                .attr("r", R)
+                .style("fill", d=>color(d))
+
+            legend.append("text")
+                .attr("class", "legend-text")
+                .attr("x", R*2)
+                .attr("y", R/2)
+                .style("fill", "#A9A9A9")
+                .style("font-size", 12)
+                .text(d=>d)
 
 
           // APPEND MULTIPLE LINES //
