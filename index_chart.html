@@ -81,11 +81,6 @@
       // then the number of countries in the default choice dictates the number of lines available for the remainder of the choices.
       // If other choices have fewer countries, the extra line(s) stays behind when alternating between choices for that filter.
       // If other choices have more countries, the extra line(s) do not get created.
-  
-  // BUG 2
-      // Legend does not update
-
-
 
 // GLOBAL VARIABLES FOR THE CHART
       var glines
@@ -155,32 +150,6 @@
         var line = d3.line()
           .x(d => xScale(d.date))
           .y(d => yScale(d.Value))
-
-  //  // CREATE LEGEND // 
-  //       var legend_category = d3.map(res, function(d){return d.Location;}).keys()
-
-  //       var legend = svgLegend.selectAll('.legend')
-  //         .data(legend_category)
-  //         .enter().append('g')
-  //           .attr("class", "legend")
-  //           .attr("transform", function (d, i) {return "translate(0," + i * 20 + ")"})
-
-  //       legend.append("circle")
-  //           .attr("class", "legend-node")
-  //           .attr("cx", 0)
-  //           .attr("cy", 0)
-  //           .attr("r", R)
-  //           // .style("fill", d=>color(d))
-
-  //       legend.append("text")
-  //           .attr("class", "legend-text")
-  //           .attr("x", R*2)
-  //           .attr("y", R/2)
-  //           .style("fill", "#A9A9A9")
-  //           .style("font-size", 12)
-  //           .text(d=>d)
-
-
 
   // SET DEFAULT PARAMETERS HERE
         renderChart("CO2", "2016", "2") // inital chart render (set default to choice of default data)

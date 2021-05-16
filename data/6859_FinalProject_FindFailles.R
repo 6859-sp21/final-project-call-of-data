@@ -91,10 +91,13 @@ lapply(packages, require, character.only = TRUE)
 country = read.csv("./country-level.csv", stringsAsFactors = F)
 
 # Drop Row Index column
-country <- subset(country, select = -c(X, index))
+country <- subset(country, select = -c(X))
 
 # Simplify column names:
-names(country) <- c("Location", "Year", "CO2", "CO2_per_GDP", "Share_of_Global_CO2", "CO2_per_Capita", "CO2_per_Unit_Energy", "Primary_Energy_Consumption", "Energy_per_Capita", "Energy_per_GDP", "Population", "GDP")
+names(country) <- c("Location", "Year", 
+                    "CO2", "CO2_per_GDP", "Share_of_Global_CO2", "CO2_per_Capita", "CO2_per_Unit_Energy", "Primary_Energy_Consumption", "Energy_per_Capita", "Energy_per_GDP", 
+                    "Population", "GDP", "Group1", "Group2", "Group3", "Group4", "Group5", 
+                    "Growth_CO2", "Growth_Primary_Energy", "Growth_Pop")
 
 # Convert Year to a Data
 country$Year_num <- country$Year 
@@ -115,11 +118,12 @@ country <- merge(x = country,
                  by = "Location")
 
 # Re-Organize
-country <- country[c("Year", "Year_num", "Location", "Population", "Pop_Quartile","GDP", "GDP_Quartile","CO2", "CO2_per_GDP", "Share_of_Global_CO2", "CO2_per_Capita", "CO2_per_Unit_Energy", "Primary_Energy_Consumption", "Energy_per_Capita", "Energy_per_GDP")]
+country <- country[c("Year", "Year_num", "Location", "Population", "Pop_Quartile","GDP", "GDP_Quartile", "Group1", "Group2", "Group3", "Group4", "Group5", 
+                     "CO2", "CO2_per_GDP", "Share_of_Global_CO2", "CO2_per_Capita", "CO2_per_Unit_Energy", "Primary_Energy_Consumption", "Energy_per_Capita", "Energy_per_GDP", "Growth_CO2", "Growth_Primary_Energy", "Growth_Pop")]
 
 
 # Re-shape to match example:
-country <- gather(country, Metric, Value, CO2:Energy_per_GDP, factor_key=TRUE)
+country <- gather(country, Metric, Value, CO2:Growth_Pop, factor_key=TRUE)
 
 # Write to CSV
 write.csv(country, "reshaped_country_data.csv", row.names = F)
