@@ -104,10 +104,10 @@
 
       var yScale = d3.scaleLinear()
       var xScale = d3.scaleTime()
+      var color = d3.scaleOrdinal()
+
       var yAxis
       var xAxis
-
-
 
   // START OF D3 CSV CHART FUNCTION
       d3.csv("data/output/reshaped_country_data.csv", data => {
@@ -119,8 +119,6 @@
             Location : d.Location,
             GDP_qt : +d.GDP_Quartile,
             Pop_qt : +d.Pop_Quartile,
-            // Population : d.Population,
-            // GDP : +d.GDP,
             Metric : d.Metric, 
             Value : +d.Value
           }
@@ -135,10 +133,10 @@
 
 
    // Maybe this being here is what prevents proper updating ?
-        var category = d3.map(res, function(d){return d.Location;}).keys()
-        var color = d3.scaleOrdinal()
-          .domain(category)
-          .range(d3.schemePaired)
+        var legend_category = d3.map(res, function(d){return d.Location;}).keys()
+        // var color = d3.scaleOrdinal()
+        //   .domain(category)
+        //   .range(d3.schemePaired)
 
 
    // CREATE LEGEND // 
@@ -147,7 +145,7 @@
             .attr("transform", "translate(" + (width + 20) + "," + 0 + ")")
 
         var legend = svgLegend.selectAll('.legend')
-          .data(category)
+          .data(legend_category)
           .enter().append('g')
             .attr("class", "legend")
             .attr("transform", function (d, i) {return "translate(0," + i * 20 + ")"})
@@ -157,7 +155,7 @@
             .attr("cx", 0)
             .attr("cy", 0)
             .attr("r", R)
-            .style("fill", d=>color(d))
+            // .style("fill", d=>color(d))
 
         legend.append("text")
             .attr("class", "legend-text")
@@ -196,7 +194,6 @@
 
 
 
-
   // FUNCTION TO UPDATE METRIC BEING VIEWED:
       function updateChartMetric(Metric) {
 
@@ -212,6 +209,9 @@
           // Current Filter
           var resNew = res2.filter(d=>d.Metric == Metric)
 
+        // Define and update color scale
+        var category = d3.map(resNew, function(d){return d.Location;}).keys()
+        color.domain(category).range(d3.schemePaired)
 
         // Define and Update Y axis
         yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
@@ -256,6 +256,8 @@
 
               })
 
+
+
         // Nest  Data:
             var res_nested = d3.nest()
               .key(d=>d.Location)
@@ -274,7 +276,7 @@
 
             mouseG.on('mousemove', function () { 
                 var mouse = d3.mouse(this)
-                updateTooltipContent(mouse, res_nested)
+                updateTooltipContent(mouse, res_nested, color)
               })
         }
 
@@ -295,7 +297,10 @@
 
           // Current Filter
           var resNew = res2.filter(d=>d.Year <= parseInt(Year))
-
+      
+      // Define and update color scale
+        var category = d3.map(resNew, function(d){return d.Location;}).keys()
+        color.domain(category).range(d3.schemePaired)
 
       // Define and Update Y axis
       yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
@@ -358,7 +363,7 @@
 
           mouseG.on('mousemove', function () { 
               var mouse = d3.mouse(this)
-              updateTooltipContent(mouse, res_nested)
+              updateTooltipContent(mouse, res_nested, color)
             })
         }
 
@@ -379,6 +384,10 @@
 
           // Current Filter
           var resNew = res2.filter(d=>d.GDP_qt == parseInt(GDP))
+
+      // Define and update color scale
+          var category = d3.map(resNew, function(d){return d.Location;}).keys()
+          color.domain(category).range(d3.schemePaired)
 
 
       // Define and Update Y axis
@@ -420,7 +429,7 @@
 
           mouseG.on('mousemove', function () { 
               var mouse = d3.mouse(this)
-              updateTooltipContent(mouse, res_nested)
+              updateTooltipContent(mouse, res_nested, color)
             })
         }
 
@@ -441,6 +450,11 @@
             .key(d=>d.Location)
             .entries(resNew)
 
+          // APPEND COLOR AXIS //
+          var category = d3.map(resNew, function(d){return d.Location;}).keys()
+          color.domain(category).range(d3.schemePaired)
+
+
           // APPEND MULTIPLE LINES //
           var lines = svg.append('g')
             .attr('class', 'lines')
@@ -460,8 +474,8 @@
               .style('fill', 'none')
               .style('opacity', lineOpacity)
               .style('stroke-width', lineStroke)
-
           
+
           // APPEND Y AXIS //
           yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
 
@@ -590,7 +604,7 @@
 
                 });
 
-              updateTooltipContent(mouse, res_nested)
+              updateTooltipContent(mouse, res_nested, color)
 
             })
 
@@ -599,7 +613,7 @@
 
 
 // FUNCTION FOR UPDATING TOOL TIP CONTENT:
-      function updateTooltipContent(mouse, res_nested) {
+      function updateTooltipContent(mouse, res_nested, color) {
 
         var f = d3.format(".1f");
 
@@ -619,7 +633,7 @@
         var sortingArr = sortingObj.map(d=> d.key)
 
         var res_nested1 = res_nested.slice().sort(function(a, b){
-          return sortingArr.indexOf(a.key) - sortingArr.indexOf(b.key) // rank energy category based on TWh
+          return sortingArr.indexOf(a.key) - sortingArr.indexOf(b.key) // rank country based on metric
         })
 
         tooltip.html(sortingObj[0].year + " (Data Subset: " + sortingObj[0].Group + ')')
@@ -628,7 +642,7 @@
           .style('top', d3.event.pageY - 20)
           .style('font-size', 11.5)
           .selectAll()
-          .data(res_nested1).enter() // for each energy category, print name and TWh
+          .data(res_nested1).enter()
           .append('div')
           .style('color', d => {
             return color(d.key)

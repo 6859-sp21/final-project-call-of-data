@@ -3,7 +3,7 @@
 
 
 document.getElementById("form1").onsubmit=function() {
-    //displays the response DOM element
+   //displays the response DOM element
  document.getElementById("response").style.display = "block";
  document.getElementById("response2").style.display = "block";
  
