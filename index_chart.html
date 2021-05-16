@@ -38,6 +38,18 @@
       <div class='row'>
         <div id="viz">
           <div class='header'>
+
+            <div class="form-check-variable">
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="CO2" checked>CO2</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="CO2_per_GDP">CO2_per_GDP</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="Share_of_Global_CO2">Share_of_Global_CO2</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="CO2_per_Capita">CO2_per_Capita</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="CO2_per_Unit_Energy">CO2_per_Unit_Energy</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="Primary_Energy_Consumption">Primary_Energy_Consumption</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="Energy_per_Capita">Energy_per_Capita</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="Energy_per_GDP">Energy_per_GDP</label>
+            </div>
+
             <div class="form-check-inline">
               <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="1" checked>Starts with a vowel</label>
               <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="0">Ends with a consonent</label>
@@ -103,13 +115,12 @@
             Group3 : +d.Group3,
             Population : d.Population,
             GDP : +d.GDP,
-          // Note: Currently this is the variable that gets color-coded and fed into the tool tip
             Metric : d.Metric, 
             Value : +d.Value
           }
         })
 
-        var category = d3.map(res, function(d){return d.Metric;}).keys()
+        var category = d3.map(res, function(d){return d.Location;}).keys()
 
         var xScale = d3.scaleTime()
           .domain(d3.extent(res, d=>d.date))
@@ -181,7 +192,13 @@
 
 
   // SET DEFAULT PARAMETERS HERE
-        renderChart("1", "1") // inital chart render (set default to choice of default data)
+        renderChart("CO2", "1", "1") // inital chart render (set default to choice of default data)
+
+        // Update chart when radio button is selected - Metric
+        d3.selectAll(("input[name='Metric']")).on('change', function(){
+          updateChartMetric(this.value)
+        })
+
 
         // Update chart when radio button is selected - Group 1
         d3.selectAll(("input[name='Group']")).on('change', function(){
@@ -196,13 +213,83 @@
 
 
 
-  // FUNCTION TO UPDATE CHART WITH  RADIO BUTTON
-        function updateChartGroup1(Group) {
+  // FUNCTION TO UPDATE METRIC BEING VIEWED:
+      function updateChartMetric(Metric) {
 
-      // Don't forget to filter for the value on the other radio button(s)
+      // Filter for the value on the other radio button(s)
+          // Group 1 filter
+          var group1_val = d3.select('input[name="Group"]:checked').property("value");
+          var res1 = res.filter(d=>d.Group == group1_val)
+
+          // Group 2 filter
           var group2_val = d3.select('input[name="Group2"]:checked').property("value");
-          var res1 = res.filter(d=>d.Group2 == group2_val)
-          var resNew = res1.filter(d=>d.Group == Group)
+          var res2 = res1.filter(d=>d.Group2 == group2_val)
+
+          // Current Filter
+          var resNew = res2.filter(d=>d.Metric == Metric)
+
+
+      // Define and Update Y axis
+      yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
+
+      svg.select('.y.axis')
+          .transition().duration(750)
+          .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
+          .call(g => {
+                    g.selectAll("text")
+                    .style("text-anchor", "middle")
+                    .attr("x", -axisPad*2)
+                    .attr('fill', '#A9A9A9')
+
+                    g.selectAll("line")
+                      .attr('stroke', '#A9A9A9')
+                      .attr('stroke-width', 0.7)
+                      .attr('opacity', 0.3)
+
+                    g.select(".domain").remove()
+
+                  })
+
+      // Nest  Data:
+          var res_nested = d3.nest()
+            .key(d=>d.Metric)
+            .entries(resNew)
+
+        // Update the other elements
+          glines.select('.line') //select line path within line-group (which represents a category), then bind new data 
+            .data(res_nested)
+            .transition().duration(750)
+            .attr('d', function(d) {
+              return line(d.values)
+            })
+
+          mouseG.selectAll('.mouse-per-line')
+            .data(res_nested)
+
+          mouseG.on('mousemove', function () { 
+              var mouse = d3.mouse(this)
+              updateTooltipContent(mouse, res_nested)
+            })
+        }
+
+
+
+
+  // FUNCTION TO UPDATE CHART WITH  RADIO BUTTON
+      function updateChartGroup1(Group) {
+
+      // Filter for the value on the other radio button(s)
+          // Metric 1 filter
+          var metric_val = d3.select('input[name="Metric"]:checked').property("value");
+          var res1 = res.filter(d=>d.Metric == metric_val)
+
+          // Group 2 filter
+          var group2_val = d3.select('input[name="Group2"]:checked').property("value");
+          var res2 = res1.filter(d=>d.Group2 == group2_val)
+
+          // Current Filter
+          var resNew = res2.filter(d=>d.Group == Group)
+
 
       // Define and Update Y axis
       yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
@@ -226,9 +313,9 @@
                   })
 
 
-       // Nest Data:
+       // Nest  Data:
           var res_nested = d3.nest()
-            .key(d=>d.Metric)
+            .key(d=>d.Location)
             .entries(resNew)
 
         // Update the other elements
@@ -253,10 +340,19 @@
       // FUNCTION TO UPDATE CHART WITH  RADIO BUTTON
         function updateChartGroup2(Group2) {
 
-          // Don't forget to filter for the value on the other radio button(s)
+
+        // Filter for the value on the other radio button(s)
+          // Metric 1 filter
+          var metric_val = d3.select('input[name="Metric"]:checked').property("value");
+          var res1 = res.filter(d=>d.Metric == metric_val)
+
+          // Group 1 filter
           var group1_val = d3.select('input[name="Group"]:checked').property("value");
-          var res1 = res.filter(d=>d.Group == group1_val)
-          var resNew = res1.filter(d=>d.Group2 == Group2)
+          var res2 = res1.filter(d=>d.Group == group1_val)
+
+          // Current Filter
+          var resNew = res2.filter(d=>d.Group2 == Group2)
+
 
       // Define and Update Y axis
           yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
@@ -279,12 +375,10 @@
 
                   })
 
-       // Nest Data:
+            // Nest Data:
               var res_nested = d3.nest()
-                .key(d=>d.Metric)
+                .key(d=>d.Location)
                 .entries(resNew)
-
-                console.log(res_nested)
 
             // Update the other elements
           glines.select('.line') //select line path within line-group (which represents a category), then bind new data 
@@ -307,13 +401,16 @@
 
 
    // FUNCTION TO INITIATE CHART WITH RADIO BUTTON
-        function renderChart(Group, Group2) {
+        function renderChart(Metric, Group, Group2) {
 
-          var res1 = res.filter(d=>d.Group == Group)
-          var resNew = res1.filter(d=>d.Group2 == Group2)
+          // Implement Filters: 
+          var res1 = res.filter(d=>d.Metric == Metric)
+          var res2 = res1.filter(d=>d.Group == Group)
+          var resNew = res2.filter(d=>d.Group2 == Group2)
 
-          var res_nested = d3.nest() // necessary to nest data so that keys represent each category
-            .key(d=>d.Metric)
+        // necessary to nest data so that keys represent each category
+          var res_nested = d3.nest() 
+            .key(d=>d.Location)
             .entries(resNew)
 
           // APPEND MULTIPLE LINES //
@@ -455,7 +552,7 @@
           var xDate = xScale.invert(mouse[0])
           var bisect = d3.bisector(function (d) { return d.date; }).left
           var idx = bisect(d.values, xDate)
-          sortingObj.push({key: d.values[idx].Metric, Value: d.values[idx].Value, Group: d.values[idx].Group, year: d.values[idx].date.getFullYear(), month: d.values[idx].date.getMonth()})
+          sortingObj.push({key: d.values[idx].Location, Value: d.values[idx].Value, Group: d.values[idx].Group, year: d.values[idx].date.getFullYear(), month: d.values[idx].date.getMonth()})
         })
 
 
