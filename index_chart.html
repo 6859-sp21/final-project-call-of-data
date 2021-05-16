@@ -229,47 +229,47 @@
           var resNew = res2.filter(d=>d.Metric == Metric)
 
 
-      // Define and Update Y axis
-      yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
+        // Define and Update Y axis
+        yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
 
-      svg.select('.y.axis')
-          .transition().duration(750)
-          .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
-          .call(g => {
-                    g.selectAll("text")
-                    .style("text-anchor", "middle")
-                    .attr("x", -axisPad*2)
-                    .attr('fill', '#A9A9A9')
-
-                    g.selectAll("line")
-                      .attr('stroke', '#A9A9A9')
-                      .attr('stroke-width', 0.7)
-                      .attr('opacity', 0.3)
-
-                    g.select(".domain").remove()
-
-                  })
-
-      // Nest  Data:
-          var res_nested = d3.nest()
-            .key(d=>d.Metric)
-            .entries(resNew)
-
-        // Update the other elements
-          glines.select('.line') //select line path within line-group (which represents a category), then bind new data 
-            .data(res_nested)
+        svg.select('.y.axis')
             .transition().duration(750)
-            .attr('d', function(d) {
-              return line(d.values)
-            })
+            .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
+            .call(g => {
+                      g.selectAll("text")
+                      .style("text-anchor", "middle")
+                      .attr("x", -axisPad*2)
+                      .attr('fill', '#A9A9A9')
 
-          mouseG.selectAll('.mouse-per-line')
-            .data(res_nested)
+                      g.selectAll("line")
+                        .attr('stroke', '#A9A9A9')
+                        .attr('stroke-width', 0.7)
+                        .attr('opacity', 0.3)
 
-          mouseG.on('mousemove', function () { 
-              var mouse = d3.mouse(this)
-              updateTooltipContent(mouse, res_nested)
-            })
+                      g.select(".domain").remove()
+
+                    })
+
+        // Nest  Data:
+            var res_nested = d3.nest()
+              .key(d=>d.Location)
+              .entries(resNew)
+
+          // Update the other elements
+            glines.select('.line') //select line path within line-group (which represents a category), then bind new data 
+              .data(res_nested)
+              .transition().duration(750)
+              .attr('d', function(d) {
+                return line(d.values)
+              })
+
+            mouseG.selectAll('.mouse-per-line')
+              .data(res_nested)
+
+            mouseG.on('mousemove', function () { 
+                var mouse = d3.mouse(this)
+                updateTooltipContent(mouse, res_nested)
+              })
         }
 
 
