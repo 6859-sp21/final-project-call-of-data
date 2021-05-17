@@ -695,9 +695,87 @@
                     .style('opacity', lineOpacity)
                     .style('stroke-width', lineStroke)
           
+
           // Update the mouselines: will also need to start from scratch here. 
-          mouseG.selectAll('.mouse-per-line')
+          // mouseG.selectAll('.mouse-per-line').data(res_nested)
+          svg.selectAll('.mouse-per-line').remove()
+
+          mouseG = svg.append("g")
+            .attr("class", "mouse-over-effects");
+
+          mouseG.append("path") // create vertical line to follow mouse
+            .attr("class", "mouse-line")
+            .style("stroke", "#A9A9A9")
+            .style("stroke-width", lineStroke)
+            .style("opacity", "0");
+
+          var lines = document.getElementsByClassName('line');
+
+          var mousePerLine = mouseG.selectAll('.mouse-per-line')
             .data(res_nested)
+            .enter()
+            .append("g")
+            .attr("class", "mouse-per-line");
+
+          mousePerLine.append("circle")
+            .attr("r", 4)
+            .style("stroke", function (d) {
+              return color(d.key)
+            })
+            .style("fill", "none")
+            .style("stroke-width", lineStroke)
+            .style("opacity", "0");
+
+          mouseG.append('svg:rect') // append a rect to catch mouse movements on canvas
+            .attr('width', width) 
+            .attr('height', height)
+            .attr('fill', 'none')
+            .attr('pointer-events', 'all')
+            .on('mouseout', function () { // on mouse out hide line, circles and text
+              d3.select(".mouse-line")
+                .style("opacity", "0");
+              d3.selectAll(".mouse-per-line circle")
+                .style("opacity", "0");
+              d3.selectAll(".mouse-per-line text")
+                .style("opacity", "0");
+              d3.selectAll("#tooltip")
+                .style('display', 'none')
+
+            })
+            .on('mouseover', function () { // on mouse in show line, circles and text
+              d3.select(".mouse-line")
+                .style("opacity", "1");
+              d3.selectAll(".mouse-per-line circle")
+                .style("opacity", "1");
+              d3.selectAll("#tooltip")
+                .style('display', 'block')
+            })
+            .on('mousemove', function () { // update tooltip content, line, circles and text when mouse moves
+              var mouse = d3.mouse(this)
+
+              d3.selectAll(".mouse-per-line")
+                .attr("transform", function (d, i) {
+                  var xDate = xScale.invert(mouse[0]) // use 'invert' to get date corresponding to distance from mouse position relative to svg
+                  var bisect = d3.bisector(function (d) { return d.date; }).left // retrieve row index of date on parsed csv
+                  var idx = bisect(d.values, xDate);
+
+                  d3.select(".mouse-line")
+                    .attr("d", function () {
+                      var data = "M" + xScale(d.values[idx].date) + "," + (height);
+                      data += " " + xScale(d.values[idx].date) + "," + 0;
+                      return data;
+                    });
+                  return "translate(" + xScale(d.values[idx].date) + "," + yScale(d.values[idx].Value) + ")";
+
+                });
+
+              updateTooltipContent(mouse, res_nested, color)
+
+            })
+
+
+
+
 
           // Update the tooltip. 
           mouseG.on('mousemove', function () { 
