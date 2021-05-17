@@ -64,7 +64,8 @@ country <- subset(country, select = -c(X))
 names(country) <- c("Location", "Year", 
                     "CO2", "CO2_per_GDP", "Share_of_Global_CO2", "CO2_per_Capita", "CO2_per_Unit_Energy", "Primary_Energy_Consumption", "Energy_per_Capita", "Energy_per_GDP", 
                     "Population", "GDP", "Group1", "Group2", "Group3", "Group4", "Group5", 
-                    "Growth_CO2", "Growth_Primary_Energy", "Growth_Pop")
+                    "Growth_CO2", "Growth_Primary_Energy", "Growth_Pop",
+                    "Growth_CO2_per_GDP", "Growth_CO2_per_Capita", "Growth_Energy_per_GDP", "Growth_Energy_per_Capita")
 
 # Convert Year to a Data
 country$Year_num <- country$Year 
@@ -88,11 +89,12 @@ country <- merge(x = country,
 
 # Re-Organize
 country <- country[c("Year", "Year_num", "Location", "Population", "Pop_Quartile","GDP", "GDP_Quartile", "Group1", "Group2", "Group3", "Group4", "Group5", 
-                     "CO2", "CO2_per_GDP", "Share_of_Global_CO2", "CO2_per_Capita", "CO2_per_Unit_Energy", "Primary_Energy_Consumption", "Energy_per_Capita", "Energy_per_GDP", "Growth_CO2", "Growth_Primary_Energy", "Growth_Pop")]
+                     "CO2", "CO2_per_GDP", "Share_of_Global_CO2", "CO2_per_Capita", "CO2_per_Unit_Energy", "Primary_Energy_Consumption", "Energy_per_Capita", "Energy_per_GDP", 
+                     "Growth_CO2", "Growth_Primary_Energy", "Growth_Pop", "Growth_CO2_per_GDP", "Growth_CO2_per_Capita", "Growth_Energy_per_GDP", "Growth_Energy_per_Capita")]
 
 
 # Re-shape to match example:
-country <- gather(country, Metric, Value, CO2:Growth_Pop, factor_key=TRUE)
+country <- gather(country, Metric, Value, CO2:Growth_Energy_per_Capita, factor_key=TRUE)
 
 
 
@@ -110,7 +112,7 @@ country90s <- subset(country90s, select = -c(X))
 names(country90s) <- c("Location", "Year", 
                     "CO2", "CO2_per_GDP", "Share_of_Global_CO2", "CO2_per_Capita", "CO2_per_Unit_Energy", "Primary_Energy_Consumption", "Energy_per_Capita", "Energy_per_GDP", 
                     "Population", "GDP", "Group1", "Group2", "Group3", "Group4", "Group5", 
-                    "Growth_CO2", "Growth_Primary_Energy", "Growth_Pop")
+                    "Growth_CO2", "Growth_Primary_Energy", "Growth_Pop", "Growth_CO2_per_GDP", "Growth_CO2_per_Capita", "Growth_Energy_per_GDP", "Growth_Energy_per_Capita")
 
 # Convert Year to a Data
 country90s$Year_num <- country90s$Year 
@@ -130,13 +132,14 @@ country90s <- merge(x = country90s,
                  by = "Location")
 
 
-
 # Re-Organize
-country90s <- country90s[c("Year", "Year_num", "Location", "Population", "Pop_Quartile","GDP", "GDP_Quartile", "Group1", "Group2", "Group3", "Group4", "Group5", "Growth_CO2", "Growth_Primary_Energy", "Growth_Pop")]
+country90s <- country90s[c("Year", "Year_num", "Location", "Population", "Pop_Quartile","GDP", "GDP_Quartile", "Group1", "Group2", "Group3", "Group4", "Group5", 
+                           "CO2", "CO2_per_GDP", "Share_of_Global_CO2", "CO2_per_Capita", "CO2_per_Unit_Energy", "Primary_Energy_Consumption", "Energy_per_Capita", "Energy_per_GDP", 
+                           "Growth_CO2", "Growth_Primary_Energy", "Growth_Pop", "Growth_CO2_per_GDP", "Growth_CO2_per_Capita", "Growth_Energy_per_GDP", "Growth_Energy_per_Capita")]
 
 
 # Re-shape to match example:
-country90s <- gather(country90s, Metric, Value, CO2:Growth_Pop, factor_key=TRUE)
+country90s <- gather(country90s, Metric, Value, CO2:Growth_Energy_per_Capita, factor_key=TRUE)
 
 
 # Add a 90s label to the metrics:
@@ -152,35 +155,41 @@ data <- rbind(x = country90s,
 
 
 
-#### B4. MAKE A SINGLE GROUP VARIABLE
+
+
+
+
+#### B4. CREATE DATA MANIPULATION VARIABLES AND RE-SHAPE DATA:
+
+# GROUP: Question 3
+
 data$Group1 <- as.character(data$Group1)
 data$Group2 <- gsub(1, 2, as.character(data$Group2))
 data$Group3 <- gsub(1, 3, as.character(data$Group3))
 data$Group4 <- gsub(1, 4, as.character(data$Group4))
 data$Group5 <- gsub(1, 5, as.character(data$Group5))
 
-
 data$Group = paste(data[,8], data[,9], data[,10], data[,11], data[,12])
 
-          
-
-
-
-#### B5. CREATE DATA MANIPULATION VARIABLES AND RE-SHAPE DATA:
 
 # PARAMETER: Question 1
-CO2_vars = c("CO2", "CO2_per_GDP", "Share_of_Global_CO2", "CO2_per_Capita", "CO2_per_Unit_Energy", "Growth_CO2", "Growth_CO2_90s")
-energy_vars = c("Primary_Energy_Consumption", "Energy_per_Capita", "Energy_per_GDP", "Growth_Primary_Energy", "Growth_Primary_Energy_90s")
+CO2_vars = c("CO2", "CO2_per_GDP", "Share_of_Global_CO2", "CO2_per_Capita", "CO2_per_Unit_Energy", "Growth_CO2", "Growth_CO2_per_GDP", "Growth_CO2_per_Capita", 
+             "CO2_90s", "CO2_per_GDP_90s", "Share_of_Global_CO2_90s", "CO2_per_Capita_90s", "CO2_per_Unit_Energy_90s", "Growth_CO2_90s", "Growth_CO2_per_GDP_90s", "Growth_CO2_per_Capita_90s")
+energy_vars = c("Primary_Energy_Consumption", "Energy_per_Capita", "Energy_per_GDP", "Growth_Primary_Energy", "Growth_Energy_per_GDP", "Growth_Energy_per_Capita",
+                "Primary_Energy_Consumption_90s", "Energy_per_Capita_90s", "Energy_per_GDP_90s","Growth_Primary_Energy_90s", "Growth_Energy_per_GDP_90s", "Growth_Energy_per_Capita_90s")
 
 data$Parameter <- ifelse(data$Metric %in% CO2_vars, "CO2",
                          ifelse(data$Metric %in% energy_vars, "Primary_Energy_Consumption", NA))
 
 
-# ABSOLUTE vs RELATIVE: Question 3 (Manip 1)
+# TIME FRAME: Question 2
+data$Time <- ifelse(grepl("_90s", data$Metric, fixed = TRUE), 1990, 1965)
+
+# ABSOLUTE vs RELATIVE: Question 4 (Manip 1)
 data$Manip1 <- ifelse(grepl("Growth", data$Metric, fixed = TRUE), "Growth", "Absolute")
 
                  
-# DENOMINATOR: Question 4 (Manip 2)
+# DENOMINATOR: Question 5 (Manip 2)
 data$Manip2 <- ifelse(grepl("per_Capita", data$Metric, fixed = TRUE), "Population",
                       ifelse(grepl("per_GDP", data$Metric, fixed = TRUE), "GDP", "Absolute"))
 
@@ -189,14 +198,14 @@ data$Manip2 <- ifelse(grepl("per_Capita", data$Metric, fixed = TRUE), "Populatio
                  
 #### B6. CLEAN UP AND WRITE TO CSV
 data <- subset(data, select = -c(Group1, Group2, Group3, Group4, Group5, Population, Pop_Quartile, GDP , GDP_Quartile))
-data <- data[c("Year", "Year_num", "Location", "Group", "Parameter", "Manip1", "Manip2", "Metric", "Value")]
-data <- subset(data, Metric != "Growth_Pop")
+data <- data[c("Year", "Year_num", "Location",  "Parameter", "Time", "Group", "Manip1", "Manip2", "Metric", "Value")]
+data <- subset(data, ! Metric %in% c("Growth_Pop", "Growth_Pop_90s"))
 
 write.csv(data, "reshaped_country_data.csv", row.names = F)
 
 
-
-
+test <- subset(data, Parameter == "CO2" & Time == 1965 &  Manip1 == "Growth" & Manip2 == "Population")
+test <- subset(data, Time == 1990)
 
 
 

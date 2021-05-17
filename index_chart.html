@@ -48,9 +48,10 @@
 
             <!-- CHOICE 2 -->
             <div class="form-check-year">
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Year" value="1965" checked>Long Duration Study (1965-2016)</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Year" value="1990">The dot com boom (1990-2016) </label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Time" value="1965" checked>Long Duration Study (1965-2016)</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Time" value="1990">The dot com boom (1990-2016) </label>
             </div>
+
 
             <!-- CHOICE 3 -->
             <div class="form-check-group">
@@ -71,6 +72,8 @@
             <div class="form-data-manipulation-2">
               <label class="form-check-label"><input style="display: inline" type="radio" name="Manip2" value="Population" checked>Divide by Population</label>
               <label class="form-check-label"><input style="display: inline" type="radio" name="Manip2" value="GDP">Divide by GDP</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Manip2" value="Absolute">No Division</label>
+
             </div>
 
           </div>
@@ -170,11 +173,12 @@
 
    
     // FUNCTION TO INITIATE CHART WITH RADIO BUTTON
-        function renderChart(Parameter, Year, Group, Manip1, Manip2) {
+        function renderChart(Parameter, Time, Group, Manip1, Manip2) {
 
           // Implement Filters: 
           var res1 = res.filter(d=>d.Parameter == Parameter)
-          var res2 = res1.filter(d=>d.Year >= parseInt(Year))
+          var res2 = res1.filter(d=>d.Time == parseInt(Time))
+
           var res3 = res2.filter(function (d) { return d.Group.match(Group); })
           var res4 = res3.filter(d=>d.Manip1 == Manip1)
           var resNew = res4.filter(d=>d.Manip2 == Manip2)
@@ -380,7 +384,7 @@
 
 
           // Update chart when radio button is selected - Timeframe
-          d3.selectAll(("input[name='Year']")).on('change', function(){
+          d3.selectAll(("input[name='Time']")).on('change', function(){
             updateChartYear(this.value)
           })
 
@@ -405,8 +409,8 @@
 
       // Filter for the value on the other radio button(s)
           // Time filter
-          var year_val = d3.select('input[name="Year"]:checked').property("value");
-          var res1 = res.filter(d=>d.Year >= parseInt(year_val))
+          var year_val = d3.select('input[name="Time"]:checked').property("value");
+          var res1 = res.filter(d=>d.Time == parseInt(year_val))
 
           // Group filter
           var group_val = d3.select('input[name="Group"]:checked').property("value"); 
@@ -517,7 +521,7 @@
           var res4 = res3.filter(d=>d.Manip2 == manip2_val)
 
           // Current Time Filter
-          var resNew = res4.filter(d=>d.Year >= parseInt(Year))
+          var resNew = res4.filter(d=>d.Time == parseInt(Year))
       
 
       // Define and update color scale
@@ -603,8 +607,8 @@
           var res1 = res.filter(d=>d.Parameter == parameter_val)
 
           // Year filter
-          var year_val = d3.select('input[name="Year"]:checked').property("value");
-          var res2 = res1.filter(d=>d.Year >= parseInt(year_val))
+          var year_val = d3.select('input[name="Time"]:checked').property("value");
+          var res2 = res1.filter(d=>d.Time == parseInt(year_val))
 
           // Manip 1 filter
           var manip1_val = d3.select('input[name="Manip1"]:checked').property("value");
@@ -714,8 +718,8 @@
 
       // Filter for the value on the other radio button(s)
           // Time filter
-          var year_val = d3.select('input[name="Year"]:checked').property("value");
-          var res1 = res.filter(d=>d.Year >= parseInt(year_val))
+          var year_val = d3.select('input[name="Time"]:checked').property("value");
+          var res1 = res.filter(d=>d.Time == parseInt(year_val))
 
           // Group filter
           var group_val = d3.select('input[name="Group"]:checked').property("value"); 
@@ -811,8 +815,8 @@
 
       // Filter for the value on the other radio button(s)
           // Time filter
-          var year_val = d3.select('input[name="Year"]:checked').property("value");
-          var res1 = res.filter(d=>d.Year >= parseInt(year_val))
+          var year_val = d3.select('input[name="Time"]:checked').property("value");
+          var res1 = res.filter(d=>d.Time == parseInt(year_val))
 
           // Group filter
           var group_val = d3.select('input[name="Group"]:checked').property("value"); 
