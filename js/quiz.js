@@ -21,7 +21,8 @@ document.getElementById("form1").onsubmit=function() {
    other = 0;
    
    //function to calculate score for each question
-   function eachscore(x){
+   // this function retrieves the value of the question (aka, the user's choice)
+   function eachscore(x){ 
    if(x == "science") { science = science + 1}
    if(x == "oil") { oil = oil + 1}
    if(x == "other") { other = other + 1}
@@ -29,7 +30,7 @@ document.getElementById("form1").onsubmit=function() {
    // for the above function, you could also change the 1 to a variable so you could give more points for certain questions
    
    //call function for each question
-   eachscore(eval("age"));
+   eachscore(eval("age")); // the value inside the function is the name of the question
    eachscore(eval("activity"));
    eachscore(eval("genre"));
       
@@ -38,7 +39,7 @@ document.getElementById("form1").onsubmit=function() {
  //get the max score  in the array
  maxscore = Math.max.apply(Math,all);
  
- // object holding scores and feedback	
+ // object holding scores and associated text for that character	
  scores = [{index:0, feedback: "HONEST SCIENTIST"},
            {index:1, feedback: "OIL TYCOON"},
            {index:2, feedback: "OTHER"}];
@@ -48,12 +49,8 @@ document.getElementById("form1").onsubmit=function() {
            {index:2, feedback: "SAVE THE UNITED PLATES"}];
 
 
-// // Could make this an object holding graphs here:
-// scorez = [{index:0, feedback: "SAVE THE PLANET"},
-//           {index:1, feedback: "DESTROY THE PLANET"},
-//           {index:2, feedback: "SAVE THE UNITED PLATES"}];
             
- //figure out which index # holds the max score 
+ //figure out which index # (aka which character) holds the max score 
  for(i_prime=0; i_prime<all.length; i_prime++) {
  if(all[i_prime]==maxscore) {
  
