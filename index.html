@@ -356,19 +356,22 @@
             <img id="player3_image2" src="player3_image"  class="center" style="display:none;" />
 
             <br><br>
-            Joe button realizes that the world has changed drastically over the last century. <br>
-            As we have become a more technologically advanced world our energy use has changed for better or worse.
+            President joe button is interested in observing a time series of your parameter. <br>
+            There are two possible ways to visualize the lontidunal progression: (1) a growth rate or (2) absolute values.
             <br><br>
-            Your second task is to decide which time-frame is most useful at convincing world leaders of our impending disaster.
+            Your fourth task is to decide how to encode your parameter time-series data.
               <br><br>
 
             <!-- Text for Choice 4A-->
 
             <div class="row col-sm-5 col-sm-offset-1" style="margin-left: 110px; margin-right: 20px; border-style: solid;">
-            <div class="choice_title"><br>choice one: <em style="color: yellow;"> Long Duration {1965-2016}</em> </div>
-            <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em> A long-term study of climate change parameters allows for a more complete
-            picture of progress (or lack thereof). It also represents the most granular data available for each parameter and thus can be used to infer enduring trends.
-            <br><br><br><br>
+            <div class="choice_title"><br>choice one: <em style="color: yellow;"> Absolute Values </em> </div>
+            <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em>
+            Absolute measurements avoid any assumptions around when its appropriate to sett time=0. It also leaves the data in its rawest format, which
+            allows the audience to comprehend the scale of the parameter values over time.
+
+
+            <br><br>
             <label><input type="radio" name="activity" id="choice4a" value="oil"/>Make choice one</label>
                 <br><br>
                 </div>
@@ -376,16 +379,23 @@
             <!-- Text for Choice 4B-->
 
             <div class="row col-sm-5" style="margin-top: 0px; border-style: solid;">
-            <div class="choice_title"><br>choice two: <em style="color: yellow;"> post Dot-Com Boom {1990-2016}</em> </div>
+            <div class="choice_title"><br>choice two: <em style="color: yellow;"> Relative Growth</em> </div>
             <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em>
-            Our social and political world looks very different today than it did before the 90s.
-            The internet changed our relationship with technology and subsequently energy (i.e. electricity).
-            Basing any guideline for climate change mitigation on a time-scale, which includes a less technologically-advanced period may be misleading.
 
-            <br><br>
+            <br><br><br><br><br>
             <label><input type="radio" name="activity" id="choice4b" value="science"/>Make choice two</label>
             <br><br>
             </div>
+
+            <!-- Text for Choice 4C-->
+            <div class="row col-sm-5 col-sm-offset-1" style="margin-left: 110px; margin-right: 20px; border-style: solid;">
+            <div class="choice_title"><br>choice one: <em style="color: yellow;"> Absolute Values </em> </div>
+            <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em>
+            <br><br><br><br>
+            <label><input type="radio" name="activity" id="choice4a" value="oil"/>Make choice three</label>
+                <br><br>
+                </div>
+
             <div class="row col-sm-12" style="padding-top: 100px;" >
                 <a href="#choice_screen5" style="font-size: 20px; text-align: center; font-family: 'Press Start 2P', sans-serif;">Next</a>
             </div>
@@ -406,10 +416,9 @@
 
 
             <br><br>
-            Joe button realizes that the world has changed drastically over the last century. <br>
-            As we have become a more technologically advanced world our energy use has changed for better or worse.
+            {explantion}
             <br><br>
-            Your second task is to decide which time-frame is most useful at convincing world leaders of our impending disaster.
+            Your fifth and final task is to decide which time-frame is most useful at convincing world leaders of our impending disaster.
             <br><br>
 
             <!-- Text for Choice 5A-->
@@ -442,6 +451,8 @@
             <button class="submit_button" type="submit" value="Submit" onclick="window.location.href='#final_dashboard'">Submit All and View Results</button>
             <br><br><br><br>
           </div>
+
+        </section>
       <!-- End Choice Screen Div -->
       </form>
 
