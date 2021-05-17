@@ -74,13 +74,6 @@
 
     <script>
 
-// Current bug list:
-  // BUG 1 
-      // If filtering by a variable that affects the number of lines (e.g. the number of countries shown at any one time)
-      // and there isn't the same number of countries in each bucket/choice of that grouping variable,
-      // then the number of countries in the default choice dictates the number of lines available for the remainder of the choices.
-      // If other choices have fewer countries, the extra line(s) stays behind when alternating between choices for that filter.
-      // If other choices have more countries, the extra line(s) do not get created.
 
 // GLOBAL VARIABLES FOR THE CHART
       var glines
@@ -151,304 +144,20 @@
           .x(d => xScale(d.date))
           .y(d => yScale(d.Value))
 
-  // SET DEFAULT PARAMETERS HERE
+
+// FUNCTIONS TO RENDER INITIAL CHART HERE: 
+
+    // SET DEFAULT PARAMETERS HERE
         renderChart("CO2", "2016", "2") // inital chart render (set default to choice of default data)
 
-  // CALL FUNCTIONS TO UPDATE ON CHANGE HERE
-
-        // Update chart when radio button is selected - Metric
-        d3.selectAll(("input[name='Metric']")).on('change', function(){
-          updateChartMetric(this.value)
-        })
-
-
-        // Update chart when radio button is selected - Year
-        d3.selectAll(("input[name='Year']")).on('change', function(){
-          updateChartYear(this.value)
-        })
-
-        // Update chart when radio button is selected - GDP
-        d3.selectAll(("input[name='GDP']")).on('change', function(){
-          updateChartGDP(this.value)
-        })
-
-
-
-  // FUNCTION TO UPDATE METRIC BEING VIEWED:
-      function updateChartMetric(Metric) {
-
-      // Filter for the value on the other radio button(s)
-          // Year 1 filter
-          var year_val = d3.select('input[name="Year"]:checked').property("value");
-          var res1 = res.filter(d=>d.Year <= parseInt(year_val))
-
-          // Group 2 filter
-          var gdp_val = d3.select('input[name="GDP"]:checked').property("value");
-          var res2 = res1.filter(d=>d.GDP_qt == parseInt(gdp_val))
-
-          // Current Filter
-          var resNew = res2.filter(d=>d.Metric == Metric)
-
-        // Define and update color scale
-        var category = d3.map(resNew, function(d){return d.Location;}).keys()
-        color.domain(category).range(d3.schemePaired)
-
-
-        
-        // Define and Update Y axis
-        yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
-
-        svg.select('.y.axis')
-            .transition().duration(750)
-            .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
-            .call(g => {
-                      g.selectAll("text")
-                      .style("text-anchor", "middle")
-                      .attr("x", -axisPad*2)
-                      .attr('fill', '#A9A9A9')
-
-                      g.selectAll("line")
-                        .attr('stroke', '#A9A9A9')
-                        .attr('stroke-width', 0.7)
-                        .attr('opacity', 0.3)
-
-                      g.select(".domain").remove()
-
-                    })
-
-        // Define and Update X axis
-          xScale.domain(d3.extent(resNew, d=>d.date))
-
-          svg.select('.x.axis')
-              .transition().duration(750)
-              .call(d3.axisBottom(xScale))
-              .call(g => {
-                  var years = xScale.ticks(d3.timeYear.every(1))
-                  var xshift = (width/(years.length))/2 
-                  g.selectAll("text").attr("transform", `translate(${xshift}, 0)`) //shift tick labels to middle of interval
-                    .style("text-anchor", "middle")
-                    .attr("y", axisPad)
-                    .attr('fill', '#A9A9A9')
-
-                  g.selectAll("line")
-                    .attr('stroke', '#A9A9A9')
-        
-                  g.select(".domain")
-                    .attr('stroke', '#A9A9A9')
-
-              })
-
-
-
-        // Nest  Data:
-            var res_nested = d3.nest()
-              .key(d=>d.Location)
-              .entries(resNew)
-
-          // Update the other elements
-            glines.select('.line') //select line path within line-group (which represents a category), then bind new data 
-              .data(res_nested)
-              .transition().duration(750)
-              .attr('d', function(d) {
-                return line(d.values)
-              })
-
-            mouseG.selectAll('.mouse-per-line')
-              .data(res_nested)
-
-            mouseG.on('mousemove', function () { 
-                var mouse = d3.mouse(this)
-                updateTooltipContent(mouse, res_nested, color)
-              })
-        }
-
-
-
-
-  // FUNCTION TO UPDATE CHART WITH  RADIO BUTTON
-      function updateChartYear(Year) {
-
-      // Filter for the value on the other radio button(s)
-          // Metric 1 filter
-          var metric_val = d3.select('input[name="Metric"]:checked').property("value");
-          var res1 = res.filter(d=>d.Metric == metric_val)
-
-          // Group 2 filter
-          var gdp_val = d3.select('input[name="GDP"]:checked').property("value");
-          var res2 = res1.filter(d=>d.GDP_qt == parseInt(gdp_val))
-
-          // Current Filter
-          var resNew = res2.filter(d=>d.Year <= parseInt(Year))
-      
-      // Define and update color scale
-        var category = d3.map(resNew, function(d){return d.Location;}).keys()
-        color.domain(category).range(d3.schemePaired)
-
-      // Define and Update Y axis
-      yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
-
-      svg.select('.y.axis')
-          .transition().duration(750)
-          .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
-          .call(g => {
-                    g.selectAll("text")
-                    .style("text-anchor", "middle")
-                    .attr("x", -axisPad*2)
-                    .attr('fill', '#A9A9A9')
-
-                    g.selectAll("line")
-                      .attr('stroke', '#A9A9A9')
-                      .attr('stroke-width', 0.7)
-                      .attr('opacity', 0.3)
-
-                    g.select(".domain").remove()
-
-                  })
-
-      // Define and Update X axis
-      xScale.domain(d3.extent(resNew, d=>d.date))
-
-      svg.select('.x.axis')
-          .transition().duration(750)
-          .call(d3.axisBottom(xScale))
-          .call(g => {
-              var years = xScale.ticks(d3.timeYear.every(1))
-              var xshift = (width/(years.length))/2 
-              g.selectAll("text").attr("transform", `translate(${xshift}, 0)`) //shift tick labels to middle of interval
-                .style("text-anchor", "middle")
-                .attr("y", axisPad)
-                .attr('fill', '#A9A9A9')
-
-              g.selectAll("line")
-                .attr('stroke', '#A9A9A9')
-
-              g.select(".domain")
-                .attr('stroke', '#A9A9A9')
-
-          })
-
-       // Nest  Data:
-          var res_nested = d3.nest()
-            .key(d=>d.Location)
-            .entries(resNew)
-
-        // Update the other elements
-          glines.select('.line') //select line path within line-group (which represents a category), then bind new data 
-            .data(res_nested)
-            .transition().duration(750)
-            .attr('d', function(d) {
-              return line(d.values)
-            })
-
-          mouseG.selectAll('.mouse-per-line')
-            .data(res_nested)
-
-          mouseG.on('mousemove', function () { 
-              var mouse = d3.mouse(this)
-              updateTooltipContent(mouse, res_nested, color)
-            })
-        }
-
-
-
-      // FUNCTION TO UPDATE CHART WITH  RADIO BUTTON
-        function updateChartGDP(GDP) {
-
-
-        // Filter for the value on the other radio button(s)
-          // Metric 1 filter
-          var metric_val = d3.select('input[name="Metric"]:checked').property("value");
-          var res1 = res.filter(d=>d.Metric == metric_val)
-
-          // Year 1 filter
-          var year_val = d3.select('input[name="Year"]:checked').property("value");
-          var res2 = res1.filter(d=>d.Year <= parseInt(year_val))
-
-          // Current Filter
-          var resNew = res2.filter(d=>d.GDP_qt == parseInt(GDP))
-
-      // Define and update color scale
-          var category = d3.map(resNew, function(d){return d.Location;}).keys()
-          color.domain(category).range(d3.schemePaired)
-
-        // Define and update legend
-          svgLegend.selectAll('.legend').remove();
-
-          var legend = svgLegend.selectAll('.legend')
-                .data(category)
-                .enter().append('g')
-                  .attr("class", "legend")
-                  .attr("transform", function (d, i) {return "translate(0," + i * 20 + ")"})
-
-            legend.append("circle")
-                .attr("class", "legend-node")
-                .attr("cx", 0)
-                .attr("cy", 0)
-                .attr("r", R)
-                .style("fill", d=>color(d))
-
-            legend.append("text")
-                .attr("class", "legend-text")
-                .attr("x", R*2)
-                .attr("y", R/2)
-                .style("fill", "#A9A9A9")
-                .style("font-size", 12)
-                .text(d=>d)
-
-      // Define and Update Y axis
-          yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
-
-          svg.select('.y.axis')
-			      	.transition().duration(750)
-              .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
-              .call(g => {
-                    g.selectAll("text")
-                    .style("text-anchor", "middle")
-                    .attr("x", -axisPad*2)
-                    .attr('fill', '#A9A9A9')
-
-                    g.selectAll("line")
-                      .attr('stroke', '#A9A9A9')
-                      .attr('stroke-width', 0.7) 
-                      .attr('opacity', 0.3)
-
-                    g.select(".domain").remove()
-
-                  })
-
-            // Nest Data:
-              var res_nested = d3.nest()
-                .key(d=>d.Location)
-                .entries(resNew)
-
-            // Update the other elements
-          glines.select('.line') //select line path within line-group (which represents a category), then bind new data 
-            .data(res_nested)
-            .transition().duration(750)
-            .attr('d', function(d) {
-              return line(d.values)
-            })
-
-          mouseG.selectAll('.mouse-per-line')
-            .data(res_nested)
-
-          mouseG.on('mousemove', function () { 
-              var mouse = d3.mouse(this)
-              updateTooltipContent(mouse, res_nested, color)
-            })
-        }
-
-
-
-
-   // FUNCTION TO INITIATE CHART WITH RADIO BUTTON
+   
+    // FUNCTION TO INITIATE CHART WITH RADIO BUTTON
         function renderChart(Metric, Year, GDP) {
 
           // Implement Filters: 
           var res1 = res.filter(d=>d.Year <= parseInt(Year))
           var res2 = res1.filter(d=>d.GDP_qt == parseInt(GDP))
           var resNew = res2.filter(d=>d.Metric == Metric)
-
 
         // necessary to nest data so that keys represent each category
           var res_nested = d3.nest() 
@@ -460,7 +169,7 @@
           color.domain(category).range(d3.schemePaired)
 
 
-             // CREATE LEGEND // 
+          // CREATE LEGEND // 
             legend = svgLegend.selectAll('.legend')
                 .data(category)
                 .enter().append('g')
@@ -640,6 +349,312 @@
 
 
 
+// FUNCTIONS TO UPDATE CHART HERE
+
+    // CALL FUNCTIONS TO UPDATE ON CHANGE HERE
+
+          // Update chart when radio button is selected - Metric
+          d3.selectAll(("input[name='Metric']")).on('change', function(){
+            updateChartMetric(this.value)
+          })
+
+
+          // Update chart when radio button is selected - Year
+          d3.selectAll(("input[name='Year']")).on('change', function(){
+            updateChartYear(this.value)
+          })
+
+          // Update chart when radio button is selected - GDP
+          d3.selectAll(("input[name='GDP']")).on('change', function(){
+            updateChartGDP(this.value)
+          })
+
+
+
+    // FUNCTION TO UPDATE METRIC BEING VIEWED: 
+      function updateChartMetric(Metric) {
+
+      // Filter for the value on the other radio button(s)
+          // Year 1 filter
+          var year_val = d3.select('input[name="Year"]:checked').property("value");
+          var res1 = res.filter(d=>d.Year <= parseInt(year_val))
+
+          // Group 2 filter
+          var gdp_val = d3.select('input[name="GDP"]:checked').property("value");
+          var res2 = res1.filter(d=>d.GDP_qt == parseInt(gdp_val))
+
+          // Current Filter
+          var resNew = res2.filter(d=>d.Metric == Metric)
+
+        // Define and update color scale
+        var category = d3.map(resNew, function(d){return d.Location;}).keys()
+        color.domain(category).range(d3.schemePaired)
+
+        
+        // Define and Update Y axis
+        yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
+
+        svg.select('.y.axis')
+            .transition().duration(750)
+            .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
+            .call(g => {
+                      g.selectAll("text")
+                      .style("text-anchor", "middle")
+                      .attr("x", -axisPad*2)
+                      .attr('fill', '#A9A9A9')
+
+                      g.selectAll("line")
+                        .attr('stroke', '#A9A9A9')
+                        .attr('stroke-width', 0.7)
+                        .attr('opacity', 0.3)
+
+                      g.select(".domain").remove()
+
+                    })
+
+        // Define and Update X axis
+          xScale.domain(d3.extent(resNew, d=>d.date))
+
+          svg.select('.x.axis')
+              .transition().duration(750)
+              .call(d3.axisBottom(xScale))
+              .call(g => {
+                  var years = xScale.ticks(d3.timeYear.every(1))
+                  var xshift = (width/(years.length))/2 
+                  g.selectAll("text").attr("transform", `translate(${xshift}, 0)`) //shift tick labels to middle of interval
+                    .style("text-anchor", "middle")
+                    .attr("y", axisPad)
+                    .attr('fill', '#A9A9A9')
+
+                  g.selectAll("line")
+                    .attr('stroke', '#A9A9A9')
+        
+                  g.select(".domain")
+                    .attr('stroke', '#A9A9A9')
+
+              })
+
+        // Nest  Data:
+            var res_nested = d3.nest()
+              .key(d=>d.Location)
+              .entries(resNew)
+
+          // Update the other elements
+            glines.select('.line') //select line path within line-group (which represents a category), then bind new data 
+              .data(res_nested)
+              .transition().duration(750)
+              .attr('d', function(d) {
+                return line(d.values)
+              })
+
+            mouseG.selectAll('.mouse-per-line')
+              .data(res_nested)
+
+            mouseG.on('mousemove', function () { 
+                var mouse = d3.mouse(this)
+                updateTooltipContent(mouse, res_nested, color)
+              })
+        }
+
+
+
+
+  // FUNCTION TO UPDATE CHART WITH  RADIO BUTTON THAT AFFECTS X-AXIS
+      function updateChartYear(Year) {
+
+      // Filter for the value on the other radio button(s)
+          // Metric 1 filter
+          var metric_val = d3.select('input[name="Metric"]:checked').property("value");
+          var res1 = res.filter(d=>d.Metric == metric_val)
+
+          // Group 2 filter
+          var gdp_val = d3.select('input[name="GDP"]:checked').property("value");
+          var res2 = res1.filter(d=>d.GDP_qt == parseInt(gdp_val))
+
+          // Current Filter
+          var resNew = res2.filter(d=>d.Year <= parseInt(Year))
+      
+      // Define and update color scale
+        var category = d3.map(resNew, function(d){return d.Location;}).keys()
+        color.domain(category).range(d3.schemePaired)
+
+      // Define and Update Y axis
+        yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
+
+        svg.select('.y.axis')
+            .transition().duration(750)
+            .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
+            .call(g => {
+                      g.selectAll("text")
+                      .style("text-anchor", "middle")
+                      .attr("x", -axisPad*2)
+                      .attr('fill', '#A9A9A9')
+
+                      g.selectAll("line")
+                        .attr('stroke', '#A9A9A9')
+                        .attr('stroke-width', 0.7)
+                        .attr('opacity', 0.3)
+
+                      g.select(".domain").remove()
+
+                    })
+
+      // Define and Update X axis
+        xScale.domain(d3.extent(resNew, d=>d.date))
+
+        svg.select('.x.axis')
+            .transition().duration(750)
+            .call(d3.axisBottom(xScale))
+            .call(g => {
+                var years = xScale.ticks(d3.timeYear.every(1))
+                var xshift = (width/(years.length))/2 
+                g.selectAll("text").attr("transform", `translate(${xshift}, 0)`) //shift tick labels to middle of interval
+                  .style("text-anchor", "middle")
+                  .attr("y", axisPad)
+                  .attr('fill', '#A9A9A9')
+
+                g.selectAll("line")
+                  .attr('stroke', '#A9A9A9')
+
+                g.select(".domain")
+                  .attr('stroke', '#A9A9A9')
+
+            })
+
+       // Nest  Data:
+          var res_nested = d3.nest()
+            .key(d=>d.Location)
+            .entries(resNew)
+
+        // Update the other elements
+          glines.select('.line')
+            .data(res_nested)
+            .transition().duration(750)
+            .attr('d', function(d) {
+              return line(d.values)
+            })
+
+          mouseG.selectAll('.mouse-per-line')
+            .data(res_nested)
+
+          mouseG.on('mousemove', function () { 
+              var mouse = d3.mouse(this)
+              updateTooltipContent(mouse, res_nested, color)
+            })
+        }
+
+
+
+
+    // FUNCTION TO UPDATE CHART BY GDP QUARTILE: 
+    // USE THIS TYPE OF FUNCTION IF THE NUMBER OF LINES WILL CHANGE BETWEEN FILTERS
+
+        function updateChartGDP(GDP) {
+
+      // Filter for the value on the other radio button(s)
+          // Metric 1 filter
+          var metric_val = d3.select('input[name="Metric"]:checked').property("value");
+          var res1 = res.filter(d=>d.Metric == metric_val)
+
+          // Year 1 filter
+          var year_val = d3.select('input[name="Year"]:checked').property("value");
+          var res2 = res1.filter(d=>d.Year <= parseInt(year_val))
+
+          // Current Filter
+          var resNew = res2.filter(d=>d.GDP_qt == parseInt(GDP))
+
+      // Define and update color scale
+          var category = d3.map(resNew, function(d){return d.Location;}).keys()
+          color.domain(category).range(d3.schemePaired)
+
+      // Define and update legend
+          svgLegend.selectAll('.legend').remove();
+
+          var legend = svgLegend.selectAll('.legend')
+                .data(category)
+                .enter().append('g')
+                  .attr("class", "legend")
+                  .attr("transform", function (d, i) {return "translate(0," + i * 20 + ")"})
+
+            legend.append("circle")
+                .attr("class", "legend-node")
+                .attr("cx", 0)
+                .attr("cy", 0)
+                .attr("r", R)
+                .style("fill", d=>color(d))
+
+            legend.append("text")
+                .attr("class", "legend-text")
+                .attr("x", R*2)
+                .attr("y", R/2)
+                .style("fill", "#A9A9A9")
+                .style("font-size", 12)
+                .text(d=>d)
+
+        // Define and Update Y axis
+          yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
+
+          svg.select('.y.axis')
+			      	.transition().duration(750)
+              .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
+              .call(g => {
+                    g.selectAll("text")
+                    .style("text-anchor", "middle")
+                    .attr("x", -axisPad*2)
+                    .attr('fill', '#A9A9A9')
+
+                    g.selectAll("line")
+                      .attr('stroke', '#A9A9A9')
+                      .attr('stroke-width', 0.7) 
+                      .attr('opacity', 0.3)
+
+                    g.select(".domain").remove()
+
+                  })
+
+          // Nest Data:
+              var res_nested = d3.nest()
+                .key(d=>d.Location)
+                .entries(resNew)
+
+          // Update the lines: Need to start from scratch here. 
+              svg.selectAll('.lines').remove()
+
+              var lines = svg.append('g')
+                  .attr('class', 'lines')
+
+              glines = lines.selectAll('.line-group')
+                  .data(res_nested).enter()
+                  .append('g')
+                  .attr('class', 'line-group')
+
+                glines  
+                  .append('path')
+                    .attr('class', 'line')  
+                    .attr('d', d => line(d.values))
+                    .style('stroke', d => {
+                  return color(d.key)
+                })
+                    .style('fill', 'none')
+                    .style('opacity', lineOpacity)
+                    .style('stroke-width', lineStroke)
+          
+          // Update the mouselines and tooltip. 
+          mouseG.selectAll('.mouse-per-line')
+            .data(res_nested)
+
+          mouseG.on('mousemove', function () { 
+              var mouse = d3.mouse(this)
+              updateTooltipContent(mouse, res_nested, color)
+            })
+        }
+
+
+
+
+  
+
+
 // FUNCTION FOR UPDATING TOOL TIP CONTENT:
       function updateTooltipContent(mouse, res_nested, color) {
 
@@ -664,18 +679,19 @@
           return sortingArr.indexOf(a.key) - sortingArr.indexOf(b.key) // rank country based on metric
         })
 
-        tooltip.html(sortingObj[0].year + " (Data Subset: " + sortingObj[0].Group + ')')
+        tooltip.html("Year: "+ sortingObj[0].year)
           .style('display', 'block')
           .style('left', d3.event.pageX + 20)
           .style('top', d3.event.pageY - 20)
-          .style('font-size', 11.5)
+          .style('font-size', 14) //Change tooltip title font here
+          .style('font-weight', "bold") 
           .selectAll()
           .data(res_nested1).enter()
           .append('div')
           .style('color', d => {
             return color(d.key)
           })
-          .style('font-size', 10)
+          .style('font-size', 10) //Change tooltip text font here
           .html(d => {
             var xDate = xScale.invert(mouse[0])
             var bisect = d3.bisector(function (d) { return d.date; }).left
@@ -686,7 +702,7 @@
       }
     })
 
-// END OF D3 CSV CHART FUNTION
+// END OF D3 CSV CHART FUNCTION
 
     </script>
   </body>
