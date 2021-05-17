@@ -40,27 +40,37 @@
         <div id="viz">
           <div class='header'>
 
+            <!-- CHOICE 1 -->
             <div class="form-check-variable">
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="CO2" checked>CO2</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="CO2_per_GDP">CO2_per_GDP</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="Share_of_Global_CO2">Share_of_Global_CO2</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="CO2_per_Capita">CO2_per_Capita</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="CO2_per_Unit_Energy">CO2_per_Unit_Energy</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="Primary_Energy_Consumption">Primary_Energy_Consumption</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="Energy_per_Capita">Energy_per_Capita</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="Energy_per_GDP">Energy_per_GDP</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Parameter" value="CO2" checked>CO2</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Parameter" value="Primary_Energy_Consumption">Primary_Energy_Consumption</label>
             </div>
 
-            <div class="form-check-inline">
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Year" value="2016" checked>All Years</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Year" value="1990">Stop at 1990</label>
+            <!-- CHOICE 2 -->
+            <div class="form-check-year">
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Year" value="1965" checked>Long Duration Study (1965-2016)</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Year" value="1990">The dot com boom (1990-2016) </label>
             </div>
 
-            <div class="form-check-inline-2">
-              <label class="form-check-label"><input style="display: inline" type="radio" name="GDP" value="1">GDP: Lowest Quartile</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="GDP" value="2" checked>GDP: 2nd Lowest Quartile</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="GDP" value="3">GDP: 3nd Lowest Quartile</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="GDP" value="4">GDP: Highest Quartile</label>
+            <!-- CHOICE 3 -->
+            <div class="form-check-group">
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="1" checked>Top Oil Producing Nations </label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="2">Countries with highest renewable energy</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="3">OECD Nations</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="4">Countries w/ Largest Population Size</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="5">Most Technologically Advanced Countries</label>
+            </div>
+
+            <!-- CHOICE 4 -->
+            <div class="form-data-manipulation-1">
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Manip1" value="Absolute" checked>Absolute Values</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Manip1" value="Growth">Relative Growth Rates</label>
+            </div>
+          
+            <!-- CHOICE 5 -->
+            <div class="form-data-manipulation-2">
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Manip2" value="Population" checked>Divide by Population</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Manip2" value="GDP">Divide by GDP</label>
             </div>
 
           </div>
@@ -69,13 +79,17 @@
     </div>
 
 
+<!-- LIST OF ToDos -->
+      <!-- Mouse over circles are not updating properly with group changes -->
+      <!-- Need to remove all and redefine in the updateChartGroup function-->
+
 
 <!-- JAVASCRIPT -->
 
     <script>
 
 
-// GLOBAL VARIABLES FOR THE CHART
+// SET GLOBAL VARIABLES FOR THE CHART
       var glines
       var mouseG
       var tooltip
@@ -116,7 +130,8 @@
     
      var legend
 
-  // START OF D3 CSV CHART FUNCTION
+
+// START OF D3 CSV CHART FUNCTION
       d3.csv("data/output/reshaped_country_data.csv", data => {
 
         var res = data.map((d,i) => {
@@ -124,13 +139,18 @@
             date : parseDate(d.Year),
             Year : +d.Year_num,
             Location : d.Location,
-            GDP_qt : +d.GDP_Quartile,
-            Pop_qt : +d.Pop_Quartile,
+            Parameter : d.Parameter,
+            Time : +d.Time,
+            Group : d.Group,
+            Manip1 : d.Manip1,
+            Manip2 : d.Manip2,
             Metric : d.Metric, 
             Value : +d.Value
           }
         })
         
+
+        // Set some intial variables: line generator, x and y-Scales
 
         xScale.domain(d3.extent(res, d=>d.date))
           .range([0, width])
@@ -138,9 +158,7 @@
         yScale.domain([d3.min(res, d => d.Value), d3.max(res, d => d.Value)])
           .range([height, 0]);
 
-
-    // line generator 
-        var line = d3.line()
+       var line = d3.line()
           .x(d => xScale(d.date))
           .y(d => yScale(d.Value))
 
@@ -148,16 +166,18 @@
 // FUNCTIONS TO RENDER INITIAL CHART HERE: 
 
     // SET DEFAULT PARAMETERS HERE
-        renderChart("CO2", "2016", "2") // inital chart render (set default to choice of default data)
+        renderChart("CO2", "1965", "1", "Absolute", "Population") // inital chart render (set default to choice of default data)
 
    
     // FUNCTION TO INITIATE CHART WITH RADIO BUTTON
-        function renderChart(Metric, Year, GDP) {
+        function renderChart(Parameter, Year, Group, Manip1, Manip2) {
 
           // Implement Filters: 
-          var res1 = res.filter(d=>d.Year <= parseInt(Year))
-          var res2 = res1.filter(d=>d.GDP_qt == parseInt(GDP))
-          var resNew = res2.filter(d=>d.Metric == Metric)
+          var res1 = res.filter(d=>d.Parameter == Parameter)
+          var res2 = res1.filter(d=>d.Year >= parseInt(Year))
+          var res3 = res2.filter(function (d) { return d.Group.match(Group); })
+          var res4 = res3.filter(d=>d.Manip1 == Manip1)
+          var resNew = res4.filter(d=>d.Manip2 == Manip2)
 
         // necessary to nest data so that keys represent each category
           var res_nested = d3.nest() 
@@ -264,7 +284,7 @@
 
 
 
-          // CREATE HOVER TOOLTIP WITH VERTICAL LINE //
+    // CREATE HOVER TOOLTIP WITH VERTICAL LINE //
           tooltip = d3.select("#viz").append("div")
             .attr('id', 'tooltip')
             .style('position', 'absolute')
@@ -353,64 +373,81 @@
 
     // CALL FUNCTIONS TO UPDATE ON CHANGE HERE
 
-          // Update chart when radio button is selected - Metric
-          d3.selectAll(("input[name='Metric']")).on('change', function(){
-            updateChartMetric(this.value)
+          // Update chart when radio button is selected - Parameter
+          d3.selectAll(("input[name='Parameter']")).on('change', function(){
+            updateChartParameter(this.value)
           })
 
 
-          // Update chart when radio button is selected - Year
+          // Update chart when radio button is selected - Timeframe
           d3.selectAll(("input[name='Year']")).on('change', function(){
             updateChartYear(this.value)
           })
 
-          // Update chart when radio button is selected - GDP
-          d3.selectAll(("input[name='GDP']")).on('change', function(){
-            updateChartGDP(this.value)
+          // Update chart when radio button is selected - Group
+          d3.selectAll(("input[name='Group']")).on('change', function(){
+            updateChartGroup(this.value)
+          })
+
+          // Update chart when radio button is selected - D
+          d3.selectAll(("input[name='Manip1']")).on('change', function(){
+            updateChartManip1(this.value)
+          })
+
+          d3.selectAll(("input[name='Manip2']")).on('change', function(){
+            updateChartManip2(this.value)
           })
 
 
 
     // FUNCTION TO UPDATE METRIC BEING VIEWED: 
-      function updateChartMetric(Metric) {
+      function updateChartParameter(Parameter) {
 
       // Filter for the value on the other radio button(s)
-          // Year 1 filter
+          // Time filter
           var year_val = d3.select('input[name="Year"]:checked').property("value");
-          var res1 = res.filter(d=>d.Year <= parseInt(year_val))
+          var res1 = res.filter(d=>d.Year >= parseInt(year_val))
 
-          // Group 2 filter
-          var gdp_val = d3.select('input[name="GDP"]:checked').property("value");
-          var res2 = res1.filter(d=>d.GDP_qt == parseInt(gdp_val))
+          // Group filter
+          var group_val = d3.select('input[name="Group"]:checked').property("value"); 
+          var res2 = res1.filter(function (d) { return d.Group.match(group_val); })
 
-          // Current Filter
-          var resNew = res2.filter(d=>d.Metric == Metric)
+          // Manip 1 filter
+          var manip1_val = d3.select('input[name="Manip1"]:checked').property("value");
+          var res3 = res2.filter(d=>d.Manip1 == manip1_val)
+
+          // Manip 2 filter
+          var manip2_val = d3.select('input[name="Manip2"]:checked').property("value");
+          var res4 = res3.filter(d=>d.Manip2 == manip2_val)
+
+          // Current Parameter Filter
+          var resNew = res4.filter(d=>d.Parameter == Parameter)
 
         // Define and update color scale
-        var category = d3.map(resNew, function(d){return d.Location;}).keys()
-        color.domain(category).range(d3.schemePaired)
+          var category = d3.map(resNew, function(d){return d.Location;}).keys()
+          color.domain(category).range(d3.schemePaired)
 
         
         // Define and Update Y axis
-        yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
+          yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
 
-        svg.select('.y.axis')
-            .transition().duration(750)
-            .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
-            .call(g => {
-                      g.selectAll("text")
-                      .style("text-anchor", "middle")
-                      .attr("x", -axisPad*2)
-                      .attr('fill', '#A9A9A9')
+          svg.select('.y.axis')
+              .transition().duration(750)
+              .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
+              .call(g => {
+                        g.selectAll("text")
+                        .style("text-anchor", "middle")
+                        .attr("x", -axisPad*2)
+                        .attr('fill', '#A9A9A9')
 
-                      g.selectAll("line")
-                        .attr('stroke', '#A9A9A9')
-                        .attr('stroke-width', 0.7)
-                        .attr('opacity', 0.3)
+                        g.selectAll("line")
+                          .attr('stroke', '#A9A9A9')
+                          .attr('stroke-width', 0.7)
+                          .attr('opacity', 0.3)
 
-                      g.select(".domain").remove()
+                        g.select(".domain").remove()
 
-                    })
+                      })
 
         // Define and Update X axis
           xScale.domain(d3.extent(resNew, d=>d.date))
@@ -463,17 +500,26 @@
       function updateChartYear(Year) {
 
       // Filter for the value on the other radio button(s)
-          // Metric 1 filter
-          var metric_val = d3.select('input[name="Metric"]:checked').property("value");
-          var res1 = res.filter(d=>d.Metric == metric_val)
+          // Parameter filter
+          var parameter_val = d3.select('input[name="Parameter"]:checked').property("value");
+          var res1 = res.filter(d=>d.Parameter == parameter_val)
 
-          // Group 2 filter
-          var gdp_val = d3.select('input[name="GDP"]:checked').property("value");
-          var res2 = res1.filter(d=>d.GDP_qt == parseInt(gdp_val))
+          // Group filter
+          var group_val = d3.select('input[name="Group"]:checked').property("value"); 
+          var res2 = res1.filter(function (d) { return d.Group.match(group_val); })
 
-          // Current Filter
-          var resNew = res2.filter(d=>d.Year <= parseInt(Year))
+          // Manip 1 filter
+          var manip1_val = d3.select('input[name="Manip1"]:checked').property("value");
+          var res3 = res2.filter(d=>d.Manip1 == manip1_val)
+
+          // Manip 2 filter
+          var manip2_val = d3.select('input[name="Manip2"]:checked').property("value");
+          var res4 = res3.filter(d=>d.Manip2 == manip2_val)
+
+          // Current Time Filter
+          var resNew = res4.filter(d=>d.Year >= parseInt(Year))
       
+
       // Define and update color scale
         var category = d3.map(resNew, function(d){return d.Location;}).keys()
         color.domain(category).range(d3.schemePaired)
@@ -546,22 +592,32 @@
 
 
 
-    // FUNCTION TO UPDATE CHART BY GDP QUARTILE: 
+    // FUNCTION TO UPDATE CHART BY GROUP OF COUNTRIES QUARTILE: 
     // USE THIS TYPE OF FUNCTION IF THE NUMBER OF LINES WILL CHANGE BETWEEN FILTERS
 
-        function updateChartGDP(GDP) {
+        function updateChartGroup(Group) {
 
       // Filter for the value on the other radio button(s)
-          // Metric 1 filter
-          var metric_val = d3.select('input[name="Metric"]:checked').property("value");
-          var res1 = res.filter(d=>d.Metric == metric_val)
+          // Parameter filter
+          var parameter_val = d3.select('input[name="Parameter"]:checked').property("value");
+          var res1 = res.filter(d=>d.Parameter == parameter_val)
 
-          // Year 1 filter
+          // Year filter
           var year_val = d3.select('input[name="Year"]:checked').property("value");
-          var res2 = res1.filter(d=>d.Year <= parseInt(year_val))
+          var res2 = res1.filter(d=>d.Year >= parseInt(year_val))
 
-          // Current Filter
-          var resNew = res2.filter(d=>d.GDP_qt == parseInt(GDP))
+          // Manip 1 filter
+          var manip1_val = d3.select('input[name="Manip1"]:checked').property("value");
+          var res3 = res2.filter(d=>d.Manip1 == manip1_val)
+
+          // Manip 2 filter
+          var manip2_val = d3.select('input[name="Manip2"]:checked').property("value");
+          var res4 = res3.filter(d=>d.Manip2 == manip2_val)
+
+          // Current Group Filter: checks whether the string contains the input:
+          var resNew = res4.filter(function (d) { return d.Group.match(Group); })
+
+
 
       // Define and update color scale
           var category = d3.map(resNew, function(d){return d.Location;}).keys()
@@ -639,15 +695,211 @@
                     .style('opacity', lineOpacity)
                     .style('stroke-width', lineStroke)
           
-          // Update the mouselines and tooltip. 
+          // Update the mouselines: will also need to start from scratch here. 
           mouseG.selectAll('.mouse-per-line')
             .data(res_nested)
 
+          // Update the tooltip. 
           mouseG.on('mousemove', function () { 
               var mouse = d3.mouse(this)
               updateTooltipContent(mouse, res_nested, color)
             })
         }
+
+
+
+
+   // FUNCTION TO UPDATE MANIP 1: 
+      function updateChartManip1(Manip1) {
+
+      // Filter for the value on the other radio button(s)
+          // Time filter
+          var year_val = d3.select('input[name="Year"]:checked').property("value");
+          var res1 = res.filter(d=>d.Year >= parseInt(year_val))
+
+          // Group filter
+          var group_val = d3.select('input[name="Group"]:checked').property("value"); 
+          var res2 = res1.filter(function (d) { return d.Group.match(group_val); })
+
+          // Parameter filter
+          var parameter_val = d3.select('input[name="Parameter"]:checked').property("value");
+          var res3 = res2.filter(d=>d.Parameter == parameter_val)
+
+          // Manip 2 filter
+          var manip2_val = d3.select('input[name="Manip2"]:checked').property("value");
+          var res4 = res3.filter(d=>d.Manip2 == manip2_val)
+
+          // Current Parameter Filter
+          var resNew = res4.filter(d=>d.Manip1 == Manip1)
+
+
+
+        // Define and update color scale
+          var category = d3.map(resNew, function(d){return d.Location;}).keys()
+          color.domain(category).range(d3.schemePaired)
+
+        
+        // Define and Update Y axis
+          yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
+
+          svg.select('.y.axis')
+              .transition().duration(750)
+              .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
+              .call(g => {
+                        g.selectAll("text")
+                        .style("text-anchor", "middle")
+                        .attr("x", -axisPad*2)
+                        .attr('fill', '#A9A9A9')
+
+                        g.selectAll("line")
+                          .attr('stroke', '#A9A9A9')
+                          .attr('stroke-width', 0.7)
+                          .attr('opacity', 0.3)
+
+                        g.select(".domain").remove()
+
+                      })
+
+        // Define and Update X axis
+          xScale.domain(d3.extent(resNew, d=>d.date))
+
+          svg.select('.x.axis')
+              .transition().duration(750)
+              .call(d3.axisBottom(xScale))
+              .call(g => {
+                  var years = xScale.ticks(d3.timeYear.every(1))
+                  var xshift = (width/(years.length))/2 
+                  g.selectAll("text").attr("transform", `translate(${xshift}, 0)`) //shift tick labels to middle of interval
+                    .style("text-anchor", "middle")
+                    .attr("y", axisPad)
+                    .attr('fill', '#A9A9A9')
+
+                  g.selectAll("line")
+                    .attr('stroke', '#A9A9A9')
+        
+                  g.select(".domain")
+                    .attr('stroke', '#A9A9A9')
+
+              })
+
+        // Nest  Data:
+            var res_nested = d3.nest()
+              .key(d=>d.Location)
+              .entries(resNew)
+
+          // Update the other elements
+            glines.select('.line') //select line path within line-group (which represents a category), then bind new data 
+              .data(res_nested)
+              .transition().duration(750)
+              .attr('d', function(d) {
+                return line(d.values)
+              })
+
+            mouseG.selectAll('.mouse-per-line')
+              .data(res_nested)
+
+            mouseG.on('mousemove', function () { 
+                var mouse = d3.mouse(this)
+                updateTooltipContent(mouse, res_nested, color)
+              })
+        }
+
+
+
+  // FUNCTION TO UPDATE MANIP 2: 
+      function updateChartManip2(Manip2) {
+
+      // Filter for the value on the other radio button(s)
+          // Time filter
+          var year_val = d3.select('input[name="Year"]:checked').property("value");
+          var res1 = res.filter(d=>d.Year >= parseInt(year_val))
+
+          // Group filter
+          var group_val = d3.select('input[name="Group"]:checked').property("value"); 
+          var res2 = res1.filter(function (d) { return d.Group.match(group_val); })
+
+          // Parameter filter
+          var parameter_val = d3.select('input[name="Parameter"]:checked').property("value");
+          var res3 = res2.filter(d=>d.Parameter == parameter_val)
+
+          // Manip 2 filter
+          var manip1_val = d3.select('input[name="Manip1"]:checked').property("value");
+          var res4 = res3.filter(d=>d.Manip1 == manip1_val)
+
+          // Current Parameter Filter
+          var resNew = res4.filter(d=>d.Manip2 == Manip2)
+
+
+        // Define and update color scale
+          var category = d3.map(resNew, function(d){return d.Location;}).keys()
+          color.domain(category).range(d3.schemePaired)
+
+        
+        // Define and Update Y axis
+          yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
+
+          svg.select('.y.axis')
+              .transition().duration(750)
+              .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
+              .call(g => {
+                        g.selectAll("text")
+                        .style("text-anchor", "middle")
+                        .attr("x", -axisPad*2)
+                        .attr('fill', '#A9A9A9')
+
+                        g.selectAll("line")
+                          .attr('stroke', '#A9A9A9')
+                          .attr('stroke-width', 0.7)
+                          .attr('opacity', 0.3)
+
+                        g.select(".domain").remove()
+
+                      })
+
+        // Define and Update X axis
+          xScale.domain(d3.extent(resNew, d=>d.date))
+
+          svg.select('.x.axis')
+              .transition().duration(750)
+              .call(d3.axisBottom(xScale))
+              .call(g => {
+                  var years = xScale.ticks(d3.timeYear.every(1))
+                  var xshift = (width/(years.length))/2 
+                  g.selectAll("text").attr("transform", `translate(${xshift}, 0)`) //shift tick labels to middle of interval
+                    .style("text-anchor", "middle")
+                    .attr("y", axisPad)
+                    .attr('fill', '#A9A9A9')
+
+                  g.selectAll("line")
+                    .attr('stroke', '#A9A9A9')
+        
+                  g.select(".domain")
+                    .attr('stroke', '#A9A9A9')
+
+              })
+
+        // Nest  Data:
+            var res_nested = d3.nest()
+              .key(d=>d.Location)
+              .entries(resNew)
+
+          // Update the other elements
+            glines.select('.line') //select line path within line-group (which represents a category), then bind new data 
+              .data(res_nested)
+              .transition().duration(750)
+              .attr('d', function(d) {
+                return line(d.values)
+              })
+
+            mouseG.selectAll('.mouse-per-line')
+              .data(res_nested)
+
+            mouseG.on('mousemove', function () { 
+                var mouse = d3.mouse(this)
+                updateTooltipContent(mouse, res_nested, color)
+              })
+        }
+
 
 
 
