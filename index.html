@@ -19,7 +19,7 @@
       <a href="#mission_objective" style="background-color: #111;">Your Mission</a>
       <a href="#player_selection" style="background-color: #111;">Players</a>
     </div>
-    
+
     <button class="openbtn" onclick="openNav()">&#9776; Open Menu</button>
 
 
@@ -54,18 +54,18 @@
       <!-- Section 2: Introducing the President -->
       <section class="step"  id ="button_intro">
       <!-- <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div> -->
-     
+
 
       <!-- Text -->
       <div class="title" style="margin-left: 250px text-align: left;">
-       Hello [ Human ], <br> You’ve been recruited.
+       Hello [ Human ], <br> You have been recruited.
       </div><br><br><br><br>
 
       <div style="width: 100%;">
-        <div style="width: 35%; height: 100px; float: left; padding-right: 125px;"> 
+        <div style="width: 35%; height: 100px; float: left; padding-right: 125px;">
           <img src="data/president.png" align="right" alt="president">
         </div>
-        <div style="margin-left: 35%; height: 100px;"> 
+        <div style="margin-left: 35%; height: 100px;">
           <div class="output" id="output">
             <h1 class="cursor"></h1>
             <p></p>
@@ -82,7 +82,7 @@
       </div>
 
 
-         <!-- Sources: joe: https://www.minecraftskins.com/uploads/preview-skins/2020/11/18/joe-biden-15793981.png?v357 -->
+      <!-- Sources: joe: https://www.minecraftskins.com/uploads/preview-skins/2020/11/18/joe-biden-15793981.png?v357 -->
       </section>
 
 
@@ -94,10 +94,10 @@
       </div><br><br><br><br>
 
       <div style="width: 100%;">
-        <div style="width: 35%; height: 100px; float: left; padding-right: 125px;"> 
+        <div style="width: 35%; height: 100px; float: left; padding-right: 125px;">
           <img src="data/president.png" align="right" alt="president">
         </div>
-        <div style="margin-left: 35%; height: 100px;"> 
+        <div style="margin-left: 35%; height: 100px;">
           <div class="output" id="output2">
             <h1 class="cursor"></h1>
             <p></p>
@@ -121,16 +121,18 @@
       <div class="title" style="font-size: 34px">Select Your Player</div><br><br><br><br>
 
       <div>
-        <img src="data/science_cat.png" alt="science_cat" style="height:200px; padding-right: 30px;">
-        <img src="data/spaceperson.png" alt="spaceperson" style="height:220px; padding-left: 30px;">
+        <img src="data/science_cat.png" alt="science_cat" style="height:190px; padding-right: 25px;">
+        <img src="data/spaceperson.png" alt="spaceperson" style="height:220px; padding-left: 40px;">
+        <img src="data/blue_guy.png"    alt="blue_guy"    style="height:200px; padding-left: 30px;">
+
     </div>
     <br>
 
     <!-- Button to select player -->
       <div id="button-wrap">
-              <button class="player_button" id="player1" style="margin-right: 80px;" onclick="picture1()"><a href="#choice_screen1">Player One</a></button>
-              <button class="player_button" id="player2" style="margin-right: 60px;" onclick="picture2()"><a href="#choice_screen1">Player Two</a></button>
-
+              <button class="player_button" id="player1" style="margin-right: 90px;" onclick="picture1()"><a href="#choice_screen1">Player One</a></button>
+              <button class="player_button" id="player2" style="margin-right: 70px;" onclick="picture2()"><a href="#choice_screen1">Player Two</a></button>
+              <button class="player_button" id="player3" style="margin-right: 50px;" onclick="picture3()"><a href="#choice_screen1">Player Three</a></button>
         </div>
     <!-- Button to select player -->
         <br><br><br>
@@ -140,66 +142,90 @@
 
 
   <!-- CHOICE SCREENS -->
- 
+
   <form  id="form1">
 
     <!-- Choice Screen 1 -->
-    
+
       <section class="step" id ="choice_screen1" style="height: 1500px;">
       <!-- <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div> -->
-    
-      <div class="title">action number one: Data</div>
+
+      <div class="title">action number one: Choose Your Parameter</div>
       <br>
         <img id="player1_image1" src="player1_image"  class="center" style="display:none;" />
         <img id="player2_image1" src="player2_image"  class="center" style="display:none; " />
-    
+        <img id="player3_image1" src="player3_image"  class="center" style="display:none;" />
+
+        <section class="choice_txt" style="font-size: 18px; margin-bottom: 10px;">
         <br><br>
-        There are currently two possible variables with which to measure X. <br>
-        your first task is to choose which of these will most help president joe button.
-        <br><br>
-    
+        A team of data enthusiasits have travelled the world to collect information on each countrys Carbon footprint.  <br>
+        The team identified <em> energy consumption </em> and <em> carbon dioxide </em> as strong proxies for the escalation of climate change. <br>
+        <br>
+        Your first task is to choose which parameter to measure to help president joe button.
+        <br><br> </section>
+
         <div class="row col-sm-5 col-sm-offset-1" style="margin-left: 110px; margin-right: 20px; border-style: solid;">
-        <div class="choice_title"><br>Choice one</div>
-        Compelling argument for variable 1 <br><br>
+        <div class="choice_title"><br>choice one: <em style="color: yellow;"> Carbon Dioxide Produced </em> </div>
+
+        <!-- Text for Choice A-->
+        <em style="color: green; font-size: 18px"> UNIT: </em>  Annual Tonnes of CO2_equivalent per Country
+        <br> <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em> Carbon dioxide is the most important of Earths greenhouse gases.
+        Its increasing concentration in the atmosphere causes Earths temperature to rise;
+        which in turn causes warming oceans, extreme weather events, and sea-level rise. <br>
+        <p style="color: yellow; font-size: 16px"> By choosing carbon dioxide, you can measure the relative increase or decrease of
+        adverse climate change effects. </p>
+        <br><br>
         <label><input type="radio" name="age" id="choice1a" value="oil"/>Make choice one</label>
         <br><br>
         </div>
-    
-        <div class="row col-sm-5" style="margin-top: 0px; border-style: solid;">
-        <div class="choice_title"><br>Choice two</div>
-        Compelling argument for variable 2 <br><br>
+
+        <div class="row col-sm-5" style="margin-top: 0px; border-style: solid">
+        <div class="choice_title"><br>choice two: <em style="color: yellow;"> Primary Energy Consumed</em> </div>
+
+        <!-- Text for Choice B-->
+        <em style="color: green; font-size: 18px"> UNIT: </em>  Annual TWh of Energy Consumed per Country
+        <br> <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em> Globally,
+        the use of energy representes the largest source of greenhouse gas emissions (i.e. carbon dioxide)
+        from human activities. About two thirds of global greenhouse gas emissions are linked to
+        burning fossil fuels for energy.
+        <br>
+        <p style="color: yellow; font-size: 16px"> By choosing energy consumption,
+        you can measure how country energy decisions and consumption habits have impacted climate.</p>
+        <br><br>
         <label><input type="radio" name="age" id="choice1b" value="science"/>Make choice two</label>
         <br><br>
         </div>
-        <div class="row col-sm-12" style="padding-top: 200px;" >
+        <div class="row col-sm-12" style="padding-top: 100px;" >
           <a href="#choice_screen2" style="font-size: 20px; text-align: center; font-family: 'Press Start 2P', sans-serif;">Next</a>
        </div>
-       
+
       </section>
-    
-    
-    
+
+
+
       <!-- Choice Screen 2 -->
-      <section class="step" id ="choice_screen2" style="height: 1500px;"> 
+      <section class="step" id ="choice_screen2" style="height: 1500px;">
       <!-- <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div> -->
-    
-      <div class="title">action number two: Data</div>
+
+      <div class="title">action number two: Time Frame</div>
       <br>
         <img id="player1_image2" src="player1_image"  class="center" style="display:none;" />
         <img id="player2_image2" src="player2_image"  class="center" style="display:none; " />
-    
+        <img id="player3_image2" src="player3_image"  class="center" style="display:none;" />
+
+
         <br><br>
         There are currently two possible variables with which to measure X. <br>
         your first task is to choose which of these will most help president joe button.
         <br><br>
-    
+
         <div class="row col-sm-5 col-sm-offset-1" style="margin-left: 110px; margin-right: 20px; border-style: solid;">
         <div class="choice_title"><br>Choice one</div>
         Compelling argument for variable 1 <br><br>
         <label><input type="radio" name="activity" id="choice2a" value="oil"/>Make choice one</label>
         <br><br>
         </div>
-    
+
         <div class="row col-sm-5" style="margin-top: 0px; border-style: solid;">
         <div class="choice_title"><br>Choice two</div>
         Compelling argument for variable 2 <br><br>
@@ -210,45 +236,47 @@
           <a href="#choice_screen3" style="font-size: 20px; text-align: center; font-family: 'Press Start 2P', sans-serif;">Next</a>
        </div>
       </section>
-    
-    
-    
+
+
+
         <!-- Choice Screen 3 -->
         <section class="step" id ="choice_screen3" style="height: 1500px;">
         <!-- <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div> -->
-      
+
         <div class="title">action number two: Data</div>
         <br>
           <img id="player1_image3" src="player1_image"  class="center" style="display:none;" />
           <img id="player2_image3" src="player2_image"  class="center" style="display:none; " />
-      
+          <img id="player3_image3" src="player3_image"  class="center" style="display:none;" />
+
+
           <br><br>
           There are currently two possible variables with which to measure X. <br>
           your first task is to choose which of these will most help president joe button.
           <br><br>
-      
+
           <div class="row col-sm-5 col-sm-offset-1" style="margin-left: 110px; margin-right: 20px; border-style: solid;">
           <div class="choice_title"><br>Choice one</div>
           Compelling argument for variable 1 <br><br>
           <label><input type="radio" name="genre" id="choice3a" value="science"/>Make choice one</label>
           <br><br>
           </div>
-      
+
           <div class="row col-sm-5" style="margin-top: 0px; border-style: solid;">
           <div class="choice_title"><br>Choice two</div>
           Compelling argument for variable 2 <br><br>
           <label><input type="radio" name="genre" id="choice3b" value="oil"/>Make choice two</label>
           <br><br>
           </div>            <br><br><br>
-    
-          
+
+
           <!-- Submit Button at last choice screen -->
           <div class="row col-sm-12" style="padding-top: 200px;">
           <button class="submit_button" type="submit" value="Submit" onclick="window.location.href='#final_dashboard'">Submit All and View Results</button>
-          </div> 
+          </div>
 
         </section>
-    
+
       <!-- End Choice Screen Div -->
       </form>
 
@@ -261,17 +289,17 @@
         <!-- <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div> -->
 
         <div class="title">Mission Results</div><br><br>
-        
+
 
 
           <div  class="row col-sm-12" style="width: 100%;">
 
             <!-- Left Hand Panel -->
-            <div style="width: 65%; float: left; padding-left: 75px;"> 
-              
+            <div style="width: 65%; float: left; padding-left: 75px;">
+
                 <div class="title_dashboard" id="response">You got <span id="answer" style="color: #39ff14;"></span></div>
-                <p style="text-align: left; color: #39ff14; font-weight: bold;" id="response2"> Your biases succesfully convinced Earth's leaders to <span id="answer2" style="color: #39ff14;"></span>!</p> 
-                
+                <p style="text-align: left; color: #39ff14; font-weight: bold;" id="response2"> Your biases succesfully convinced Earth's leaders to <span id="answer2" style="color: #39ff14;"></span>!</p>
+
                 <div class="title_dashboard">Your Resulting Visualization:</div>
                 <br><br><br> PLACEHOLDER SVG
                 <div id="viz"></div>
@@ -279,10 +307,10 @@
             </div>
 
             <!-- Right Hand Panel -->
-            <div style="margin-left: 65%; padding-right: 15px;"> 
+            <div style="margin-left: 65%; padding-right: 15px;">
 
               <div class="title_dashboard">Toggle your decisions to view how wach of them biased the final visualization</div><br>
-              
+
               <div class="action_dashboard">Action one: X</div><br>
 
                   <div style="width: 50%; float: left; padding-left: 5px;"><button class="db_button" id="choice1a_d">Choice 1</button></div>
@@ -308,7 +336,7 @@
                   <div style="width: 50%; float: left; padding-left: 5px;"><button class="db_button" id="choice1e_d">Choice 1</button></div>
                   <div style="margin-left: 50%; padding-right: 5px;"><button class="db_button" id="choice2e_d">Choice 2</button></div><br>
 
-             
+
             </div>
 
           </div>
@@ -366,7 +394,7 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stupidtable/0.0.1/stupidtable.min.js"></script>
-  
+
   <script src="lib/d3.js"></script>
   <script src="js/textanimations.js"></script>
   <script src="js/sidebar.js"></script>

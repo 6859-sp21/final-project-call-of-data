@@ -69,4 +69,6 @@ Countries: ['Australia', 'Austria', 'Belgium', 'Brazil', 'Bulgaria', 'Canada',
        'United States']
 
 Variables:
-'GHG': ALL greenhouse gas emissions in Tonnes of CO2_equivalent 
+'GHG': ALL greenhouse gas emissions in Tonnes of CO2_equivalent
+
+Player 3 : Tech-pro

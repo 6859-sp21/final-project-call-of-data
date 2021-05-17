@@ -3,11 +3,18 @@ body {
   background-color: black;
   color: white;
   display: flex;
+  font-size: 20px;
   justify-content: center;
 }
 
 em {
   font-weight: bold;
+  font-style: normal;
+  color: magenta;
+}
+
+ul {
+  text-decoration: underline;
   font-style: normal;
 }
 
@@ -131,11 +138,19 @@ p {
   text-align: left;
 }
 
+.choice_txt{
+  font-family: "Courier";
+  margin-bottom: 5px;
+  color: white;
+  line-height: 1.2em;
+  text-align: center;
+  font-size: 18px;
 
+}
 /* Choice buttons */
 input[type=radio] {
   display: block;
-  margin: 0 auto;
+  margin: 0px;
 }
 
 label {
@@ -375,9 +390,9 @@ p.cursor::after {
 }
 
 .player_button {
-  background-color: black !important; 
+  background-color: black !important;
   border: 1px solid green;
-  color: black !important; 
+  color: black !important;
   padding: 2px 5px;
   text-align: center;
   text-decoration: none;
@@ -386,9 +401,9 @@ p.cursor::after {
 }
 
 .choice_button {
-  background-color: black !important; 
+  background-color: black !important;
   border: 1px solid green;
-  color: black; 
+  color: black;
   padding: 2px 5px;
   text-align: center;
   text-decoration: none;
@@ -397,7 +412,7 @@ p.cursor::after {
 }
 
 .submit_button{
-  background-color: black !important; 
+  background-color: black !important;
   border: 1px solid green;
   padding: 10px 25px;
   text-align: center;
@@ -410,9 +425,9 @@ p.cursor::after {
 }
 
 .db_button{
-  background-color: white; 
+  background-color: white;
   border: 2px solid green;
-  color: black; 
+  color: black;
   font-weight: bold;
   padding: 2px 15px;
   text-align: center;
@@ -441,7 +456,3 @@ button.selected{
   cursor: pointer;
 
 }
-
-
-
-
