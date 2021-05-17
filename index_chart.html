@@ -40,27 +40,23 @@
         <div id="viz">
           <div class='header'>
 
+            <!-- CHOICE ONE -->
             <div class="form-check-variable">
               <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="CO2" checked>CO2</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="CO2_per_GDP">CO2_per_GDP</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="Share_of_Global_CO2">Share_of_Global_CO2</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="CO2_per_Capita">CO2_per_Capita</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="CO2_per_Unit_Energy">CO2_per_Unit_Energy</label>
               <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="Primary_Energy_Consumption">Primary_Energy_Consumption</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="Energy_per_Capita">Energy_per_Capita</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Metric" value="Energy_per_GDP">Energy_per_GDP</label>
             </div>
 
-            <div class="form-check-inline">
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Year" value="2016" checked>All Years</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Year" value="1990">Stop at 1990</label>
+            <div class="form-check-time">
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Year" value="1990">The dot com boom (1990-2016) </label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Year" value="1965" checked>Long Duration Study (1965-2016)</label>
             </div>
 
-            <div class="form-check-inline-2">
-              <label class="form-check-label"><input style="display: inline" type="radio" name="GDP" value="1">GDP: Lowest Quartile</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="GDP" value="2" checked>GDP: 2nd Lowest Quartile</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="GDP" value="3">GDP: 3nd Lowest Quartile</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="GDP" value="4">GDP: Highest Quartile</label>
+            <div class="form-check-group">
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="1" checked>Top Oil Producing Nations </label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="2" >Countries with highest renewable energy</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="3">OECD Nations</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="4">Countries w/ Largest Population Size</label>
+              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="5">Most Technologically Advanced Countries</label>
             </div>
 
           </div>
@@ -125,6 +121,7 @@
             date : parseDate(d.Year),
             Year : +d.Year_num,
             Location : d.Location,
+            Group : d.Group,
             GDP_qt : +d.GDP_Quartile,
             Pop_qt : +d.Pop_Quartile,
             Metric : d.Metric, 
@@ -149,15 +146,15 @@
 // FUNCTIONS TO RENDER INITIAL CHART HERE: 
 
     // SET DEFAULT PARAMETERS HERE
-        renderChart("CO2", "2016", "2") // inital chart render (set default to choice of default data)
+        renderChart("CO2", "1965", "1") // inital chart render (set default to choice of default data)
 
    
     // FUNCTION TO INITIATE CHART WITH RADIO BUTTON
-        function renderChart(Metric, Year, GDP) {
+        function renderChart(Metric, Year, Group) {
 
           // Implement Filters: 
-          var res1 = res.filter(d=>d.Year <= parseInt(Year))
-          var res2 = res1.filter(d=>d.GDP_qt == parseInt(GDP))
+          var res1 = res.filter(d=>d.Year >= parseInt(Year))
+          var res2 = res1.filter(function (d) { return d.Group.match(Group); })
           var resNew = res2.filter(d=>d.Metric == Metric)
 
         // necessary to nest data so that keys represent each category
@@ -366,8 +363,8 @@
           })
 
           // Update chart when radio button is selected - GDP
-          d3.selectAll(("input[name='GDP']")).on('change', function(){
-            updateChartGDP(this.value)
+          d3.selectAll(("input[name='Group']")).on('change', function(){
+            updateChartGroup(this.value)
           })
 
 
@@ -376,15 +373,15 @@
       function updateChartMetric(Metric) {
 
       // Filter for the value on the other radio button(s)
-          // Year 1 filter
+          // Year filter
           var year_val = d3.select('input[name="Year"]:checked').property("value");
-          var res1 = res.filter(d=>d.Year <= parseInt(year_val))
+          var res1 = res.filter(d=>d.Year >= parseInt(year_val))
 
-          // Group 2 filter
-          var gdp_val = d3.select('input[name="GDP"]:checked').property("value");
-          var res2 = res1.filter(d=>d.GDP_qt == parseInt(gdp_val))
+          // Group filter
+          var group_val = d3.select('input[name="Group"]:checked').property("value"); 
+          var res2 = res1.filter(function (d) { return d.Group.match(group_val); })
 
-          // Current Filter
+          // Current Metric Filter
           var resNew = res2.filter(d=>d.Metric == Metric)
 
         // Define and update color scale
@@ -468,12 +465,12 @@
           var metric_val = d3.select('input[name="Metric"]:checked').property("value");
           var res1 = res.filter(d=>d.Metric == metric_val)
 
-          // Group 2 filter
-          var gdp_val = d3.select('input[name="GDP"]:checked').property("value");
-          var res2 = res1.filter(d=>d.GDP_qt == parseInt(gdp_val))
+          // Group filter
+          var group_val = d3.select('input[name="Group"]:checked').property("value"); 
+          var res2 = res1.filter(function (d) { return d.Group.match(group_val); })
 
           // Current Filter
-          var resNew = res2.filter(d=>d.Year <= parseInt(Year))
+          var resNew = res2.filter(d=>d.Year >= parseInt(Year))
       
       // Define and update color scale
         var category = d3.map(resNew, function(d){return d.Location;}).keys()
@@ -547,10 +544,10 @@
 
 
 
-    // FUNCTION TO UPDATE CHART BY GDP QUARTILE: 
+    // FUNCTION TO UPDATE CHART BY GROUP OF COUNTRIES QUARTILE: 
     // USE THIS TYPE OF FUNCTION IF THE NUMBER OF LINES WILL CHANGE BETWEEN FILTERS
 
-        function updateChartGDP(GDP) {
+        function updateChartGroup(Group) {
 
       // Filter for the value on the other radio button(s)
           // Metric 1 filter
@@ -559,11 +556,12 @@
 
           // Year 1 filter
           var year_val = d3.select('input[name="Year"]:checked').property("value");
-          var res2 = res1.filter(d=>d.Year <= parseInt(year_val))
+          var res2 = res1.filter(d=>d.Year >= parseInt(year_val))
 
-          // Current Filter
-          var resNew = res2.filter(d=>d.GDP_qt == parseInt(GDP))
+          // Current Group Filter: checks whether the string contains the input:
+          var resNew = res2.filter(function (d) { return d.Group.match(Group); })
 
+          
       // Define and update color scale
           var category = d3.map(resNew, function(d){return d.Location;}).keys()
           color.domain(category).range(d3.schemePaired)

@@ -175,10 +175,26 @@ country90s$Metric <- paste0(country90s$Metric, "_90s")
 
 
 
-#### B3. MERGE THE TWO DATA SETS AND WRITE TO CSV
+
+#### B4. MERGE THE TWO DATA SETS  
 data <- rbind(x = country90s, 
               y = country)
 
 
+
+#### B5. MAKE A SINGLE GROUP VARIABLE
+data$Group1 <- as.character(data$Group1)
+data$Group2 <- gsub(1, 2, as.character(data$Group2))
+data$Group3 <- gsub(1, 3, as.character(data$Group3))
+data$Group4 <- gsub(1, 4, as.character(data$Group4))
+data$Group5 <- gsub(1, 5, as.character(data$Group5))
+
+
+data$Group = paste(c(data$Group1, data$Group2, data$Group3, data$Group4, data$Group5), " ")
+
+                   
+                   
+                   
+#### B6. WRITE TO CSV
 write.csv(data, "reshaped_country_data.csv", row.names = F)
 
