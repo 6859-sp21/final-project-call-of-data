@@ -11,6 +11,8 @@ document.getElementById("form1").onsubmit=function() {
  document.getElementById("answer").innerHTML = "";
  document.getElementById("answer2").innerHTML = "";
 
+
+  //Retrieves the value of the user selected choice for each question:
    age = document.querySelector('#form1 input[name = "age"]:checked').value;
    activity = document.querySelector('#form1 input[name = "activity"]:checked').value;
    genre = document.querySelector('#form1 input[name = "genre"]:checked').value;
@@ -20,8 +22,8 @@ document.getElementById("form1").onsubmit=function() {
    oil = 0;
    other = 0;
    
-   //function to calculate score for each question
-   // this function retrieves the value of the question (aka, the user's choice)
+   // function to calculate score for each question
+   // We'll have to make one of these functions for each of the questions, to vary both weight and assign a character based on the selection
    function eachscore(x){ 
    if(x == "science") { science = science + 1}
    if(x == "oil") { oil = oil + 1}
@@ -30,7 +32,8 @@ document.getElementById("form1").onsubmit=function() {
    // for the above function, you could also change the 1 to a variable so you could give more points for certain questions
    
    //call function for each question
-   eachscore(eval("age")); // the value inside the function is the name of the question
+   // the value inside the function is the name of the question
+   eachscore(eval("age")); 
    eachscore(eval("activity"));
    eachscore(eval("genre"));
       
