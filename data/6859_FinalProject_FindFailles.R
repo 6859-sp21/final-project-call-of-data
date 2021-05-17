@@ -199,13 +199,17 @@ data$Manip2 <- ifelse(grepl("per_Capita", data$Metric, fixed = TRUE), "Populatio
 #### B6. CLEAN UP AND WRITE TO CSV
 data <- subset(data, select = -c(Group1, Group2, Group3, Group4, Group5, Population, Pop_Quartile, GDP , GDP_Quartile))
 data <- data[c("Year", "Year_num", "Location",  "Parameter", "Time", "Group", "Manip1", "Manip2", "Metric", "Value")]
-data <- subset(data, ! Metric %in% c("Growth_Pop", "Growth_Pop_90s"))
 
+# Remove extra variables that could corrupt graph
+data <- subset(data, ! Metric %in% c("Growth_Pop", "Growth_Pop_90s"))
+data <- subset(data, ! Metric %in% c("Share_of_Global_CO2_90s", "CO2_per_Unit_Energy_90s", "Share_of_Global_CO2", "CO2_per_Unit_Energy"))
+
+# Write CSV
 write.csv(data, "reshaped_country_data.csv", row.names = F)
 
-
-test <- subset(data, Parameter == "CO2" & Time == 1965 &  Manip1 == "Growth" & Manip2 == "Population")
-test <- subset(data, Time == 1990)
+# For Sanity Checks
+test1 <- subset(data, Parameter == "CO2" & Time == 1965 &  Manip1 == "Absolute" & Manip2 == "Absolute")
+test2 <- subset(data, Parameter == "CO2" & Time == 1990 &  Manip1 == "Absolute" & Manip2 == "Absolute")
 
 
 
