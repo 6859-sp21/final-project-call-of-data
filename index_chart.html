@@ -75,7 +75,7 @@
     <script>
 
 
-// GLOBAL VARIABLES FOR THE CHART
+// SET GLOBAL VARIABLES FOR THE CHART
       var glines
       var mouseG
       var tooltip
@@ -116,7 +116,8 @@
     
      var legend
 
-  // START OF D3 CSV CHART FUNCTION
+
+// START OF D3 CSV CHART FUNCTION
       d3.csv("data/output/reshaped_country_data.csv", data => {
 
         var res = data.map((d,i) => {
@@ -132,15 +133,15 @@
         })
         
 
+        // Set some intial variables: line generator, x and y-Scales
+
         xScale.domain(d3.extent(res, d=>d.date))
           .range([0, width])
 
         yScale.domain([d3.min(res, d => d.Value), d3.max(res, d => d.Value)])
           .range([height, 0]);
 
-
-    // line generator 
-        var line = d3.line()
+       var line = d3.line()
           .x(d => xScale(d.date))
           .y(d => yScale(d.Value))
 
@@ -264,7 +265,7 @@
 
 
 
-          // CREATE HOVER TOOLTIP WITH VERTICAL LINE //
+    // CREATE HOVER TOOLTIP WITH VERTICAL LINE //
           tooltip = d3.select("#viz").append("div")
             .attr('id', 'tooltip')
             .style('position', 'absolute')
