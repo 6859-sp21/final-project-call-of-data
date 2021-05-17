@@ -25,6 +25,7 @@ p {
 }
 
 
+
 /* Full screen sections */
 
 #sections {
@@ -160,6 +161,18 @@ label {
   color:#39ff14;
   border:1px solid green;
   padding:2px 15px;
+}
+
+.form-check-label{
+  display: inline-block;
+  justify-content: left;
+  font-size: 10px;
+  text-align: left;
+  margin-top: 8px;
+  background:#444;
+  color:#39ff14;
+  border:1px solid green;
+  padding: 3px 6px;
 }
 
 

@@ -462,62 +462,64 @@
   <!-- Final Dashboard Screen -->
 
       <section class="step" id ="final_dashboard">
-        <!-- <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div> -->
-
         <div class="title">Mission Results</div><br><br>
 
-
-
-          <div  class="row col-sm-12" style="width: 100%;">
-
+        <div  class="row col-sm-12" style="width: 100%;">
+            
             <!-- Left Hand Panel -->
-            <div style="width: 65%; float: left; padding-left: 75px;">
+            <div style="width: 65%; float: left; padding-left: 50px;">
 
                 <div class="title_dashboard" id="response">You got <span id="answer" style="color: #39ff14;"></span></div>
                 <p style="text-align: left; color: #39ff14; font-weight: bold;" id="response2"> Your biases succesfully convinced Earth's leaders to <span id="answer2" style="color: #39ff14;"></span>!</p>
 
                 <div class="title_dashboard">Your Resulting Visualization:</div>
-                <br><br><br> PLACEHOLDER SVG
-                <div id="viz"></div>
+                <div id="viz" style="float: left;"></div>
 
             </div>
 
-            <!-- Right Hand Panel -->
-            <div style="margin-left: 65%; padding-right: 15px;">
+          <!-- Right Hand Panel -->
+              <div style="margin-left: 65%; padding-right: 15px;">
 
-              <div class="title_dashboard">Toggle your decisions to view how wach of them biased the final visualization</div><br>
+                <div class="title_dashboard">Toggle your decisions to view how wach of them biased the final visualization</div><br>
 
-              <div class="action_dashboard">Action one: X</div><br>
+                <!-- CHOICE 1 -->
+                <div class="action_dashboard">A1: Parameter</div>          
+                <div class="form-check-variable">
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Parameter" value="CO2" checked>CO2</label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Parameter" value="Primary_Energy_Consumption">Primary_Energy_Consumption</label>
+                  <br>
 
-                  <div style="width: 50%; float: left; padding-left: 5px;"><button class="db_button" id="choice1a_d">Choice 1</button></div>
-                  <div style="margin-left: 50%; padding-right: 5px;"><button class="db_button" id="choice2a_d">Choice 2</button></div><br>
-
-              <div class="action_dashboard">Action two: Y</div><br>
-
-                  <div style="width: 50%; float: left; padding-left: 5px;"><button class="db_button" id="choice1b_d">Choice 1</button></div>
-                  <div style="margin-left: 50%; padding-right: 5px;"><button class="db_button" id="choice2b_d">Choice 2</button></div><br>
-
-              <div class="action_dashboard">Action three: Z</div><br>
-
-                  <div style="width: 50%; float: left; padding-left: 5px;"><button class="db_button" id="choice1c_d">Choice 1</button></div>
-                  <div style="margin-left: 50%; padding-right: 5px;"><button class="db_button" id="choice2c_d">Choice 2</button></div><br>
-
-              <div class="action_dashboard">Action four: AA</div><br>
-
-                  <div style="width: 50%; float: left; padding-left: 5px;"><button class="db_button" id="choice1d_d">Choice 1</button></div>
-                  <div style="margin-left: 50%; padding-right: 5px;"><button class="db_button" id="choice2d_d">Choice 2</button></div><br>
-
-              <div class="action_dashboard">Action five: BB</div><br>
-
-                  <div style="width: 50%; float: left; padding-left: 5px;"><button class="db_button" id="choice1e_d">Choice 1</button></div>
-                  <div style="margin-left: 50%; padding-right: 5px;"><button class="db_button" id="choice2e_d">Choice 2</button></div><br>
+                <!-- CHOICE 2 -->
+                <div class="action_dashboard">A2: Time</div>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Time" value="1965" checked>Long Duration Study (1965-2016)</label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Time" value="1990">The dot com boom (1990-2016) </label>
+                  <br>
 
 
-            </div>
+                <!-- CHOICE 3 -->
+                <div class="action_dashboard">A3: Countries</div>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="1" checked>Top Oil Producing Nations </label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="2">Countries with highest renewable energy</label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="3">OECD Nations</label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="4">Countries w/ Largest Population Size</label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="5">Most Technologically Advanced Countries</label>
+                  <br>
 
+                <!-- CHOICE 4 -->
+                  <div class="action_dashboard">A4: Unit</div>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Manip1" value="Absolute" checked>Absolute Values</label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Manip1" value="Growth">Relative Growth Rates</label>
+                  <br>
+              
+                <!-- CHOICE 5 -->
+                  <div class="action_dashboard">A5: Denominator</div>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Manip2" value="Population" checked>Divide by Population</label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Manip2" value="GDP">Divide by GDP</label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Manip2" value="Absolute">No Division</label>
+                </div>
+              </div>
           </div>
 
-          <br><br><br><br>
           <div  class="row col-sm-12">
           <a href="index.html" class="next" style="font-family: 'Press Start 2P', sans-serif; font-size: 15px; padding-right: 150px;" onclick="window.location.replace('index.html');">Start Over!</a>
           <a href="#sources" class="next" style="font-family: 'Press Start 2P', sans-serif; font-size: 15px;"> View Sources </a>
@@ -572,6 +574,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stupidtable/0.0.1/stupidtable.min.js"></script>
 
   <script src="lib/d3.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
   <script src="js/textanimations.js"></script>
   <script src="js/sidebar.js"></script>
   <script src="js/dashboard.js"></script>
