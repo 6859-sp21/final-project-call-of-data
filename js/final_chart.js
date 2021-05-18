@@ -1,54 +1,62 @@
+// Wrap the whole thing in a function so the graph can be drawn twice:
+draw2("#viz_results");
+
+
+function draw2(selector){
+
 // SOURCE: Adapted from Dianaow’s Block 0da76b59a7dffe24abcfa55d5b9e163e
 // https://bl.ocks.org/dianaow/0da76b59a7dffe24abcfa55d5b9e163e
 
 // SET GLOBAL VARIABLES FOR THE CHART
-var glines2
-var mouseG2
-var tooltip2
+var glines
+var mouseG
+var tooltip
 
-var parseDate2 = d3.timeParse("%Y-%m-%d")
+var parseDate = d3.timeParse("%Y-%m-%d")
 
-var margin2 = {top: 50, right: 100, bottom: 50, left: 200}
-var width2 = 900 - margin2.left - margin2.right
-var height2 = 450 - margin2.top - margin2.bottom
+var margin = {top: 50, right: 100, bottom: 50, left: 200}
+var width = 900 - margin.left - margin.right
+var height = 450 - margin.top - margin.bottom
 
-var lineOpacity2 = 1
-var lineStroke2 = "2px"
+var lineOpacity = 1
+var lineStroke = "2px"
 
-var axisPad2 = 6 // axis formatting
-var R2 = 6 //legend marker
+var axisPad = 6 // axis formatting
+var XAxisHeight = 40
+var R = 6 //legend marker
 
-// Declare tooltip2 first
-var tooltip2 = d3.select("#viz")
+// Declare Tooltip first
+var tooltip = d3.select(selector)
             .append("div")
             .attr('id', 'tooltip2')
             .style('position', 'absolute')
             .style("background-color", "#D3D3D3")
             .style('display', 'block')
+            
 
 // SVG should be a global variable if we want axes to update
 // Source for responsive axes: https://www.d3-graph-gallery.com/graph/scatter_buttonXlim.html
-var svg2 = d3.select("#viz")
+var svg = d3.select(selector)
     .append("svg")
-    .attr("width", width2 + margin2.left + margin2.right)
-    .attr("height", height2 + margin2.top + margin2.bottom)
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
     .append('g')
-      .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 // In general, any element we want to update should be globally set
 
-var yScale2 = d3.scaleLinear()
-var xScale2 = d3.scaleTime()
-var color2 = d3.scaleOrdinal()
+var yScale = d3.scaleLinear()
+var xScale = d3.scaleTime()
+var color = d3.scaleOrdinal()
 
-var yAxis2
-var xAxis2
+var yAxis
+var xAxis
 
-var svgLegend2 = svg2.append('g')
+var svgLegend = svg.append('g')
       .attr('class', 'gLegend')
-      .attr("transform", "translate(" + (width2 + 20) + "," + 0 + ")")
+      .attr("transform", "translate(" + (width + 20) + "," + 0 + ")")
 
-var legend2
+var legend
 
 
 // START OF D3 CSV CHART FUNCTION
@@ -56,7 +64,7 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
 
   var res = data.map((d,i) => {
     return {
-      date : parseDate2(d.Year),
+      date : parseDate(d.Year),
       Year : +d.Year_num,
       Location : d.Location,
       Parameter : d.Parameter,
@@ -72,15 +80,15 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
 
   // Set some intial variables: line generator, x and y-Scales
 
-  xScale2.domain(d3.extent(res, d=>d.date))
-    .range([0, width2])
+  xScale.domain(d3.extent(res, d=>d.date))
+    .range([0, width])
 
-  yScale2.domain([d3.min(res, d => d.Value), d3.max(res, d => d.Value)])
-    .range([height2, 0]);
+  yScale.domain([d3.min(res, d => d.Value), d3.max(res, d => d.Value)])
+    .range([height, 0]);
 
- var line2 = d3.line()
-    .x(d => xScale2(d.date))
-    .y(d => yScale2(d.Value))
+ var line = d3.line()
+    .x(d => xScale(d.date))
+    .y(d => yScale(d.Value))
 
 
 // FUNCTIONS TO RENDER INITIAL CHART HERE:
@@ -123,66 +131,66 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
 
     // APPEND COLOR AXIS //
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
-    color2.domain(category).range(d3.schemePaired)
+    color.domain(category).range(d3.schemePaired)
 
 
     // CREATE LEGEND //
-    legend2 = svgLegend2.selectAll('.legend2')
+      legend = svgLegend.selectAll('.legend')
           .data(category)
           .enter().append('g')
-            .attr("class", "legend2")
+            .attr("class", "legend")
             .attr("transform", function (d, i) {return "translate(0," + i * 20 + ")"})
 
-    legend2.append("circle")
+      legend.append("circle")
           .attr("class", "legend-node")
           .attr("cx", 0)
           .attr("cy", 0)
-          .attr("r", R2)
-          .style("fill", d=>color2(d))
+          .attr("r", R)
+          .style("fill", d=>color(d))
 
-    legend2.append("text")
+      legend.append("text")
           .attr("class", "legend-text")
-          .attr("x", R2*2)
-          .attr("y", R2/2)
+          .attr("x", R*2)
+          .attr("y", R/2)
           .style("fill", "#A9A9A9")
           .style("font-size", 12)
           .text(d=>d)
 
 
     // APPEND MULTIPLE LINES //
-    var lines2 = svg2.append('g')
+    var lines = svg.append('g')
       .attr('class', 'lines')
 
-    glines2 = lines2.selectAll('.line-group')
+    glines = lines.selectAll('.line-group')
       .data(res_nested).enter()
       .append('g')
       .attr('class', 'line-group')
 
-    glines2
+    glines
       .append('path')
         .attr('class', 'line')
-        .attr('d', d => line2(d.values))
+        .attr('d', d => line(d.values))
         .style('stroke', d => {
-      return color2(d.key)
+      return color(d.key)
     })
         .style('fill', 'none')
-        .style('opacity', lineOpacity2)
-        .style('stroke-width', lineStroke2)
+        .style('opacity', lineOpacity)
+        .style('stroke-width', lineStroke)
 
 
     // APPEND Y AXIS //
-    yScale2.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
+    yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
 
-    yAxis2 = svg2.append("g")
+    yAxis = svg.append("g")
         .attr("class", "y axis")
-        .call(d3.axisLeft(yScale2).ticks(10, "s").tickSize(-width2))
+        .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
         .call(g => {
               g.selectAll("text")
               .style("text-anchor", "middle")
-              .attr("x", -axisPad2*2)
+              .attr("x", -axisPad*2)
               .attr('fill', '#A9A9A9')
 
-              g.selectAll("line2")
+              g.selectAll("line")
                 .attr('stroke', '#A9A9A9')
                 .attr('stroke-width', 0.7) // make horizontal tick thinner and lighter so that line paths can stand out
                 .attr('opacity', 0.3)
@@ -193,21 +201,21 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
 
 
     // APPEND X AXIS //
-    xScale2.domain(d3.extent(resNew, d=>d.date))
+    xScale.domain(d3.extent(resNew, d=>d.date))
 
-    xAxis2 = svg2.append("g")
+    xAxis = svg.append("g")
       .attr("class", "x axis")
-      .attr("transform", `translate(0, ${height2})`)
-      .call(d3.axisBottom(xScale2))
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(xScale))
       .call(g => {
-          var years = xScale2.ticks(d3.timeYear.every(1))
-          var xshift = (width2/(years.length))/2
+          var years = xScale.ticks(d3.timeYear.every(1))
+          var xshift = (width/(years.length))/2
           g.selectAll("text").attr("transform", `translate(${xshift}, 0)`) //shift tick labels to middle of interval
             .style("text-anchor", "middle")
-            .attr("y", axisPad2)
+            .attr("y", axisPad)
             .attr('fill', '#A9A9A9')
 
-          g.selectAll("line2")
+          g.selectAll("line")
             .attr('stroke', '#A9A9A9')
 
           g.select(".domain")
@@ -218,18 +226,18 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
 
 // APPEND AXIS TITLES //
     // X AXIS
-    svg2.append("text")
+    svg.append("text")
       .attr("class", "x_label")
       .attr("text-anchor", "end")
-      .attr("x", width2)
-      .attr("y", height2 + 35)
+      .attr("x", width)
+      .attr("y", height + 35)
       .attr("fill", "white")
       .attr("weight", "white")
       .text("Years");
 
 
       // Y AXIS
-      svg2.append("text")
+    svg.append("text")
       .attr("class", "y_label")
       .attr("text-anchor", "end")
       .attr("y", -45)
@@ -240,19 +248,19 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
 
 
 
-// CREATE HOVER tooltip2 WITH VERTICAL LINE //
-    mouseG2 = svg2.append("g")
+// CREATE HOVER TOOLTIP WITH VERTICAL LINE //
+    mouseG = svg.append("g")
       .attr("class", "mouse-over-effects");
 
-    mouseG2.append("path") // create vertical line to follow mouse
+    mouseG.append("path") // create vertical line to follow mouse
       .attr("class", "mouse-line")
       .style("stroke", "#A9A9A9")
-      .style("stroke-width", lineStroke2)
+      .style("stroke-width", lineStroke)
       // .style("opacity", "0");
 
-    var lines = document.getElementsByClassName('line2');
+    var lines = document.getElementsByClassName('line');
 
-    var mousePerLine = mouseG2.selectAll('.mouse-per-line')
+    var mousePerLine = mouseG.selectAll('.mouse-per-line')
       .data(res_nested)
       .enter()
       .append("g")
@@ -261,15 +269,15 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
     mousePerLine.append("circle")
       .attr("r", 4)
       .style("stroke", function (d) {
-        return color2(d.key)
+        return color(d.key)
       })
       .style("fill", "none")
-      .style("stroke-width", lineStroke2)
+      .style("stroke-width", lineStroke)
       .style("opacity", "0");
 
-    mouseG2.append('svg2:rect') // append a rect to catch mouse movements on canvas
-      .attr('width', width2)
-      .attr('height', height2)
+    mouseG.append('svg:rect') // append a rect to catch mouse movements on canvas
+      .attr('width', width)
+      .attr('height', height)
       .attr('fill', 'none')
       .attr('pointer-events', 'all')
       .on('mouseout', function () { // on mouse out hide line, circles and text
@@ -279,7 +287,7 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
           .style("opacity", "0");
         d3.selectAll(".mouse-per-line text")
           .style("opacity", "0");
-        // d3.selectAll("#tooltip2")
+        // d3.selectAll("#tooltip")
         //   .style('display', 'none')
 
       })
@@ -288,32 +296,31 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
           .style("opacity", "1");
         d3.selectAll(".mouse-per-line circle")
           .style("opacity", "1");
-        // d3.selectAll("#tooltip2")
+        // d3.selectAll("#tooltip")
         //   .style('display', 'block')
       })
-      .on('mousemove', function () { // update tooltip2 content, line, circles and text when mouse moves
+      .on('mousemove', function () { // update tooltip content, line, circles and text when mouse moves
         var mouse = d3.mouse(this)
 
         d3.selectAll(".mouse-per-line")
           .attr("transform", function (d, i) {
-            var xDate = xScale2.invert(mouse[0]) // use 'invert' to get date corresponding to distance from mouse position relative to svg
+            var xDate = xScale.invert(mouse[0]) // use 'invert' to get date corresponding to distance from mouse position relative to svg
             var bisect = d3.bisector(function (d) { return d.date; }).left // retrieve row index of date on parsed csv
             var idx = bisect(d.values, xDate);
 
             d3.select(".mouse-line")
               .attr("d", function () {
-                var data = "M" + xScale2(d.values[idx].date) + "," + (height2);
-                data += " " + xScale2(d.values[idx].date) + "," + 0;
+                var data = "M" + xScale(d.values[idx].date) + "," + (height);
+                data += " " + xScale(d.values[idx].date) + "," + 0;
                 return data;
               });
-            return "translate(" + xScale2(d.values[idx].date) + "," + yScale2(d.values[idx].Value) + ")";
+            return "translate(" + xScale(d.values[idx].date) + "," + yScale(d.values[idx].Value) + ")";
 
           });
 
-        updateTooltipContent(mouse, res_nested, color2)
+        updateTooltipContent(mouse, res_nested, color)
 
       })
-
 
     }
 
@@ -360,7 +367,7 @@ function updateChartParameter(Parameter) {
     var res1 = res.filter(d=>d.Time == parseInt(year_val))
 
     // Group filter
-    var group_val = d3.select('input[name="Group"]:checked').property("value");
+    var group_val = d3.select('input[name="Group"]:checked').property("value"); 
     var res2 = res1.filter(function (d) { return d.Group.match(group_val); })
 
     // Manip 1 filter
@@ -377,7 +384,7 @@ function updateChartParameter(Parameter) {
 
 // Define and update color scale
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
-    color2.domain(category).range(d3.schemePaired)
+    color.domain(category).range(d3.schemePaired)
 
 // Y-Axis Label Variables
     var parameter_label
@@ -396,18 +403,18 @@ function updateChartParameter(Parameter) {
     var y_axis_label = parameter_label + manip2_label + manip1_label
 
   // Define and Update Y axis
-  yScale2.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
+    yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
 
     svg.select('.y.axis')
         .transition().duration(750)
-        .call(d3.axisLeft(yScale2).ticks(10, "s").tickSize(-width2))
+        .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
         .call(g => {
                   g.selectAll("text")
                   .style("text-anchor", "middle")
-                  .attr("x", -axisPad2*2)
+                  .attr("x", -axisPad*2)
                   .attr('fill', '#A9A9A9')
 
-                  g.selectAll("line2")
+                  g.selectAll("line")
                     .attr('stroke', '#A9A9A9')
                     .attr('stroke-width', 0.7)
                     .attr('opacity', 0.3)
@@ -417,20 +424,20 @@ function updateChartParameter(Parameter) {
                 })
 
     // Define and Update X axis
-    xScale2.domain(d3.extent(resNew, d=>d.date))
+      xScale.domain(d3.extent(resNew, d=>d.date))
 
-    svg2.select('.x.axis')
+      svg.select('.x.axis')
           .transition().duration(750)
-          .call(d3.axisBottom(xScale2))
+          .call(d3.axisBottom(xScale))
           .call(g => {
-              var years = xScale2.ticks(d3.timeYear.every(1))
-              var xshift = (width2/(years.length))/2
+              var years = xScale.ticks(d3.timeYear.every(1))
+              var xshift = (width/(years.length))/2
               g.selectAll("text").attr("transform", `translate(${xshift}, 0)`) //shift tick labels to middle of interval
                 .style("text-anchor", "middle")
-                .attr("y", axisPad2)
+                .attr("y", axisPad)
                 .attr('fill', '#A9A9A9')
 
-              g.selectAll("line2")
+              g.selectAll("line")
                 .attr('stroke', '#A9A9A9')
 
               g.select(".domain")
@@ -439,9 +446,9 @@ function updateChartParameter(Parameter) {
           })
 
     // Update Y-Axis Title
-    svg2.selectAll('.y_label').remove()
+      svg.selectAll('.y_label').remove()
 
-    svg2.append("text")
+        svg.append("text")
           .attr("class", "y_label")
           .attr("text-anchor", "end")
           .attr("y", -45)
@@ -457,19 +464,19 @@ function updateChartParameter(Parameter) {
         .entries(resNew)
 
     // Update the other elements
-      glines2.select('.line2') //select line path within line-group (which represents a category), then bind new data
+      glines.select('.line') //select line path within line-group (which represents a category), then bind new data
         .data(res_nested)
         .transition().duration(750)
         .attr('d', function(d) {
-          return line2(d.values)
+          return line(d.values)
         })
 
-      mouseG2.selectAll('.mouse-per-line')
+      mouseG.selectAll('.mouse-per-line')
         .data(res_nested)
 
-      mouseG2.on('mousemove', function () {
+      mouseG.on('mousemove', function () {
           var mouse = d3.mouse(this)
-          updateTooltipContent(mouse, res_nested, color2)
+          updateTooltipContent(mouse, res_nested, color)
         })
   }
 
@@ -485,7 +492,7 @@ function updateChartYear(Year) {
     var res1 = res.filter(d=>d.Parameter == parameter_val)
 
     // Group filter
-    var group_val = d3.select('input[name="Group"]:checked').property("value");
+    var group_val = d3.select('input[name="Group"]:checked').property("value"); 
     var res2 = res1.filter(function (d) { return d.Group.match(group_val); })
 
     // Manip 1 filter
@@ -502,7 +509,7 @@ function updateChartYear(Year) {
 
 // Define and update color scale
   var category = d3.map(resNew, function(d){return d.Location;}).keys()
-  color2.domain(category).range(d3.schemePaired)
+  color.domain(category).range(d3.schemePaired)
 
 // Y-Axis Label Variables
   var parameter_label
@@ -521,18 +528,18 @@ function updateChartYear(Year) {
     var y_axis_label = parameter_label + manip2_label + manip1_label
 
 // Define and Update Y axis
-yScale2.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
+  yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
 
-svg2.select('.y.axis')
+  svg.select('.y.axis')
       .transition().duration(750)
-      .call(d3.axisLeft(yScale2).ticks(10, "s").tickSize(-width))
+      .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
       .call(g => {
                 g.selectAll("text")
                 .style("text-anchor", "middle")
-                .attr("x", -axisPad2*2)
+                .attr("x", -axisPad*2)
                 .attr('fill', '#A9A9A9')
 
-                g.selectAll("line2")
+                g.selectAll("line")
                   .attr('stroke', '#A9A9A9')
                   .attr('stroke-width', 0.7)
                   .attr('opacity', 0.3)
@@ -543,20 +550,20 @@ svg2.select('.y.axis')
 
 
   // Define and Update X axis
-  xScale2.domain(d3.extent(resNew, d=>d.date))
+    xScale.domain(d3.extent(resNew, d=>d.date))
 
-  svg2.select('.x.axis')
+    svg.select('.x.axis')
         .transition().duration(750)
-        .call(d3.axisBottom(xScale2))
+        .call(d3.axisBottom(xScale))
         .call(g => {
-            var years = xScale2.ticks(d3.timeYear.every(1))
-            var xshift = (width2/(years.length))/2
+            var years = xScale.ticks(d3.timeYear.every(1))
+            var xshift = (width/(years.length))/2
             g.selectAll("text").attr("transform", `translate(${xshift}, 0)`) //shift tick labels to middle of interval
               .style("text-anchor", "middle")
-              .attr("y", axisPad2)
+              .attr("y", axisPad)
               .attr('fill', '#A9A9A9')
 
-            g.selectAll("line2")
+            g.selectAll("line")
               .attr('stroke', '#A9A9A9')
 
             g.select(".domain")
@@ -565,9 +572,9 @@ svg2.select('.y.axis')
         })
 
   // Update Y-Axis Title
-  svg2.selectAll('.y_label').remove()
+      svg.selectAll('.y_label').remove()
 
-  svg2.append("text")
+        svg.append("text")
           .attr("class", "y_label")
           .attr("text-anchor", "end")
           .attr("y", -45)
@@ -582,19 +589,19 @@ svg2.select('.y.axis')
       .entries(resNew)
 
   // Update the other elements
-    glines2.select('.line2')
+    glines.select('.line')
       .data(res_nested)
       .transition().duration(750)
       .attr('d', function(d) {
-        return line2(d.values)
+        return line(d.values)
       })
 
-    mouseG2.selectAll('.mouse-per-line')
+    mouseG.selectAll('.mouse-per-line')
       .data(res_nested)
 
-    mouseG2.on('mousemove', function () {
+    mouseG.on('mousemove', function () {
         var mouse = d3.mouse(this)
-        updateTooltipContent(mouse, res_nested, color2)
+        updateTooltipContent(mouse, res_nested, color)
       })
   }
 
@@ -644,45 +651,45 @@ svg2.select('.y.axis')
 
 // Define and update color scale
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
-    color2.domain(category).range(d3.schemePaired)
+    color.domain(category).range(d3.schemePaired)
 
 // Define and update legend
-    svgLegend2.selectAll('.legend2').remove();
+    svgLegend.selectAll('.legend').remove();
 
-    var legend2 = svgLegend2.selectAll('.legend2')
+    var legend = svgLegend.selectAll('.legend')
           .data(category)
           .enter().append('g')
-            .attr("class", "legend2")
+            .attr("class", "legend")
             .attr("transform", function (d, i) {return "translate(0," + i * 20 + ")"})
 
-    legend2.append("circle")
+      legend.append("circle")
           .attr("class", "legend-node")
           .attr("cx", 0)
           .attr("cy", 0)
-          .attr("r", R2)
-          .style("fill", d=>color2(d))
+          .attr("r", R)
+          .style("fill", d=>color(d))
 
-    legend2.append("text")
+      legend.append("text")
           .attr("class", "legend-text")
-          .attr("x", R2*2)
-          .attr("y", R2/2)
+          .attr("x", R*2)
+          .attr("y", R/2)
           .style("fill", "#A9A9A9")
           .style("font-size", 12)
           .text(d=>d)
 
   // Define and Update Y axis
-  yScale2.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
+    yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
 
-  svg2.select('.y.axis')
+    svg.select('.y.axis')
                 .transition().duration(750)
-        .call(d3.axisLeft(yScale2).ticks(10, "s").tickSize(-width2))
+        .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
         .call(g => {
               g.selectAll("text")
               .style("text-anchor", "middle")
-              .attr("x", -axisPad2*2)
+              .attr("x", -axisPad*2)
               .attr('fill', '#A9A9A9')
 
-              g.selectAll("line2")
+              g.selectAll("line")
                 .attr('stroke', '#A9A9A9')
                 .attr('stroke-width', 0.7)
                 .attr('opacity', 0.3)
@@ -692,9 +699,9 @@ svg2.select('.y.axis')
             })
 
   // Update Y-Axis Title
-  svg2.selectAll('.y_label').remove()
+      svg.selectAll('.y_label').remove()
 
-  svg2.append("text")
+      svg.append("text")
         .attr("class", "y_label")
         .attr("text-anchor", "end")
         .attr("y", -45)
@@ -709,46 +716,46 @@ svg2.select('.y.axis')
           .entries(resNew)
 
     // Update the lines: Need to start from scratch here.
-    svg2.selectAll('.lines2').remove()
+        svg.selectAll('.lines').remove()
 
-        var lines2 = svg2.append('g')
-            .attr('class', 'lines2')
+        var lines = svg.append('g')
+            .attr('class', 'lines')
 
-        glines2 = lines2.selectAll('.line-group')
+        glines = lines.selectAll('.line-group')
             .data(res_nested).enter()
             .append('g')
             .attr('class', 'line-group')
 
-          glines2
+          glines
             .append('path')
-              .attr('class', 'line2')
-              .attr('d', d => line2(d.values))
+              .attr('class', 'line')
+              .attr('d', d => line(d.values))
               .style('stroke', d => {
-            return color2(d.key)
+            return color(d.key)
           })
               .style('fill', 'none')
-              .style('opacity', lineOpacity2)
-              .style('stroke-width', lineStroke2)
+              .style('opacity', lineOpacity)
+              .style('stroke-width', lineStroke)
 
 
     // Update the mouselines: will also need to start from scratch here.
-    // mouseG2.selectAll('.mouse-per-line').data(res_nested)
-    svg2.selectAll('.mouse-per-line').remove()
+    // mouseG.selectAll('.mouse-per-line').data(res_nested)
+    svg.selectAll('.mouse-per-line').remove()
 
-    mouseG2 = svg2.append("g")
+    mouseG = svg.append("g")
       .attr("class", "mouse-over-effects");
 
-    mouseG2.append("path") // create vertical line to follow mouse
+    mouseG.append("path") // create vertical line to follow mouse
       .attr("class", "mouse-line")
       .style("stroke", "#A9A9A9")
-      .style("stroke-width", lineStroke2)
+      .style("stroke-width", lineStroke)
       // .style("opacity", "0");
       .style("opacity", "1");
 
 
-    var lines2 = document.getElementsByClassName('line2');
+    var lines = document.getElementsByClassName('line');
 
-    var mousePerLine = mouseG2.selectAll('.mouse-per-line')
+    var mousePerLine = mouseG.selectAll('.mouse-per-line')
       .data(res_nested)
       .enter()
       .append("g")
@@ -757,14 +764,14 @@ svg2.select('.y.axis')
     mousePerLine.append("circle")
       .attr("r", 4)
       .style("stroke", function (d) {
-        return color2(d.key)
+        return color(d.key)
       })
       .style("fill", "none")
-      .style("stroke-width", lineStroke2)
+      .style("stroke-width", lineStroke)
       .style("opacity", "0");
 
-    mouseG2.append('svg2:rect') // append a rect to catch mouse movements on canvas
-      .attr('width', width2)
+    mouseG.append('svg:rect') // append a rect to catch mouse movements on canvas
+      .attr('width', width)
       .attr('height', height)
       .attr('fill', 'none')
       .attr('pointer-events', 'all')
@@ -781,29 +788,29 @@ svg2.select('.y.axis')
           .style("opacity", "1");
         d3.selectAll(".mouse-per-line circle")
           .style("opacity", "1");
-        d3.selectAll("#tooltip2")
+        d3.selectAll("#tooltip")
           .style('display', 'block')
       })
-      .on('mousemove', function () { // update tooltip2 content, line, circles and text when mouse moves
+      .on('mousemove', function () { // update tooltip content, line, circles and text when mouse moves
         var mouse = d3.mouse(this)
 
         d3.selectAll(".mouse-per-line")
           .attr("transform", function (d, i) {
-            var xDate = xScale2.invert(mouse[0]) // use 'invert' to get date corresponding to distance from mouse position relative to svg
+            var xDate = xScale.invert(mouse[0]) // use 'invert' to get date corresponding to distance from mouse position relative to svg
             var bisect = d3.bisector(function (d) { return d.date; }).left // retrieve row index of date on parsed csv
             var idx = bisect(d.values, xDate);
 
             d3.select(".mouse-line")
               .attr("d", function () {
-                var data = "M" + xScale2(d.values[idx].date) + "," + (height2);
-                data += " " + xScale2(d.values[idx].date) + "," + 0;
+                var data = "M" + xScale(d.values[idx].date) + "," + (height);
+                data += " " + xScale(d.values[idx].date) + "," + 0;
                 return data;
               });
-            return "translate(" + xScale2(d.values[idx].date) + "," + yScale2(d.values[idx].Value) + ")";
+            return "translate(" + xScale(d.values[idx].date) + "," + yScale(d.values[idx].Value) + ")";
 
           });
 
-        updatetooltipContent(mouse, res_nested, color2)
+        updateTooltipContent(mouse, res_nested, color)
 
       })
 
@@ -812,9 +819,9 @@ svg2.select('.y.axis')
 
 
     // Update the tooltip.
-    mouseG2.on('mousemove', function () {
+    mouseG.on('mousemove', function () {
         var mouse = d3.mouse(this)
-        updateTooltipContent(mouse, res_nested, color2)
+        updateTooltipContent(mouse, res_nested, color)
       })
   }
 
@@ -830,7 +837,7 @@ function updateChartManip1(Manip1) {
     var res1 = res.filter(d=>d.Time == parseInt(year_val))
 
     // Group filter
-    var group_val = d3.select('input[name="Group"]:checked').property("value");
+    var group_val = d3.select('input[name="Group"]:checked').property("value"); 
     var res2 = res1.filter(function (d) { return d.Group.match(group_val); })
 
     // Parameter filter
@@ -863,22 +870,22 @@ function updateChartManip1(Manip1) {
 
   // Define and update color scale
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
-    color2.domain(category).range(d3.schemePaired)
+    color.domain(category).range(d3.schemePaired)
 
 
   // Define and Update Y axis
-  yScale2.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
+    yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
 
-  svg2.select('.y.axis')
+    svg.select('.y.axis')
         .transition().duration(750)
-        .call(d3.axisLeft(yScale2).ticks(10, "s").tickSize(-width2))
+        .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
         .call(g => {
                   g.selectAll("text")
                   .style("text-anchor", "middle")
-                  .attr("x", -axisPad2*2)
+                  .attr("x", -axisPad*2)
                   .attr('fill', '#A9A9A9')
 
-                  g.selectAll("line2")
+                  g.selectAll("line")
                     .attr('stroke', '#A9A9A9')
                     .attr('stroke-width', 0.7)
                     .attr('opacity', 0.3)
@@ -889,20 +896,20 @@ function updateChartManip1(Manip1) {
 
 
   // Define and Update X axis
-  xScale2.domain(d3.extent(resNew, d=>d.date))
+    xScale.domain(d3.extent(resNew, d=>d.date))
 
-  svg2.select('.x.axis')
+    svg.select('.x.axis')
         .transition().duration(750)
-        .call(d3.axisBottom(xScale2))
+        .call(d3.axisBottom(xScale))
         .call(g => {
-            var years = xScale2.ticks(d3.timeYear.every(1))
-            var xshift = (width2/(years.length))/2
+            var years = xScale.ticks(d3.timeYear.every(1))
+            var xshift = (width/(years.length))/2
             g.selectAll("text").attr("transform", `translate(${xshift}, 0)`) //shift tick labels to middle of interval
               .style("text-anchor", "middle")
-              .attr("y", axisPad2)
+              .attr("y", axisPad)
               .attr('fill', '#A9A9A9')
 
-            g.selectAll("line2")
+            g.selectAll("line")
               .attr('stroke', '#A9A9A9')
 
             g.select(".domain")
@@ -911,9 +918,9 @@ function updateChartManip1(Manip1) {
         })
 
   // Update Y-Axis Title
-  svg2.selectAll('.y_label').remove()
+    svg.selectAll('.y_label').remove()
 
-  svg2.append("text")
+    svg.append("text")
       .attr("class", "y_label")
       .attr("text-anchor", "end")
       .attr("y", -45)
@@ -928,19 +935,19 @@ function updateChartManip1(Manip1) {
         .entries(resNew)
 
     // Update the other elements
-      glines2.select('.line2') //select line path within line-group (which represents a category), then bind new data
+      glines.select('.line') //select line path within line-group (which represents a category), then bind new data
         .data(res_nested)
         .transition().duration(750)
         .attr('d', function(d) {
-          return line2(d.values)
+          return line(d.values)
         })
 
-      mouseG2.selectAll('.mouse-per-line')
+      mouseG.selectAll('.mouse-per-line')
         .data(res_nested)
 
-      mouseG2.on('mousemove', function () {
+      mouseG.on('mousemove', function () {
           var mouse = d3.mouse(this)
-          updateTooltipContent(mouse, res_nested, color2)
+          updateTooltipContent(mouse, res_nested, color)
         })
   }
 
@@ -955,7 +962,7 @@ function updateChartManip2(Manip2) {
     var res1 = res.filter(d=>d.Time == parseInt(year_val))
 
     // Group filter
-    var group_val = d3.select('input[name="Group"]:checked').property("value");
+    var group_val = d3.select('input[name="Group"]:checked').property("value"); 
     var res2 = res1.filter(function (d) { return d.Group.match(group_val); })
 
     // Parameter filter
@@ -987,19 +994,19 @@ function updateChartManip2(Manip2) {
 
   // Define and update color scale
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
-    color2.domain(category).range(d3.schemePaired)
+    color.domain(category).range(d3.schemePaired)
 
 
   // Define and Update Y axis
-  yScale2.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
+    yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
 
-  svg2.select('.y.axis')
+    svg.select('.y.axis')
         .transition().duration(750)
-        .call(d3.axisLeft(yScale2).ticks(10, "s").tickSize(-width2))
+        .call(d3.axisLeft(yScale).ticks(10, "s").tickSize(-width))
         .call(g => {
                   g.selectAll("text")
                   .style("text-anchor", "middle")
-                  .attr("x", -axisPad2*2)
+                  .attr("x", -axisPad*2)
                   .attr('fill', '#A9A9A9')
 
                   g.selectAll("line")
@@ -1014,20 +1021,20 @@ function updateChartManip2(Manip2) {
 
 
   // Define and Update X axis
-  xScale2.domain(d3.extent(resNew, d=>d.date))
+    xScale.domain(d3.extent(resNew, d=>d.date))
 
-  svg2.select('.x.axis')
+    svg.select('.x.axis')
         .transition().duration(750)
-        .call(d3.axisBottom(xScale2))
+        .call(d3.axisBottom(xScale))
         .call(g => {
-            var years = xScale2.ticks(d3.timeYear.every(1))
-            var xshift = (width2/(years.length))/2
+            var years = xScale.ticks(d3.timeYear.every(1))
+            var xshift = (width/(years.length))/2
             g.selectAll("text").attr("transform", `translate(${xshift}, 0)`) //shift tick labels to middle of interval
               .style("text-anchor", "middle")
-              .attr("y", axisPad2)
+              .attr("y", axisPad)
               .attr('fill', '#A9A9A9')
 
-            g.selectAll("line2")
+            g.selectAll("line")
               .attr('stroke', '#A9A9A9')
 
             g.select(".domain")
@@ -1036,9 +1043,9 @@ function updateChartManip2(Manip2) {
         })
 
   // Update Y-Axis Title
-  svg2.selectAll('.y_label').remove()
+      svg.selectAll('.y_label').remove()
 
-  svg2.append("text")
+      svg.append("text")
         .attr("class", "y_label")
         .attr("text-anchor", "end")
         .attr("y", -45)
@@ -1053,19 +1060,19 @@ function updateChartManip2(Manip2) {
         .entries(resNew)
 
     // Update the other elements
-      glines2.select('.line2') //select line path within line-group (which represents a category), then bind new data
+      glines.select('.line') //select line path within line-group (which represents a category), then bind new data
         .data(res_nested)
         .transition().duration(750)
         .attr('d', function(d) {
-          return line2(d.values)
+          return line(d.values)
         })
 
-      mouseG2.selectAll('.mouse-per-line')
+      mouseG.selectAll('.mouse-per-line')
         .data(res_nested)
 
-      mouseG2.on('mousemove', function () {
+      mouseG.on('mousemove', function () {
           var mouse = d3.mouse(this)
-          updateTooltipContent(mouse, res_nested, color2)
+          updateTooltipContent(mouse, res_nested, color)
         })
   }
 
@@ -1077,13 +1084,13 @@ function updateChartManip2(Manip2) {
 
 
 // FUNCTION FOR UPDATING TOOL TIP CONTENT:
-function updateTooltipContent(mouse, res_nested, color2) {
+function updateTooltipContent(mouse, res_nested, color) {
 
   var f = d3.format(".1f");
 
   sortingObj = []
   res_nested.map(d => {
-    var xDate = xScale2.invert(mouse[0])
+    var xDate = xScale.invert(mouse[0])
     var bisect = d3.bisector(function (d) { return d.date; }).left
     var idx = bisect(d.values, xDate)
     sortingObj.push({key: d.values[idx].Location, Value: d.values[idx].Value, Group: d.values[idx].Group, year: d.values[idx].date.getFullYear(), month: d.values[idx].date.getMonth()})
@@ -1100,18 +1107,18 @@ function updateTooltipContent(mouse, res_nested, color2) {
     return sortingArr.indexOf(a.key) - sortingArr.indexOf(b.key) // rank country based on metric
   })
 
-  tooltip2.html("Year: "+ sortingObj[0].year)
+  tooltip.html("Year: "+ sortingObj[0].year)
     .style('display', 'block')
-    .attr('id', 'tooltip2_title')
+    .attr('id', 'tooltip_title2')
     .selectAll()
     .data(res_nested1).enter()
     .append('div')
     .style('color', d => {
-      return color2(d.key)
+      return color(d.key)
     })
-    .attr('id', 'tooltip2_text')
+    .attr('id', 'tooltip_text2')
     .html(d => {
-      var xDate = xScale2.invert(mouse[0])
+      var xDate = xScale.invert(mouse[0])
       var bisect = d3.bisector(function (d) { return d.date; }).left
       var idx = bisect(d.values, xDate)
       return d.key + ": " + f(d.values[idx].Value).toString() + " TWh"
@@ -1121,3 +1128,4 @@ function updateTooltipContent(mouse, res_nested, color2) {
 })
 
 // END OF D3 CSV CHART FUNCTION
+}
