@@ -1122,24 +1122,3 @@ function updateTooltipContent(mouse, res_nested, color) {
 
 // END OF D3 CSV CHART FUNCTION
 
-
-
-
-// RENDER THE CHART ON SUBMISSION OF FORM ONE: 
-document.getElementById("form1").onsubmit=function() {
-
-  param = document.querySelector('#form1 input[name = "Parameter"]:checked').value;
-  time = document.querySelector('#form1 input[name = "Time"]:checked').value;
-  group = document.querySelector('#form1 input[name = "Group"]:checked').value;
-  manip1 = document.querySelector('#form1 input[name = "Manip1"]:checked').value;
-  manip2 = document.querySelector('#form1 input[name="Manip2"]:checked').value;
-
-
-  renderChart(param, time, group, manip1, manip2);
-  updateChartParameter(param);
-  updateChartYear(time);
-  updateChartGroup(group);
-  updateChartManip1(manip1);
-  updateChartManip2(manip2);
-
-}
