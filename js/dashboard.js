@@ -1,3 +1,6 @@
+// Wrap the whole thing in a function so the graph can be drawn twice:
+
+
 // SOURCE: Adapted from Dianaow’s Block 0da76b59a7dffe24abcfa55d5b9e163e
 // https://bl.ocks.org/dianaow/0da76b59a7dffe24abcfa55d5b9e163e 
 
@@ -20,16 +23,17 @@ var XAxisHeight = 40
 var R = 6 //legend marker
 
 // Declare Tooltip first
-var tooltip = d3.select("#viz")
+var tooltip = d3.select("#viz_final")
             .append("div")
             .attr('id', 'tooltip')
             .style('position', 'absolute')
             .style("background-color", "#D3D3D3")
             .style('display', 'block')
+            
 
 // SVG should be a global variable if we want axes to update
 // Source for responsive axes: https://www.d3-graph-gallery.com/graph/scatter_buttonXlim.html
-var svg = d3.select("#viz")
+var svg = d3.select("#viz_final")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -324,27 +328,27 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
 // CALL FUNCTIONS TO UPDATE ON CHANGE HERE
 
     // Update chart when radio button is selected - Parameter
-    d3.selectAll(("input[name='Parameter']")).on('change', function(){
+    d3.selectAll(("input[name='Parameter_prime']")).on('change', function(){
       updateChartParameter(this.value)
     })
 
 
     // Update chart when radio button is selected - Timeframe
-    d3.selectAll(("input[name='Time']")).on('change', function(){
+    d3.selectAll(("input[name='Time_prime']")).on('change', function(){
       updateChartYear(this.value)
     })
 
     // Update chart when radio button is selected - Group
-    d3.selectAll(("input[name='Group']")).on('change', function(){
+    d3.selectAll(("input[name='Group_prime']")).on('change', function(){
       updateChartGroup(this.value)
     })
 
     // Update chart when radio button is selected - D
-    d3.selectAll(("input[name='Manip1']")).on('change', function(){
+    d3.selectAll(("input[name='Manip1_prime']")).on('change', function(){
       updateChartManip1(this.value)
     })
 
-    d3.selectAll(("input[name='Manip2']")).on('change', function(){
+    d3.selectAll(("input[name='Manip2_prime']")).on('change', function(){
       updateChartManip2(this.value)
     })
 
@@ -356,19 +360,19 @@ function updateChartParameter(Parameter) {
 
 // Filter for the value on the other radio button(s)
     // Time filter
-    var year_val = d3.select('input[name="Time"]:checked').property("value");
+    var year_val = d3.select('input[name="Time_prime"]:checked').property("value");
     var res1 = res.filter(d=>d.Time == parseInt(year_val))
 
     // Group filter
-    var group_val = d3.select('input[name="Group"]:checked').property("value"); 
+    var group_val = d3.select('input[name="Group_prime"]:checked').property("value"); 
     var res2 = res1.filter(function (d) { return d.Group.match(group_val); })
 
     // Manip 1 filter
-    var manip1_val = d3.select('input[name="Manip1"]:checked').property("value");
+    var manip1_val = d3.select('input[name="Manip1_prime"]:checked').property("value");
     var res3 = res2.filter(d=>d.Manip1 == manip1_val)
 
     // Manip 2 filter
-    var manip2_val = d3.select('input[name="Manip2"]:checked').property("value");
+    var manip2_val = d3.select('input[name="Manip2_prime"]:checked').property("value");
     var res4 = res3.filter(d=>d.Manip2 == manip2_val)
 
     // Current Parameter Filter
@@ -481,19 +485,19 @@ function updateChartYear(Year) {
 
 // Filter for the value on the other radio button(s)
     // Parameter filter
-    var parameter_val = d3.select('input[name="Parameter"]:checked').property("value");
+    var parameter_val = d3.select('input[name="Parameter_prime"]:checked').property("value");
     var res1 = res.filter(d=>d.Parameter == parameter_val)
 
     // Group filter
-    var group_val = d3.select('input[name="Group"]:checked').property("value"); 
+    var group_val = d3.select('input[name="Group_prime"]:checked').property("value"); 
     var res2 = res1.filter(function (d) { return d.Group.match(group_val); })
 
     // Manip 1 filter
-    var manip1_val = d3.select('input[name="Manip1"]:checked').property("value");
+    var manip1_val = d3.select('input[name="Manip1_prime"]:checked').property("value");
     var res3 = res2.filter(d=>d.Manip1 == manip1_val)
 
     // Manip 2 filter
-    var manip2_val = d3.select('input[name="Manip2"]:checked').property("value");
+    var manip2_val = d3.select('input[name="Manip2_prime"]:checked').property("value");
     var res4 = res3.filter(d=>d.Manip2 == manip2_val)
 
     // Current Time Filter
@@ -608,19 +612,19 @@ function updateChartYear(Year) {
 
 // Filter for the value on the other radio button(s)
     // Parameter filter
-    var parameter_val = d3.select('input[name="Parameter"]:checked').property("value");
+    var parameter_val = d3.select('input[name="Parameter_prime"]:checked').property("value");
     var res1 = res.filter(d=>d.Parameter == parameter_val)
 
     // Year filter
-    var year_val = d3.select('input[name="Time"]:checked').property("value");
+    var year_val = d3.select('input[name="Time_prime"]:checked').property("value");
     var res2 = res1.filter(d=>d.Time == parseInt(year_val))
 
     // Manip 1 filter
-    var manip1_val = d3.select('input[name="Manip1"]:checked').property("value");
+    var manip1_val = d3.select('input[name="Manip1_prime"]:checked').property("value");
     var res3 = res2.filter(d=>d.Manip1 == manip1_val)
 
     // Manip 2 filter
-    var manip2_val = d3.select('input[name="Manip2"]:checked').property("value");
+    var manip2_val = d3.select('input[name="Manip2_prime"]:checked').property("value");
     var res4 = res3.filter(d=>d.Manip2 == manip2_val)
 
     // Current Group Filter: checks whether the string contains the input:
@@ -826,19 +830,19 @@ function updateChartManip1(Manip1) {
 
 // Filter for the value on the other radio button(s)
     // Time filter
-    var year_val = d3.select('input[name="Time"]:checked').property("value");
+    var year_val = d3.select('input[name="Time_prime"]:checked').property("value");
     var res1 = res.filter(d=>d.Time == parseInt(year_val))
 
     // Group filter
-    var group_val = d3.select('input[name="Group"]:checked').property("value"); 
+    var group_val = d3.select('input[name="Group_prime"]:checked').property("value"); 
     var res2 = res1.filter(function (d) { return d.Group.match(group_val); })
 
     // Parameter filter
-    var parameter_val = d3.select('input[name="Parameter"]:checked').property("value");
+    var parameter_val = d3.select('input[name="Parameter_prime"]:checked').property("value");
     var res3 = res2.filter(d=>d.Parameter == parameter_val)
 
     // Manip 2 filter
-    var manip2_val = d3.select('input[name="Manip2"]:checked').property("value");
+    var manip2_val = d3.select('input[name="Manip2_prime"]:checked').property("value");
     var res4 = res3.filter(d=>d.Manip2 == manip2_val)
 
     // Current Parameter Filter
@@ -951,19 +955,19 @@ function updateChartManip2(Manip2) {
 
 // Filter for the value on the other radio button(s)
     // Time filter
-    var year_val = d3.select('input[name="Time"]:checked').property("value");
+    var year_val = d3.select('input[name="Time_prime"]:checked').property("value");
     var res1 = res.filter(d=>d.Time == parseInt(year_val))
 
     // Group filter
-    var group_val = d3.select('input[name="Group"]:checked').property("value"); 
+    var group_val = d3.select('input[name="Group_prime"]:checked').property("value"); 
     var res2 = res1.filter(function (d) { return d.Group.match(group_val); })
 
     // Parameter filter
-    var parameter_val = d3.select('input[name="Parameter"]:checked').property("value");
+    var parameter_val = d3.select('input[name="Parameter_prime"]:checked').property("value");
     var res3 = res2.filter(d=>d.Parameter == parameter_val)
 
     // Manip 2 filter
-    var manip1_val = d3.select('input[name="Manip1"]:checked').property("value");
+    var manip1_val = d3.select('input[name="Manip1_prime"]:checked').property("value");
     var res4 = res3.filter(d=>d.Manip1 == manip1_val)
 
     // Current Parameter Filter
