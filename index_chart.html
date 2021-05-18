@@ -1,6 +1,6 @@
 <!-- SOURCE: Adapted from Dianaow’s Block 0da76b59a7dffe24abcfa55d5b9e163e -->
 <!-- https://bl.ocks.org/dianaow/0da76b59a7dffe24abcfa55d5b9e163e -->
-
+<!DOCTYPE html>
 <html>
   <head>
     <title>Chart Only</title>
@@ -107,7 +107,7 @@
       
       var parseDate = d3.timeParse("%Y-%m-%d")
 
-      var margin = {top: 50, right: 200, bottom: 50, left: 20}
+      var margin = {top: 10, right: 10, bottom: 10, left: 200}
       var width = 900 - margin.left - margin.right
       var height = 400 - margin.top - margin.bottom
 
@@ -120,6 +120,16 @@
 
     // SVG should be a global variable if we want axes to update
     // Source for responsive axes: https://www.d3-graph-gallery.com/graph/scatter_buttonXlim.html
+
+    // tooltip = d3.select("#viz")
+    //         .append("div")
+    //         .attr('id', 'tooltip')
+    //         .style('position', 'absolute')
+    //         .style("background-color", "#D3D3D3")
+    //         .style('padding-left', 10)
+    //         .style('margin-left', 10)
+    //         .style('display', 'none')
+
       var svg = d3.select("#viz")
           .append("svg")
           .attr("width", width + margin.left + margin.right)
@@ -183,6 +193,7 @@
    
     // FUNCTION TO INITIATE CHART WITH RADIO BUTTON
         function renderChart(Parameter, Time, Group, Manip1, Manip2) {
+
 
           // Implement Filters: 
           var res1 = res.filter(d=>d.Parameter == Parameter)
@@ -371,6 +382,8 @@
             .style("stroke-width", lineStroke)
             .style("opacity", "0");
 
+            
+
           mouseG.append('svg:rect') // append a rect to catch mouse movements on canvas
             .attr('width', width) 
             .attr('height', height)
@@ -393,7 +406,8 @@
               d3.selectAll(".mouse-per-line circle")
                 .style("opacity", "1");
               d3.selectAll("#tooltip")
-                .style('display', 'block')
+                .style('display', 'inline-block')
+
             })
             .on('mousemove', function () { // update tooltip content, line, circles and text when mouse moves
               var mouse = d3.mouse(this)
@@ -1201,8 +1215,8 @@
 
         tooltip.html("Year: "+ sortingObj[0].year)
           .style('display', 'block')
-          .style('left', d3.event.pageX + 20)
-          .style('top', d3.event.pageY - 20)
+          .style('left', d3.event.pageX)
+          .style('top', d3.event.pageY)
           .style('font-size', 14) //Change tooltip title font here
           .style('font-weight', "bold") 
           .selectAll()
@@ -1219,6 +1233,10 @@
             return d.key + ": " + f(d.values[idx].Value).toString() + " TWh"
 
           })
+
+          console.log(d3.event.pageX)
+          console.log(d3.event.pageX)
+
       }
     })
 

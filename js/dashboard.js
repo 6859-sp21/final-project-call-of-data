@@ -8,9 +8,9 @@ var tooltip
 
 var parseDate = d3.timeParse("%Y-%m-%d")
 
-var margin = {top: 50, right: 200, bottom: 50, left: 20}
+var margin = {top: 50, right: 100, bottom: 50, left: 200}
 var width = 900 - margin.left - margin.right
-var height = 400 - margin.top - margin.bottom
+var height = 450 - margin.top - margin.bottom
 
 var lineOpacity = 1
 var lineStroke = "2px"
@@ -18,6 +18,14 @@ var lineStroke = "2px"
 var axisPad = 6 // axis formatting
 var XAxisHeight = 40
 var R = 6 //legend marker
+
+// Declare Tooltip first
+var tooltip = d3.select("#viz")
+            .append("div")
+            .attr('id', 'tooltip')
+            .style('position', 'absolute')
+            .style("background-color", "#D3D3D3")
+            .style('display', 'block')
 
 // SVG should be a global variable if we want axes to update
 // Source for responsive axes: https://www.d3-graph-gallery.com/graph/scatter_buttonXlim.html
@@ -183,12 +191,7 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
               g.select(".domain").remove()
 
             })
-        // .append('text')
-        //   .attr("class", "yaxistext")
-        //   .attr('x', 50)
-        //   .attr("y", -10)
-        //   .attr("fill", "#A9A9A9")
-        //   .text(y_axis_label)
+
       
     // APPEND X AXIS //
     xScale.domain(d3.extent(resNew, d=>d.date))
@@ -212,11 +215,7 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
             .attr('stroke', '#A9A9A9')
 
       }) 
-      // .append('text')
-      //     .attr('x',width/2)
-      //     .attr("y", XAxisHeight)
-      //     .attr("fill", "#A9A9A9")
-      //     .text("Years")
+
 
 // APPEND AXIS TITLES //
     // X AXIS
@@ -239,13 +238,6 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
 
 
 // CREATE HOVER TOOLTIP WITH VERTICAL LINE //
-    tooltip = d3.select("#viz").append("div")
-      .attr('id', 'tooltip')
-      .style('position', 'absolute')
-      .style("background-color", "#D3D3D3")
-      .style('padding', 6)
-      .style('display', 'none')
-
     mouseG = svg.append("g")
       .attr("class", "mouse-over-effects");
 
@@ -253,7 +245,8 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
       .attr("class", "mouse-line")
       .style("stroke", "#A9A9A9")
       .style("stroke-width", lineStroke)
-      .style("opacity", "0");
+      // .style("opacity", "0");
+      .style("opacity", "1");
 
     var lines = document.getElementsByClassName('line');
 
@@ -278,14 +271,14 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
       .attr('fill', 'none')
       .attr('pointer-events', 'all')
       .on('mouseout', function () { // on mouse out hide line, circles and text
-        d3.select(".mouse-line")
-          .style("opacity", "0");
+        // d3.select(".mouse-line")
+        //   .style("opacity", "0");
         d3.selectAll(".mouse-per-line circle")
           .style("opacity", "0");
         d3.selectAll(".mouse-per-line text")
           .style("opacity", "0");
-        d3.selectAll("#tooltip")
-          .style('display', 'none')
+        // d3.selectAll("#tooltip")
+        //   .style('display', 'none')
 
       })
       .on('mouseover', function () { // on mouse in show line, circles and text
@@ -293,8 +286,8 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
           .style("opacity", "1");
         d3.selectAll(".mouse-per-line circle")
           .style("opacity", "1");
-        d3.selectAll("#tooltip")
-          .style('display', 'block')
+        // d3.selectAll("#tooltip")
+        //   .style('display', 'block')
       })
       .on('mousemove', function () { // update tooltip content, line, circles and text when mouse moves
         var mouse = d3.mouse(this)
@@ -743,7 +736,9 @@ function updateChartYear(Year) {
       .attr("class", "mouse-line")
       .style("stroke", "#A9A9A9")
       .style("stroke-width", lineStroke)
-      .style("opacity", "0");
+      // .style("opacity", "0");
+      .style("opacity", "1");
+
 
     var lines = document.getElementsByClassName('line');
 
@@ -768,15 +763,12 @@ function updateChartYear(Year) {
       .attr('fill', 'none')
       .attr('pointer-events', 'all')
       .on('mouseout', function () { // on mouse out hide line, circles and text
-        d3.select(".mouse-line")
-          .style("opacity", "0");
+        // d3.select(".mouse-line")
+        //   .style("opacity", "0");
         d3.selectAll(".mouse-per-line circle")
           .style("opacity", "0");
         d3.selectAll(".mouse-per-line text")
           .style("opacity", "0");
-        d3.selectAll("#tooltip")
-          .style('display', 'none')
-
       })
       .on('mouseover', function () { // on mouse in show line, circles and text
         d3.select(".mouse-line")
@@ -1102,16 +1094,14 @@ function updateTooltipContent(mouse, res_nested, color) {
 
   tooltip.html("Year: "+ sortingObj[0].year)
     .style('display', 'block')
-    .style('left', d3.event.pageX + 20)
-    .style('top', d3.event.pageY - 20)
-    .style('font-size', 14) //Change tooltip title font here
+    .attr('id', 'tooltip_title')
     .selectAll()
     .data(res_nested1).enter()
     .append('div')
     .style('color', d => {
       return color(d.key)
     })
-    // .style('font-size', 10) //Change tooltip text font here
+    .attr('id', 'tooltip_text')
     .html(d => {
       var xDate = xScale.invert(mouse[0])
       var bisect = d3.bisector(function (d) { return d.date; }).left
