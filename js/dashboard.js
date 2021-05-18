@@ -220,19 +220,23 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
 // APPEND AXIS TITLES //
     // X AXIS
     svg.append("text")
-      .attr("class", "x label")
+      .attr("class", "x_label")
       .attr("text-anchor", "end")
       .attr("x", width)
-      .attr("y", height - 6)
+      .attr("y", height + 35)
+      .attr("fill", "white")
+      .attr("weight", "white")
       .text("Years");
+      
     
       // Y AXIS
     svg.append("text")
-      .attr("class", "y label")
+      .attr("class", "y_label")
       .attr("text-anchor", "end")
-      .attr("y", 6)
+      .attr("y", -45)
       .attr("dy", ".75em")
       .attr("transform", "rotate(-90)")
+      .attr("fill", "white")
       .text(y_axis_label);
 
 
@@ -246,7 +250,6 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
       .style("stroke", "#A9A9A9")
       .style("stroke-width", lineStroke)
       // .style("opacity", "0");
-      .style("opacity", "1");
 
     var lines = document.getElementsByClassName('line');
 
@@ -436,14 +439,15 @@ function updateChartParameter(Parameter) {
           })
 
     // Update Y-Axis Title
-      svg.selectAll('.y.label').remove()
+      svg.selectAll('.y_label').remove()
 
         svg.append("text")
-          .attr("class", "y label")
+          .attr("class", "y_label")
           .attr("text-anchor", "end")
-          .attr("y", 6)
+          .attr("y", -45)
           .attr("dy", ".75em")
           .attr("transform", "rotate(-90)")
+          .attr("fill", "white")
           .text(y_axis_label);
 
 
@@ -561,14 +565,15 @@ function updateChartYear(Year) {
         })
   
   // Update Y-Axis Title
-      svg.selectAll('.y.label').remove()
+      svg.selectAll('.y_label').remove()
 
         svg.append("text")
-          .attr("class", "y label")
+          .attr("class", "y_label")
           .attr("text-anchor", "end")
-          .attr("y", 6)
+          .attr("y", -45)
           .attr("dy", ".75em")
           .attr("transform", "rotate(-90)")
+          .attr("fill", "white")
           .text(y_axis_label);
 
  // Nest  Data:
@@ -687,14 +692,15 @@ function updateChartYear(Year) {
             })
 
   // Update Y-Axis Title
-      svg.selectAll('.y.label').remove()
+      svg.selectAll('.y_label').remove()
 
       svg.append("text")
-        .attr("class", "y label")
+        .attr("class", "y_label")
         .attr("text-anchor", "end")
-        .attr("y", 6)
+        .attr("y", -45)
         .attr("dy", ".75em")
         .attr("transform", "rotate(-90)")
+        .attr("fill", "white")
         .text(y_axis_label);
 
     // Nest Data:
@@ -841,7 +847,7 @@ function updateChartManip1(Manip1) {
     // Y-Axis Label Variables
     var parameter_label 
         if (parameter_val == "CO2") { parameter_label =  "CO2"
-        } else{ c =  "Energy"}
+        } else{ parameter_label =  "Energy"}
 
     var manip1_label
         if (Manip1 == "Growth") { manip1_label =  ", Growth (%)"
@@ -905,14 +911,15 @@ function updateChartManip1(Manip1) {
         })
 
   // Update Y-Axis Title
-    svg.selectAll('.y.label').remove()
+    svg.selectAll('.y_label').remove()
 
     svg.append("text")
-      .attr("class", "y label")
+      .attr("class", "y_label")
       .attr("text-anchor", "end")
-      .attr("y", 6)
+      .attr("y", -45)
       .attr("dy", ".75em")
       .attr("transform", "rotate(-90)")
+      .attr("fill", "white")
       .text(y_axis_label);
 
   // Nest  Data:
@@ -1029,14 +1036,15 @@ function updateChartManip2(Manip2) {
         })
 
   // Update Y-Axis Title
-      svg.selectAll('.y.label').remove()
+      svg.selectAll('.y_label').remove()
 
       svg.append("text")
-        .attr("class", "y label")
+        .attr("class", "y_label")
         .attr("text-anchor", "end")
-        .attr("y", 6)
+        .attr("y", -45)
         .attr("dy", ".75em")
         .attr("transform", "rotate(-90)")
+        .attr("fill", "white")
         .text(y_axis_label);
 
   // Nest  Data:
@@ -1113,3 +1121,25 @@ function updateTooltipContent(mouse, res_nested, color) {
 })
 
 // END OF D3 CSV CHART FUNCTION
+
+
+
+
+// RENDER THE CHART ON SUBMISSION OF FORM ONE: 
+document.getElementById("form1").onsubmit=function() {
+
+  param = document.querySelector('#form1 input[name = "Parameter"]:checked').value;
+  time = document.querySelector('#form1 input[name = "Time"]:checked').value;
+  group = document.querySelector('#form1 input[name = "Group"]:checked').value;
+  manip1 = document.querySelector('#form1 input[name = "Manip1"]:checked').value;
+  manip2 = document.querySelector('#form1 input[name="Manip2"]:checked').value;
+
+
+  renderChart(param, time, group, manip1, manip2);
+  updateChartParameter(param);
+  updateChartYear(time);
+  updateChartGroup(group);
+  updateChartManip1(manip1);
+  updateChartManip2(manip2);
+
+}
