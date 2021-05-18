@@ -206,6 +206,7 @@ label {
 
 #tooltip_title{
   font-size: 15px;
+  font-weight: bold;
   text-align: left;
   background:#444 !important;
   justify-content: right;
@@ -222,10 +223,12 @@ label {
 }
 
 .y_label{
-  font-size: 15px !important;
-  color:#39ff14 !important;
+  font-weight: bold;
 }
 
+.x_label{
+  font-weight: bold;
+}
 
 
 /* Section links */

@@ -223,18 +223,21 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
       .attr("class", "x_label")
       .attr("text-anchor", "end")
       .attr("x", width)
-      .attr("y", height - 6)
+      .attr("y", height + 35)
+      .attr("fill", "white")
+      .attr("weight", "white")
       .text("Years");
+      
     
       // Y AXIS
     svg.append("text")
       .attr("class", "y_label")
       .attr("text-anchor", "end")
-      .attr("y", 6)
+      .attr("y", -45)
       .attr("dy", ".75em")
       .attr("transform", "rotate(-90)")
-      .text(y_axis_label)
-      .style("color", "white");
+      .attr("fill", "white")
+      .text(y_axis_label);
 
 
 
@@ -441,9 +444,10 @@ function updateChartParameter(Parameter) {
         svg.append("text")
           .attr("class", "y_label")
           .attr("text-anchor", "end")
-          .attr("y", 6)
+          .attr("y", -45)
           .attr("dy", ".75em")
           .attr("transform", "rotate(-90)")
+          .attr("fill", "white")
           .text(y_axis_label);
 
 
@@ -566,9 +570,10 @@ function updateChartYear(Year) {
         svg.append("text")
           .attr("class", "y_label")
           .attr("text-anchor", "end")
-          .attr("y", 6)
+          .attr("y", -45)
           .attr("dy", ".75em")
           .attr("transform", "rotate(-90)")
+          .attr("fill", "white")
           .text(y_axis_label);
 
  // Nest  Data:
@@ -692,9 +697,10 @@ function updateChartYear(Year) {
       svg.append("text")
         .attr("class", "y_label")
         .attr("text-anchor", "end")
-        .attr("y", 6)
+        .attr("y", -45)
         .attr("dy", ".75em")
         .attr("transform", "rotate(-90)")
+        .attr("fill", "white")
         .text(y_axis_label);
 
     // Nest Data:
@@ -841,7 +847,7 @@ function updateChartManip1(Manip1) {
     // Y-Axis Label Variables
     var parameter_label 
         if (parameter_val == "CO2") { parameter_label =  "CO2"
-        } else{ c =  "Energy"}
+        } else{ parameter_label =  "Energy"}
 
     var manip1_label
         if (Manip1 == "Growth") { manip1_label =  ", Growth (%)"
@@ -910,10 +916,10 @@ function updateChartManip1(Manip1) {
     svg.append("text")
       .attr("class", "y_label")
       .attr("text-anchor", "end")
-      .attr("y", 6)
+      .attr("y", -45)
       .attr("dy", ".75em")
       .attr("transform", "rotate(-90)")
-      .attr("color", "white")
+      .attr("fill", "white")
       .text(y_axis_label);
 
   // Nest  Data:
@@ -1035,9 +1041,10 @@ function updateChartManip2(Manip2) {
       svg.append("text")
         .attr("class", "y_label")
         .attr("text-anchor", "end")
-        .attr("y", 6)
+        .attr("y", -45)
         .attr("dy", ".75em")
         .attr("transform", "rotate(-90)")
+        .attr("fill", "white")
         .text(y_axis_label);
 
   // Nest  Data:
@@ -1114,3 +1121,25 @@ function updateTooltipContent(mouse, res_nested, color) {
 })
 
 // END OF D3 CSV CHART FUNCTION
+
+
+
+
+// RENDER THE CHART ON SUBMISSION OF FORM ONE: 
+document.getElementById("form1").onsubmit=function() {
+
+  param = document.querySelector('#form1 input[name = "Parameter"]:checked').value;
+  time = document.querySelector('#form1 input[name = "Time"]:checked').value;
+  group = document.querySelector('#form1 input[name = "Group"]:checked').value;
+  manip1 = document.querySelector('#form1 input[name = "Manip1"]:checked').value;
+  manip2 = document.querySelector('#form1 input[name="Manip2"]:checked').value;
+
+
+  renderChart(param, time, group, manip1, manip2);
+  updateChartParameter(param);
+  updateChartYear(time);
+  updateChartGroup(group);
+  updateChartManip1(manip1);
+  updateChartManip2(manip2);
+
+}
