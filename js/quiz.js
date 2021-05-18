@@ -14,11 +14,11 @@
 
 
   //Retrieves the value of the user selected choice for each question:
-  param = document.querySelector('#form1 input[name = "Parameter"]:checked').val;
-  time = document.querySelector('#form1 input[name = "Time"]:checked').val;
-  group = document.querySelector('#form1 input[name = "Group"]:checked').val;
-  manip1 = document.querySelector('#form1 input[name = "Manip1"]:checked').val;
-  manip2 = document.querySelector('#form1 input[name="Manip2"]:checked').val;
+  param = document.querySelector('#form1 input[name = "Parameter"]:checked').value;
+  time = document.querySelector('#form1 input[name = "Time"]:checked').value;
+  group = document.querySelector('#form1 input[name = "Group"]:checked').value;
+  manip1 = document.querySelector('#form1 input[name = "Manip1"]:checked').value;
+  manip2 = document.querySelector('#form1 input[name="Manip2"]:checked').value;
 
    // initialize score variables
    science = 0;
