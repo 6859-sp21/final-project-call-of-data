@@ -14,10 +14,11 @@
     <!-- Sidebar  -->
     <div id="mySidebar1" class="sidebar">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <a href="#homepage" style="background-color: #111;">Home</a>
-      <a href="#button_intro" style="background-color: #111;">The President</a>
-      <a href="#mission_objective" style="background-color: #111;">Your Mission</a>
-      <a href="#player_selection" style="background-color: #111;">Players</a>
+      <a href="#homepage" style="background-color: black;">Home</a>
+      <a href="#button_intro" style="background-color: black;">The President</a>
+      <a href="#mission_objective" style="background-color: black;">Your Mission</a>
+      <a href="#player_selection" style="background-color: black;">Players</a>
+      <a href="#final_dashboard" style="background-color: black;">Dashboard</a>
     </div>
 
     <button class="openbtn" onclick="openNav()">&#9776; Open Menu</button>
@@ -280,7 +281,7 @@
           <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em>
           Nations with rich fossil fuel reserves are likely to be responsible for the highest CO2 emissions.
           Investigating their longtidunal trends may be important for global climate intervention. <br>
-          <label><input type="radio" name="Group" id="choice3a" value="1"/>Make choice one</label>
+          <label><input type="radio" name="Group" id="choice3a" value="1"/>make choice one</label>
           <br><br>
           </div>
 
@@ -293,7 +294,7 @@
           with large populations are important case-studies for how either climate change parameter scales over time.
           <br>
 
-          <label><input type="radio" name="Group" id="choice3b" value="3"/>Make choice two</label>
+          <label><input type="radio" name="Group" id="choice3b" value="3"/>make choice two</label>
           <br><br>
           </div>
 
@@ -305,7 +306,7 @@
           Technological advancement necessitates the consumption of natural resources, therefore an interesting question is whether
           their economies are too energy-intensive and whether they are ostensibly the largest polluters.
           <br>
-          <label><input type="radio" name="Group" id="choice3c" value="4"/>Make choice three</label>
+          <label><input type="radio" name="Group" id="choice3c" value="4"/>make choice three</label>
           <br><br>
           </div>
 
@@ -317,7 +318,7 @@
           Not all energy is created equal. This subset is useful for investigating whether the hypothesis
           that energy intesive countries are all bad for the environment depends on their fuel composition.
           <br>
-          <label><input type="radio" name="Group" id="choice3d" value="5"/>Make choice four</label>
+          <label><input type="radio" name="Group" id="choice3d" value="5"/>make choice four</label>
           <br><br>
           </div>
 
@@ -364,32 +365,33 @@
 
             <!-- Text for Choice 4A-->
 
-            <div class="row col-sm-5 col-sm-offset-1" style="margin-left: 110px; margin-right: 20px; border-style: solid;">
+            <div class="row col-sm-5 col-sm-offset-1" style="margin-left: 110px; margin-right: 20px; border-style: solid; border-color: grey">
             <div class="choice_title"><br>choice one: <em style="color: yellow;"> Absolute Values </em> </div>
             <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em>
             Absolute measurements avoid any assumptions around when its appropriate to sett time=0.
             It also leaves the data in its rawest format, which
             allows the audience to comprehend the scale of the parameter values over time.
 
-            <br><br>
-            <label><input type="radio" name="Manip1" id="choice4a" value="Absolute"/>Make choice one</label>
+            <br>
+            <label><input type="radio" name="Manip1" id="choice4a" value="Absolute"/>make choice one</label>
                 <br><br>
                 </div>
 
             <!-- Text for Choice 4B-->
 
-            <div class="row col-sm-5" style="margin-top: 0px; border-style: solid;">
+            <div class="row col-sm-5" style="margin-top: 0px; border-style: solid; border-color: grey">
             <div class="choice_title"><br>choice two: <em style="color: yellow;"> Relative Growth</em> </div>
             <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em>
             Growth rates are better
-            able to convey the magnitude and direction of parameters over time. For instance you can better answer if the rate of CO_2 entering the atmosphere has increased or decreased
+            able to convey the magnitude and direction of parameters over time.
+            For instance you can better answer if the rate of CO_2 entering the atmosphere has increased or decreased
 
-            <br><br>
-            <label><input type="radio" name="Manip1" id="choice4b" value="Growth"/>Make choice two</label>
+            <br>
+            <label><input type="radio" name="Manip1" id="choice4b" value="Growth"/>make choice two</label>
             <br><br>
             </div>
 
-            <div class="row col-sm-12" style="padding-top: 100px;" >
+            <div class="row col-sm-12" style="padding-top: 50px;" >
                 <a href="#choice_screen5" style="font-size: 20px; text-align: center; font-family: 'Press Start 2P', sans-serif;">Next</a>
             </div>
             </section>
@@ -418,41 +420,41 @@
 
             <!-- Text for Choice 5A-->
 
-            <div class="row col-sm-3 col-sm-offset-1" style="margin-left: 210px; margin-right: 20px; border-style: solid;">
+            <div class="row col-sm-3 col-sm-offset-1" style="margin-left: 210px; margin-right: 20px; border-style: solid; border-color: grey;">
             <div class="choice_title"><br>choice one: <em style="color: yellow;"> Divide by Annual Population per Country</em> </div>
             <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em>
             Population numbers vary widely acoss countries, without accounting for this number - possible inferences on how your parameters are
             changing for a particular country may be under- or overestimated.
-            <br><br>
-            <label><input type="radio" name="Manip2" id="choice5a" value="Population"/>Make choice one</label>
+            <br>
+            <label><input type="radio" name="Manip2" id="choice5a" value="Population"/>make choice one</label>
             <br><br>
             </div>
 
             <!-- Text for Choice 5B-->
 
-            <div class="row col-sm-3" style="margin-top: 0px; border-style: solid; margin-right: 20px;">
+            <div class="row col-sm-3" style="margin-top: 0px; border-style: solid; margin-right: 20px; border-color: grey;">
             <div class="choice_title"><br>choice two: <em style="color: yellow;"> Divide by Annual GDP per Country</em> </div>
             <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em>
             A reasonable assumption is that GDP is correlated with energy production, consumption, and subsequently emissions.
             To make robust comparisons between countries you should eliminate the causal effect of GDP by normalizing the data.
-            <br><br>
-            <label><input type="radio" name="Manip2" id="choice5b" value="GDP"/>Make choice two</label>
+
+            <label><input type="radio" name="Manip2" id="choice5b" value="GDP"/>make choice two</label>
             <br><br>
             </div>
 
             <!-- Text for Choice 5C-->
-            <div class="row col-sm-3" style="margin-top: 0px; border-style: solid;">
+            <div class="row col-sm-3" style="margin-top: 0px; border-style: solid; border-color: grey">
             <div class="choice_title"><br>choice three: <em style="color: yellow;"> NONE </em> </div>
             <br><br> <em style="color: green; font-size: 18px"> Argument For Selection:</em> Neither alternative provides a compelling alternative to
             the data's existing format.
-            <br><br><br><br><br>
-            <label><input type="radio" name="Manip2" id="choice5c" value="NoneD"/>Make choice three</label>
+            <br><br><br><br>
+            <label><input type="radio" name="Manip2" id="choice5c" value="NoneD"/>make choice three</label>
                 <br><br>
                 </div>
 
 
             <!-- Submit Button at last choice screen -->
-            <div class="row col-sm-12" style="padding-top: 100px;">
+            <div class="row col-sm-12" style="padding-top: 50px;">
             <button class="submit_button" type="submit" value="Submit" onclick="window.location.href='#results_screen'">Submit All and View Results</button>
             <br><br><br><br>
           </div>

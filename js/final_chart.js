@@ -1,5 +1,5 @@
 // SOURCE: Adapted from Dianaow’s Block 0da76b59a7dffe24abcfa55d5b9e163e
-// https://bl.ocks.org/dianaow/0da76b59a7dffe24abcfa55d5b9e163e 
+// https://bl.ocks.org/dianaow/0da76b59a7dffe24abcfa55d5b9e163e
 
 // SET GLOBAL VARIABLES FOR THE CHART
 var glines2
@@ -64,11 +64,11 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
       Group : d.Group,
       Manip1 : d.Manip1,
       Manip2 : d.Manip2,
-      Metric : d.Metric, 
+      Metric : d.Metric,
       Value : +d.Value
     }
   })
-  
+
 
   // Set some intial variables: line generator, x and y-Scales
 
@@ -83,7 +83,7 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
     .y(d => yScale2(d.Value))
 
 
-// FUNCTIONS TO RENDER INITIAL CHART HERE: 
+// FUNCTIONS TO RENDER INITIAL CHART HERE:
 
 // SET DEFAULT PARAMETERS HERE
   renderChart("CO2", "1965", "1", "Absolute", "Population") // inital chart render (set default to choice of default data)
@@ -92,7 +92,7 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
 // FUNCTION TO INITIATE CHART WITH RADIO BUTTON
   function renderChart(Parameter, Time, Group, Manip1, Manip2) {
 
-    // Implement Filters: 
+    // Implement Filters:
     var res1 = res.filter(d=>d.Parameter == Parameter)
     var res2 = res1.filter(d=>d.Time == parseInt(Time))
 
@@ -101,15 +101,15 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
     var resNew = res4.filter(d=>d.Manip2 == Manip2)
 
   // Y-Axis Label Variables
-    var parameter_label 
+    var parameter_label
         if (Parameter == "CO2") { parameter_label =  "CO2"
         } else{ parameter_label =  "Energy"}
 
-    var manip1_label 
+    var manip1_label
         if (Manip1 == "Growth") { manip1_label =  ", Growth (%)"
         } else{ manip1_label =  ", (Twh)"}
 
-    var manip2_label 
+    var manip2_label
         if (Manip2 == "Population") { manip2_label =  " per Capita"
         } else if(Manip2 == "GDP") { manip2_label =  " per GDP"
         } else{manip2_label = ""}
@@ -117,7 +117,7 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
     var y_axis_label = parameter_label + manip2_label + manip1_label
 
     // necessary to nest data so that keys represent each category
-    var res_nested = d3.nest() 
+    var res_nested = d3.nest()
       .key(d=>d.Location)
       .entries(resNew)
 
@@ -126,7 +126,7 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
     color2.domain(category).range(d3.schemePaired)
 
 
-    // CREATE LEGEND // 
+    // CREATE LEGEND //
     legend2 = svgLegend2.selectAll('.legend2')
           .data(category)
           .enter().append('g')
@@ -158,9 +158,9 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
       .append('g')
       .attr('class', 'line-group')
 
-    glines2  
+    glines2
       .append('path')
-        .attr('class', 'line')  
+        .attr('class', 'line')
         .attr('d', d => line2(d.values))
         .style('stroke', d => {
       return color2(d.key)
@@ -168,7 +168,7 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
         .style('fill', 'none')
         .style('opacity', lineOpacity2)
         .style('stroke-width', lineStroke2)
-    
+
 
     // APPEND Y AXIS //
     yScale2.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
@@ -191,7 +191,7 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
 
             })
 
-      
+
     // APPEND X AXIS //
     xScale2.domain(d3.extent(resNew, d=>d.date))
 
@@ -201,7 +201,7 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
       .call(d3.axisBottom(xScale2))
       .call(g => {
           var years = xScale2.ticks(d3.timeYear.every(1))
-          var xshift = (width2/(years.length))/2 
+          var xshift = (width2/(years.length))/2
           g.selectAll("text").attr("transform", `translate(${xshift}, 0)`) //shift tick labels to middle of interval
             .style("text-anchor", "middle")
             .attr("y", axisPad2)
@@ -213,7 +213,7 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
           g.select(".domain")
             .attr('stroke', '#A9A9A9')
 
-      }) 
+      })
 
 
 // APPEND AXIS TITLES //
@@ -226,8 +226,8 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
       .attr("fill", "white")
       .attr("weight", "white")
       .text("Years");
-      
-    
+
+
       // Y AXIS
       svg2.append("text")
       .attr("class", "y_label")
@@ -268,7 +268,7 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
       .style("opacity", "0");
 
     mouseG2.append('svg2:rect') // append a rect to catch mouse movements on canvas
-      .attr('width', width2) 
+      .attr('width', width2)
       .attr('height', height2)
       .attr('fill', 'none')
       .attr('pointer-events', 'all')
@@ -351,7 +351,7 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
 
 
 
-// FUNCTION TO UPDATE METRIC BEING VIEWED: 
+// FUNCTION TO UPDATE METRIC BEING VIEWED:
 function updateChartParameter(Parameter) {
 
 // Filter for the value on the other radio button(s)
@@ -360,7 +360,7 @@ function updateChartParameter(Parameter) {
     var res1 = res.filter(d=>d.Time == parseInt(year_val))
 
     // Group filter
-    var group_val = d3.select('input[name="Group"]:checked').property("value"); 
+    var group_val = d3.select('input[name="Group"]:checked').property("value");
     var res2 = res1.filter(function (d) { return d.Group.match(group_val); })
 
     // Manip 1 filter
@@ -380,21 +380,21 @@ function updateChartParameter(Parameter) {
     color2.domain(category).range(d3.schemePaired)
 
 // Y-Axis Label Variables
-    var parameter_label 
+    var parameter_label
         if (Parameter == "CO2") { parameter_label =  "CO2"
         } else{ parameter_label =  "Energy"}
 
-    var manip1_label 
+    var manip1_label
         if (manip1_val == "Growth") { manip1_label =  ", Growth (%)"
         } else{ manip1_label =  ", (Twh)"}
 
-    var manip2_label 
+    var manip2_label
         if (manip2_val == "Population") { manip2_label =  " per Capita"
         } else if(manip2_val == "GDP") { manip2_label =  " per GDP"
         } else{manip2_label = ""}
 
     var y_axis_label = parameter_label + manip2_label + manip1_label
-  
+
   // Define and Update Y axis
   yScale2.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
 
@@ -424,7 +424,7 @@ function updateChartParameter(Parameter) {
           .call(d3.axisBottom(xScale2))
           .call(g => {
               var years = xScale2.ticks(d3.timeYear.every(1))
-              var xshift = (width2/(years.length))/2 
+              var xshift = (width2/(years.length))/2
               g.selectAll("text").attr("transform", `translate(${xshift}, 0)`) //shift tick labels to middle of interval
                 .style("text-anchor", "middle")
                 .attr("y", axisPad2)
@@ -432,7 +432,7 @@ function updateChartParameter(Parameter) {
 
               g.selectAll("line2")
                 .attr('stroke', '#A9A9A9')
-    
+
               g.select(".domain")
                 .attr('stroke', '#A9A9A9')
 
@@ -457,7 +457,7 @@ function updateChartParameter(Parameter) {
         .entries(resNew)
 
     // Update the other elements
-      glines2.select('.line2') //select line path within line-group (which represents a category), then bind new data 
+      glines2.select('.line2') //select line path within line-group (which represents a category), then bind new data
         .data(res_nested)
         .transition().duration(750)
         .attr('d', function(d) {
@@ -467,7 +467,7 @@ function updateChartParameter(Parameter) {
       mouseG2.selectAll('.mouse-per-line')
         .data(res_nested)
 
-      mouseG2.on('mousemove', function () { 
+      mouseG2.on('mousemove', function () {
           var mouse = d3.mouse(this)
           updateTooltipContent(mouse, res_nested, color2)
         })
@@ -485,7 +485,7 @@ function updateChartYear(Year) {
     var res1 = res.filter(d=>d.Parameter == parameter_val)
 
     // Group filter
-    var group_val = d3.select('input[name="Group"]:checked').property("value"); 
+    var group_val = d3.select('input[name="Group"]:checked').property("value");
     var res2 = res1.filter(function (d) { return d.Group.match(group_val); })
 
     // Manip 1 filter
@@ -505,15 +505,15 @@ function updateChartYear(Year) {
   color2.domain(category).range(d3.schemePaired)
 
 // Y-Axis Label Variables
-  var parameter_label 
+  var parameter_label
         if (parameter_val == "CO2") { parameter_label =  "CO2"
         } else{ parameter_label =  "Energy"}
 
-    var manip1_label 
+    var manip1_label
         if (manip1_val == "Growth") { manip1_label =  ", Growth (%)"
         } else{ manip1_label =  ", (Twh)"}
 
-    var manip2_label 
+    var manip2_label
         if (manip2_val == "Population") { manip2_label =  " per Capita"
         } else if(manip2_val == "GDP") { manip2_label =  " per GDP"
         } else{manip2_label = ""}
@@ -550,7 +550,7 @@ svg2.select('.y.axis')
         .call(d3.axisBottom(xScale2))
         .call(g => {
             var years = xScale2.ticks(d3.timeYear.every(1))
-            var xshift = (width2/(years.length))/2 
+            var xshift = (width2/(years.length))/2
             g.selectAll("text").attr("transform", `translate(${xshift}, 0)`) //shift tick labels to middle of interval
               .style("text-anchor", "middle")
               .attr("y", axisPad2)
@@ -563,7 +563,7 @@ svg2.select('.y.axis')
               .attr('stroke', '#A9A9A9')
 
         })
-  
+
   // Update Y-Axis Title
   svg2.selectAll('.y_label').remove()
 
@@ -592,7 +592,7 @@ svg2.select('.y.axis')
     mouseG2.selectAll('.mouse-per-line')
       .data(res_nested)
 
-    mouseG2.on('mousemove', function () { 
+    mouseG2.on('mousemove', function () {
         var mouse = d3.mouse(this)
         updateTooltipContent(mouse, res_nested, color2)
       })
@@ -601,7 +601,7 @@ svg2.select('.y.axis')
 
 
 
-// FUNCTION TO UPDATE CHART BY GROUP OF COUNTRIES QUARTILE: 
+// FUNCTION TO UPDATE CHART BY GROUP OF COUNTRIES QUARTILE:
 // USE THIS TYPE OF FUNCTION IF THE NUMBER OF LINES WILL CHANGE BETWEEN FILTERS
 
   function updateChartGroup(Group) {
@@ -627,7 +627,7 @@ svg2.select('.y.axis')
     var resNew = res4.filter(function (d) { return d.Group.match(Group); })
 
 // Y-Axis Label Variables
-    var parameter_label 
+    var parameter_label
         if (parameter_val == "CO2") { parameter_label =  "CO2"
         } else{ c =  "Energy"}
 
@@ -684,7 +684,7 @@ svg2.select('.y.axis')
 
               g.selectAll("line2")
                 .attr('stroke', '#A9A9A9')
-                .attr('stroke-width', 0.7) 
+                .attr('stroke-width', 0.7)
                 .attr('opacity', 0.3)
 
               g.select(".domain").remove()
@@ -708,7 +708,7 @@ svg2.select('.y.axis')
           .key(d=>d.Location)
           .entries(resNew)
 
-    // Update the lines: Need to start from scratch here. 
+    // Update the lines: Need to start from scratch here.
     svg2.selectAll('.lines2').remove()
 
         var lines2 = svg2.append('g')
@@ -719,9 +719,9 @@ svg2.select('.y.axis')
             .append('g')
             .attr('class', 'line-group')
 
-          glines2  
+          glines2
             .append('path')
-              .attr('class', 'line2')  
+              .attr('class', 'line2')
               .attr('d', d => line2(d.values))
               .style('stroke', d => {
             return color2(d.key)
@@ -729,9 +729,9 @@ svg2.select('.y.axis')
               .style('fill', 'none')
               .style('opacity', lineOpacity2)
               .style('stroke-width', lineStroke2)
-    
 
-    // Update the mouselines: will also need to start from scratch here. 
+
+    // Update the mouselines: will also need to start from scratch here.
     // mouseG2.selectAll('.mouse-per-line').data(res_nested)
     svg2.selectAll('.mouse-per-line').remove()
 
@@ -764,7 +764,7 @@ svg2.select('.y.axis')
       .style("opacity", "0");
 
     mouseG2.append('svg2:rect') // append a rect to catch mouse movements on canvas
-      .attr('width', width2) 
+      .attr('width', width2)
       .attr('height', height)
       .attr('fill', 'none')
       .attr('pointer-events', 'all')
@@ -811,8 +811,8 @@ svg2.select('.y.axis')
 
 
 
-    // Update the tooltip. 
-    mouseG2.on('mousemove', function () { 
+    // Update the tooltip.
+    mouseG2.on('mousemove', function () {
         var mouse = d3.mouse(this)
         updateTooltipContent(mouse, res_nested, color2)
       })
@@ -821,7 +821,7 @@ svg2.select('.y.axis')
 
 
 
-// FUNCTION TO UPDATE MANIP 1: 
+// FUNCTION TO UPDATE MANIP 1:
 function updateChartManip1(Manip1) {
 
 // Filter for the value on the other radio button(s)
@@ -830,7 +830,7 @@ function updateChartManip1(Manip1) {
     var res1 = res.filter(d=>d.Time == parseInt(year_val))
 
     // Group filter
-    var group_val = d3.select('input[name="Group"]:checked').property("value"); 
+    var group_val = d3.select('input[name="Group"]:checked').property("value");
     var res2 = res1.filter(function (d) { return d.Group.match(group_val); })
 
     // Parameter filter
@@ -845,7 +845,7 @@ function updateChartManip1(Manip1) {
     var resNew = res4.filter(d=>d.Manip1 == Manip1)
 
     // Y-Axis Label Variables
-    var parameter_label 
+    var parameter_label
         if (parameter_val == "CO2") { parameter_label =  "CO2"
         } else{ parameter_label =  "Energy"}
 
@@ -865,7 +865,7 @@ function updateChartManip1(Manip1) {
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
     color2.domain(category).range(d3.schemePaired)
 
-  
+
   // Define and Update Y axis
   yScale2.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
 
@@ -886,7 +886,7 @@ function updateChartManip1(Manip1) {
                   g.select(".domain").remove()
 
                 })
-   
+
 
   // Define and Update X axis
   xScale2.domain(d3.extent(resNew, d=>d.date))
@@ -896,7 +896,7 @@ function updateChartManip1(Manip1) {
         .call(d3.axisBottom(xScale2))
         .call(g => {
             var years = xScale2.ticks(d3.timeYear.every(1))
-            var xshift = (width2/(years.length))/2 
+            var xshift = (width2/(years.length))/2
             g.selectAll("text").attr("transform", `translate(${xshift}, 0)`) //shift tick labels to middle of interval
               .style("text-anchor", "middle")
               .attr("y", axisPad2)
@@ -904,7 +904,7 @@ function updateChartManip1(Manip1) {
 
             g.selectAll("line2")
               .attr('stroke', '#A9A9A9')
-  
+
             g.select(".domain")
               .attr('stroke', '#A9A9A9')
 
@@ -928,7 +928,7 @@ function updateChartManip1(Manip1) {
         .entries(resNew)
 
     // Update the other elements
-      glines2.select('.line2') //select line path within line-group (which represents a category), then bind new data 
+      glines2.select('.line2') //select line path within line-group (which represents a category), then bind new data
         .data(res_nested)
         .transition().duration(750)
         .attr('d', function(d) {
@@ -938,7 +938,7 @@ function updateChartManip1(Manip1) {
       mouseG2.selectAll('.mouse-per-line')
         .data(res_nested)
 
-      mouseG2.on('mousemove', function () { 
+      mouseG2.on('mousemove', function () {
           var mouse = d3.mouse(this)
           updateTooltipContent(mouse, res_nested, color2)
         })
@@ -946,7 +946,7 @@ function updateChartManip1(Manip1) {
 
 
 
-// FUNCTION TO UPDATE MANIP 2: 
+// FUNCTION TO UPDATE MANIP 2:
 function updateChartManip2(Manip2) {
 
 // Filter for the value on the other radio button(s)
@@ -955,7 +955,7 @@ function updateChartManip2(Manip2) {
     var res1 = res.filter(d=>d.Time == parseInt(year_val))
 
     // Group filter
-    var group_val = d3.select('input[name="Group"]:checked').property("value"); 
+    var group_val = d3.select('input[name="Group"]:checked').property("value");
     var res2 = res1.filter(function (d) { return d.Group.match(group_val); })
 
     // Parameter filter
@@ -970,15 +970,15 @@ function updateChartManip2(Manip2) {
     var resNew = res4.filter(d=>d.Manip2 == Manip2)
 
 // Y-Axis Label Variables
-  var parameter_label 
+  var parameter_label
         if (parameter_val == "CO2") { parameter_label =  "CO2"
         } else{ parameter_label =  "Energy"}
 
-    var manip1_label 
+    var manip1_label
         if (manip1_val == "Growth") { manip1_label =  ", Growth (%)"
         } else{ manip1_label =  ", (Twh)"}
 
-    var manip2_label 
+    var manip2_label
         if (Manip2 == "Population") { manip2_label =  " per Capita"
         } else if(Manip2 == "GDP") { manip2_label =  " per GDP"
         } else{manip2_label = ""}
@@ -989,7 +989,7 @@ function updateChartManip2(Manip2) {
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
     color2.domain(category).range(d3.schemePaired)
 
-  
+
   // Define and Update Y axis
   yScale2.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
 
@@ -1011,7 +1011,7 @@ function updateChartManip2(Manip2) {
 
                 })
 
-      
+
 
   // Define and Update X axis
   xScale2.domain(d3.extent(resNew, d=>d.date))
@@ -1021,7 +1021,7 @@ function updateChartManip2(Manip2) {
         .call(d3.axisBottom(xScale2))
         .call(g => {
             var years = xScale2.ticks(d3.timeYear.every(1))
-            var xshift = (width2/(years.length))/2 
+            var xshift = (width2/(years.length))/2
             g.selectAll("text").attr("transform", `translate(${xshift}, 0)`) //shift tick labels to middle of interval
               .style("text-anchor", "middle")
               .attr("y", axisPad2)
@@ -1029,7 +1029,7 @@ function updateChartManip2(Manip2) {
 
             g.selectAll("line2")
               .attr('stroke', '#A9A9A9')
-  
+
             g.select(".domain")
               .attr('stroke', '#A9A9A9')
 
@@ -1053,7 +1053,7 @@ function updateChartManip2(Manip2) {
         .entries(resNew)
 
     // Update the other elements
-      glines2.select('.line2') //select line path within line-group (which represents a category), then bind new data 
+      glines2.select('.line2') //select line path within line-group (which represents a category), then bind new data
         .data(res_nested)
         .transition().duration(750)
         .attr('d', function(d) {
@@ -1063,7 +1063,7 @@ function updateChartManip2(Manip2) {
       mouseG2.selectAll('.mouse-per-line')
         .data(res_nested)
 
-      mouseG2.on('mousemove', function () { 
+      mouseG2.on('mousemove', function () {
           var mouse = d3.mouse(this)
           updateTooltipContent(mouse, res_nested, color2)
         })
@@ -1121,4 +1121,3 @@ function updateTooltipContent(mouse, res_nested, color2) {
 })
 
 // END OF D3 CSV CHART FUNCTION
-
