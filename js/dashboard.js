@@ -1,5 +1,9 @@
 // Wrap the whole thing in a function so the graph can be drawn twice:
+draw("#viz_final");
+draw("#viz");
 
+
+function draw(selector){
 
 // SOURCE: Adapted from Dianaow’s Block 0da76b59a7dffe24abcfa55d5b9e163e
 // https://bl.ocks.org/dianaow/0da76b59a7dffe24abcfa55d5b9e163e 
@@ -23,7 +27,7 @@ var XAxisHeight = 40
 var R = 6 //legend marker
 
 // Declare Tooltip first
-var tooltip = d3.select("#viz_final")
+var tooltip = d3.select(selector)
             .append("div")
             .attr('id', 'tooltip')
             .style('position', 'absolute')
@@ -33,7 +37,7 @@ var tooltip = d3.select("#viz_final")
 
 // SVG should be a global variable if we want axes to update
 // Source for responsive axes: https://www.d3-graph-gallery.com/graph/scatter_buttonXlim.html
-var svg = d3.select("#viz_final")
+var svg = d3.select(selector)
     .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -1125,4 +1129,4 @@ function updateTooltipContent(mouse, res_nested, color) {
 })
 
 // END OF D3 CSV CHART FUNCTION
-
+}
