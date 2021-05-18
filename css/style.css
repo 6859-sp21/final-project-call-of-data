@@ -5,6 +5,7 @@ body {
   display: flex;
   font-size: 20px;
   justify-content: center;
+  height: 100%;
 }
 
 em {
@@ -23,6 +24,7 @@ p {
   display: flex;
   padding: 5px;
 }
+
 
 
 /* Full screen sections */
@@ -60,6 +62,19 @@ p {
   padding-bottom: 200px;
   text-align: center;
 }
+
+#final_dashboard {
+  margin-bottom: 200px;
+  font-family: "Courier";
+  font-size: 16px;
+  line-height: 23px;
+  height: 100%;
+  color: white;
+  padding-top: 20px;
+  padding-bottom: 200px;
+  text-align: center;
+}
+
 
 .maintitle {
   font-family: "Press Start 2P", sans-serif;
@@ -161,6 +176,44 @@ label {
   padding:15px 15px;
 }
 
+.form-check-label{
+  display: inline-block;
+  justify-content: left;
+  font-size: 10px;
+  text-align: left;
+  margin-top: 8px;
+  background:#444;
+  color:#39ff14;
+  border:1px solid green;
+  padding: 3px 6px;
+}
+
+
+#tooltip{
+  font-size: 10px;
+  text-align: left;
+  background:#444 !important;
+  top: 135px !important;
+  height: 375px !important;
+  width: 160px !important;
+  padding: 5px !important;
+  border:1px solid green;
+}
+
+#tooltip_title{
+  font-size: 15px;
+  text-align: left;
+  background:#444 !important;
+  top: 135px !important;
+  height: 375px !important;
+  width: 160px !important;
+  padding: 5px !important;
+  border:1px solid green;
+}
+#tooltip_text{
+  font-size: 10px;
+  
+}
 
 
 

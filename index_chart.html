@@ -1,86 +1,98 @@
 <!-- SOURCE: Adapted from Dianaow’s Block 0da76b59a7dffe24abcfa55d5b9e163e -->
 <!-- https://bl.ocks.org/dianaow/0da76b59a7dffe24abcfa55d5b9e163e -->
-
+<!DOCTYPE html>
 <html>
   <head>
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <title>Chart Only</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Press+Start+2P">
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
 
-    <script src="lib/d3.js"></script>
-    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+  <!-- SCRIPTS  -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stupidtable/0.0.1/stupidtable.min.js"></script>
+
+  <script src="lib/d3.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <script src="js/textanimations.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/quiz.js"></script>
+  </head>
+
    
-   
-    <!-- CSS -->
-    <style>
-      html {
-        font-family: 'Arial', sans-serif;
-      }
-      .header {
-        margin-top: 60px;
-        margin-left: 60px;
-        text-align: left;
-      }
-      input {
-        margin-right: 10px;
-      }
-      .form-check-label {
-        font-size: 0.8em;
-        margin-right: 20px;
-      }
-    </style>
 
 
 <!-- HTML -->
-  </head>
   <body>
-    <div class ='container-fluid'>
-      <div class='row'>
-        <div id="viz">
-          <div class='header'>
-
-            <!-- CHOICE 1 -->
-            <div class="form-check-variable">
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Parameter" value="CO2" checked>CO2</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Parameter" value="Primary_Energy_Consumption">Primary_Energy_Consumption</label>
-              <br>
-
-            <!-- CHOICE 2 -->
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Time" value="1965" checked>Long Duration Study (1965-2016)</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Time" value="1990">The dot com boom (1990-2016) </label>
-              <br>
+    <div id='sections'>
 
 
-            <!-- CHOICE 3 -->
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="1" checked>Top Oil Producing Nations </label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="2">Countries with highest renewable energy</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="3">OECD Nations</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="4">Countries w/ Largest Population Size</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="5">Most Technologically Advanced Countries</label>
-              <br>
+      <section class="step" id ="final_dashboard">
+      
+      <div class="title">Mission Results</div><br><br>
 
-            <!-- CHOICE 4 -->
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Manip1" value="Absolute" checked>Absolute Values</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Manip1" value="Growth">Relative Growth Rates</label>
-              <br>
-          
-            <!-- CHOICE 5 -->
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Manip2" value="Population" checked>Divide by Population</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Manip2" value="GDP">Divide by GDP</label>
-              <label class="form-check-label"><input style="display: inline" type="radio" name="Manip2" value="Absolute">No Division</label>
+        <div  class="row col-sm-12" style="width: 100%;">
+            
+            <!-- Left Hand Panel -->
+            <div style="width: 65%; float: left; padding-left: 50px;">
+
+                <div class="title_dashboard" id="response">You got <span id="answer" style="color: #39ff14;"></span></div>
+                <p style="text-align: left; color: #39ff14; font-weight: bold;" id="response2"> Your biases succesfully convinced Earth's leaders to <span id="answer2" style="color: #39ff14;"></span>!</p>
+
+                <div class="title_dashboard">Your Resulting Visualization:</div>
+                <div id="viz" style="float: left;"></div>
 
             </div>
 
+          <!-- Right Hand Panel -->
+              <div style="margin-left: 65%; padding-right: 15px;">
+
+                <div class="title_dashboard">Toggle your decisions to view how wach of them biased the final visualization</div><br>
+
+                <!-- CHOICE 1 -->
+                <div class="action_dashboard">A1: Parameter</div>          
+                <div class="form-check-variable">
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Parameter" value="CO2" checked>CO2</label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Parameter" value="Primary_Energy_Consumption">Primary_Energy_Consumption</label>
+                  <br>
+
+                <!-- CHOICE 2 -->
+                <div class="action_dashboard">A2: Time</div>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Time" value="1965" checked>Long Duration Study (1965-2016)</label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Time" value="1990">The dot com boom (1990-2016) </label>
+                  <br>
+
+
+                <!-- CHOICE 3 -->
+                <div class="action_dashboard">A3: Countries</div>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="1" checked>Top Oil Producing Nations </label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="2">Countries with highest renewable energy</label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="3">OECD Nations</label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="4">Countries w/ Largest Population Size</label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Group" value="5">Most Technologically Advanced Countries</label>
+                  <br>
+
+                <!-- CHOICE 4 -->
+                  <div class="action_dashboard">A4: Unit</div>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Manip1" value="Absolute" checked>Absolute Values</label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Manip1" value="Growth">Relative Growth Rates</label>
+                  <br>
+              
+                <!-- CHOICE 5 -->
+                  <div class="action_dashboard">A5: Denominator</div>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Manip2" value="Population" checked>Divide by Population</label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Manip2" value="GDP">Divide by GDP</label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Manip2" value="Absolute">No Division</label>
+                </div>
+              </div>
           </div>
-        </div>
-      </div>
-    </div>
+    </section>
 
 
-<!-- LIST OF ToDos -->
-      <!-- Mouse over circles are not updating properly with group changes -->
-      <!-- Need to remove all and redefine in the updateChartGroup function-->
+  </div>
+
 
 
 <!-- JAVASCRIPT -->
@@ -95,9 +107,9 @@
       
       var parseDate = d3.timeParse("%Y-%m-%d")
 
-      var margin = {top: 80, right: 200, bottom: 40, left: 80}
-      var width = 1400 - margin.left - margin.right
-      var height = 500 - margin.top - margin.bottom
+      var margin = {top: 10, right: 10, bottom: 10, left: 200}
+      var width = 900 - margin.left - margin.right
+      var height = 400 - margin.top - margin.bottom
 
       var lineOpacity = 1
       var lineStroke = "2px"
@@ -108,6 +120,16 @@
 
     // SVG should be a global variable if we want axes to update
     // Source for responsive axes: https://www.d3-graph-gallery.com/graph/scatter_buttonXlim.html
+
+    // tooltip = d3.select("#viz")
+    //         .append("div")
+    //         .attr('id', 'tooltip')
+    //         .style('position', 'absolute')
+    //         .style("background-color", "#D3D3D3")
+    //         .style('padding-left', 10)
+    //         .style('margin-left', 10)
+    //         .style('display', 'none')
+
       var svg = d3.select("#viz")
           .append("svg")
           .attr("width", width + margin.left + margin.right)
@@ -172,6 +194,7 @@
     // FUNCTION TO INITIATE CHART WITH RADIO BUTTON
         function renderChart(Parameter, Time, Group, Manip1, Manip2) {
 
+
           // Implement Filters: 
           var res1 = res.filter(d=>d.Parameter == Parameter)
           var res2 = res1.filter(d=>d.Time == parseInt(Time))
@@ -181,15 +204,15 @@
           var resNew = res4.filter(d=>d.Manip2 == Manip2)
 
         // Y-Axis Label Variables
-          var parameter_label = []
+          var parameter_label 
               if (Parameter == "CO2") { parameter_label =  "CO2"
               } else{ parameter_label =  "Energy"}
 
-          var manip1_label = []
+          var manip1_label 
               if (Manip1 == "Growth") { manip1_label =  ", Growth (%)"
               } else{ manip1_label =  ", (Twh)"}
 
-          var manip2_label = []
+          var manip2_label 
               if (Manip2 == "Population") { manip2_label =  " per Capita"
               } else if(Manip2 == "GDP") { manip2_label =  " per GDP"
               } else{manip2_label = ""}
@@ -359,6 +382,8 @@
             .style("stroke-width", lineStroke)
             .style("opacity", "0");
 
+            
+
           mouseG.append('svg:rect') // append a rect to catch mouse movements on canvas
             .attr('width', width) 
             .attr('height', height)
@@ -381,7 +406,8 @@
               d3.selectAll(".mouse-per-line circle")
                 .style("opacity", "1");
               d3.selectAll("#tooltip")
-                .style('display', 'block')
+                .style('display', 'inline-block')
+
             })
             .on('mousemove', function () { // update tooltip content, line, circles and text when mouse moves
               var mouse = d3.mouse(this)
@@ -471,15 +497,15 @@
           color.domain(category).range(d3.schemePaired)
       
       // Y-Axis Label Variables
-          var parameter_label = []
+          var parameter_label 
               if (Parameter == "CO2") { parameter_label =  "CO2"
               } else{ parameter_label =  "Energy"}
 
-          var manip1_label = []
+          var manip1_label 
               if (manip1_val == "Growth") { manip1_label =  ", Growth (%)"
               } else{ manip1_label =  ", (Twh)"}
 
-          var manip2_label = []
+          var manip2_label 
               if (manip2_val == "Population") { manip2_label =  " per Capita"
               } else if(manip2_val == "GDP") { manip2_label =  " per GDP"
               } else{manip2_label = ""}
@@ -595,15 +621,15 @@
         color.domain(category).range(d3.schemePaired)
 
       // Y-Axis Label Variables
-        var parameter_label = []
+        var parameter_label 
               if (parameter_val == "CO2") { parameter_label =  "CO2"
               } else{ parameter_label =  "Energy"}
 
-          var manip1_label = []
+          var manip1_label 
               if (manip1_val == "Growth") { manip1_label =  ", Growth (%)"
               } else{ manip1_label =  ", (Twh)"}
 
-          var manip2_label = []
+          var manip2_label 
               if (manip2_val == "Population") { manip2_label =  " per Capita"
               } else if(manip2_val == "GDP") { manip2_label =  " per GDP"
               } else{manip2_label = ""}
@@ -716,15 +742,15 @@
           var resNew = res4.filter(function (d) { return d.Group.match(Group); })
 
       // Y-Axis Label Variables
-          var parameter_label = []
+          var parameter_label 
               if (parameter_val == "CO2") { parameter_label =  "CO2"
               } else{ c =  "Energy"}
 
-          var manip1_label = []
+          var manip1_label
               if (manip1_val == "Growth") { manip1_label =  ", Growth (%)"
               } else{ manip1_label =  ", (Twh)"}
 
-          var manip2_label = []
+          var manip2_label
               if (manip2_val == "Population") { manip2_label =  " per Capita"
               } else if(manip2_val == "GDP") { manip2_label =  " per GDP"
               } else{manip2_label = ""}
@@ -934,15 +960,15 @@
           var resNew = res4.filter(d=>d.Manip1 == Manip1)
 
           // Y-Axis Label Variables
-          var parameter_label = []
+          var parameter_label 
               if (parameter_val == "CO2") { parameter_label =  "CO2"
               } else{ c =  "Energy"}
 
-          var manip1_label = []
+          var manip1_label
               if (Manip1 == "Growth") { manip1_label =  ", Growth (%)"
               } else{ manip1_label =  ", (Twh)"}
 
-          var manip2_label = []
+          var manip2_label
               if (manip2_val == "Population") { manip2_label =  " per Capita"
               } else if(manip2_val == "GDP") { manip2_label =  " per GDP"
               } else{manip2_label = ""}
@@ -1058,15 +1084,15 @@
           var resNew = res4.filter(d=>d.Manip2 == Manip2)
 
       // Y-Axis Label Variables
-        var parameter_label = []
+        var parameter_label 
               if (parameter_val == "CO2") { parameter_label =  "CO2"
-              } else{ c =  "Energy"}
+              } else{ parameter_label =  "Energy"}
 
-          var manip1_label = []
+          var manip1_label 
               if (manip1_val == "Growth") { manip1_label =  ", Growth (%)"
               } else{ manip1_label =  ", (Twh)"}
 
-          var manip2_label = []
+          var manip2_label 
               if (Manip2 == "Population") { manip2_label =  " per Capita"
               } else if(Manip2 == "GDP") { manip2_label =  " per GDP"
               } else{manip2_label = ""}
@@ -1189,8 +1215,8 @@
 
         tooltip.html("Year: "+ sortingObj[0].year)
           .style('display', 'block')
-          .style('left', d3.event.pageX + 20)
-          .style('top', d3.event.pageY - 20)
+          .style('left', d3.event.pageX)
+          .style('top', d3.event.pageY)
           .style('font-size', 14) //Change tooltip title font here
           .style('font-weight', "bold") 
           .selectAll()
@@ -1207,11 +1233,17 @@
             return d.key + ": " + f(d.values[idx].Value).toString() + " TWh"
 
           })
+
+          console.log(d3.event.pageX)
+          console.log(d3.event.pageX)
+
       }
     })
 
 // END OF D3 CSV CHART FUNCTION
 
     </script>
+
+
   </body>
 </html>
