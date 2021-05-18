@@ -191,7 +191,7 @@ data$Manip1 <- ifelse(grepl("Growth", data$Metric, fixed = TRUE), "Growth", "Abs
                  
 # DENOMINATOR: Question 5 (Manip 2)
 data$Manip2 <- ifelse(grepl("per_Capita", data$Metric, fixed = TRUE), "Population",
-                      ifelse(grepl("per_GDP", data$Metric, fixed = TRUE), "GDP", "Absolute"))
+                      ifelse(grepl("per_GDP", data$Metric, fixed = TRUE), "GDP", "NoneD"))
 
   
 
