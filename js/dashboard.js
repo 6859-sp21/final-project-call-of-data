@@ -220,7 +220,7 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
 // APPEND AXIS TITLES //
     // X AXIS
     svg.append("text")
-      .attr("class", "x label")
+      .attr("class", "x_label")
       .attr("text-anchor", "end")
       .attr("x", width)
       .attr("y", height - 6)
@@ -228,12 +228,13 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
     
       // Y AXIS
     svg.append("text")
-      .attr("class", "y label")
+      .attr("class", "y_label")
       .attr("text-anchor", "end")
       .attr("y", 6)
       .attr("dy", ".75em")
       .attr("transform", "rotate(-90)")
-      .text(y_axis_label);
+      .text(y_axis_label)
+      .style("color", "white");
 
 
 
@@ -246,7 +247,6 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
       .style("stroke", "#A9A9A9")
       .style("stroke-width", lineStroke)
       // .style("opacity", "0");
-      .style("opacity", "1");
 
     var lines = document.getElementsByClassName('line');
 
@@ -436,10 +436,10 @@ function updateChartParameter(Parameter) {
           })
 
     // Update Y-Axis Title
-      svg.selectAll('.y.label').remove()
+      svg.selectAll('.y_label').remove()
 
         svg.append("text")
-          .attr("class", "y label")
+          .attr("class", "y_label")
           .attr("text-anchor", "end")
           .attr("y", 6)
           .attr("dy", ".75em")
@@ -561,10 +561,10 @@ function updateChartYear(Year) {
         })
   
   // Update Y-Axis Title
-      svg.selectAll('.y.label').remove()
+      svg.selectAll('.y_label').remove()
 
         svg.append("text")
-          .attr("class", "y label")
+          .attr("class", "y_label")
           .attr("text-anchor", "end")
           .attr("y", 6)
           .attr("dy", ".75em")
@@ -687,10 +687,10 @@ function updateChartYear(Year) {
             })
 
   // Update Y-Axis Title
-      svg.selectAll('.y.label').remove()
+      svg.selectAll('.y_label').remove()
 
       svg.append("text")
-        .attr("class", "y label")
+        .attr("class", "y_label")
         .attr("text-anchor", "end")
         .attr("y", 6)
         .attr("dy", ".75em")
@@ -905,14 +905,15 @@ function updateChartManip1(Manip1) {
         })
 
   // Update Y-Axis Title
-    svg.selectAll('.y.label').remove()
+    svg.selectAll('.y_label').remove()
 
     svg.append("text")
-      .attr("class", "y label")
+      .attr("class", "y_label")
       .attr("text-anchor", "end")
       .attr("y", 6)
       .attr("dy", ".75em")
       .attr("transform", "rotate(-90)")
+      .attr("color", "white")
       .text(y_axis_label);
 
   // Nest  Data:
@@ -1029,10 +1030,10 @@ function updateChartManip2(Manip2) {
         })
 
   // Update Y-Axis Title
-      svg.selectAll('.y.label').remove()
+      svg.selectAll('.y_label').remove()
 
       svg.append("text")
-        .attr("class", "y label")
+        .attr("class", "y_label")
         .attr("text-anchor", "end")
         .attr("y", 6)
         .attr("dy", ".75em")

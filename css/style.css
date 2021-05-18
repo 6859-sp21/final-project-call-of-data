@@ -23,6 +23,8 @@ p {
   margin: 8px;
   display: flex;
   padding: 5px;
+  color: white;
+
 }
 
 
@@ -194,6 +196,8 @@ label {
   font-size: 10px;
   text-align: left;
   background:#444 !important;
+  justify-content: right;
+  left: 135px !important;
   top: 135px !important;
   height: 375px !important;
   width: 160px !important;
@@ -205,6 +209,8 @@ label {
   font-size: 15px;
   text-align: left;
   background:#444 !important;
+  justify-content: right;
+  left: 5% !important;
   top: 135px !important;
   height: 375px !important;
   width: 160px !important;
@@ -214,6 +220,11 @@ label {
 #tooltip_text{
   font-size: 10px;
   
+}
+
+.y_label{
+  font-size: 15px !important;
+  color:#39ff14 !important;
 }
 
 
