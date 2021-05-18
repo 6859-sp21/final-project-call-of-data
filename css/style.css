@@ -23,8 +23,6 @@ p {
   margin: 8px;
   display: flex;
   padding: 5px;
-  color: white;
-
 }
 
 
@@ -195,8 +193,6 @@ label {
   font-size: 10px;
   text-align: left;
   background:#444 !important;
-  justify-content: right;
-  left: 135px !important;
   top: 135px !important;
   height: 375px !important;
   width: 160px !important;
@@ -206,11 +202,8 @@ label {
 
 #tooltip_title{
   font-size: 15px;
-  font-weight: bold;
   text-align: left;
   background:#444 !important;
-  justify-content: right;
-  left: 5% !important;
   top: 135px !important;
   height: 375px !important;
   width: 160px !important;
@@ -222,13 +215,6 @@ label {
   
 }
 
-.y_label{
-  font-weight: bold;
-}
-
-.x_label{
-  font-weight: bold;
-}
 
 
 /* Section links */
