@@ -151,5 +151,43 @@ document.getElementById("form1").onsubmit=function() {
    }
    }
 
+   //  FUNCTIONS TO PRE-CHECK THE DASHBOARD LABELS BASED ON USER INPUTS IN THE CHOICES SECTIONS
+   function checkbox_param(x){
+      if(x == "CO2") { document.getElementById("DashCO2").checked = true; }
+      if(x == "Primary_Energy_Consumption") { document.getElementById("DashPrimary_Energy_Consumption").checked = true; }
+      }
+
+   function checkbox_time(x){
+      if(x == "1965") { document.getElementById("Dash1965").checked = true; }
+      if(x == "1990") { document.getElementById("Dash1990").checked = true; }
+      }
+
+   function checkbox_group(x){
+      if(x == "1") { document.getElementById("DashG1").checked = true; }
+      if(x == "2") { document.getElementById("DashG2").checked = true; }
+      if(x == "3") { document.getElementById("DashG3").checked = true; }
+      if(x == "4") { document.getElementById("DashG4").checked = true; }
+      }
+
+   function checkbox_manip1(x){
+      if(x == "Absolute") { document.getElementById("DashM1Absolute").checked = true; }
+      if(x == "Growth") { document.getElementById("DashM1Growth").checked = true; }
+      }
+
+   function checkbox_manip2(x){
+      if(x == "Population") { document.getElementById("DashM2Population").checked = true; }
+      if(x == "GDP") { document.getElementById("DashM2GDP").checked = true; }
+      if(x == "Absolute") { document.getElementById("DashM2Absolute").checked = true; }
+      }
+
+      checkbox_param(eval("param"));
+      checkbox_time(eval("time"));
+      checkbox_group(eval("group"));
+      checkbox_manip1(eval("manip1"));
+      checkbox_manip2(eval("manip2"));
+
+
+
   return false; // required to not refresh the page; just leave this here
+
       }// end the submit function
