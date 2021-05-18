@@ -177,7 +177,7 @@ document.getElementById("form1").onsubmit=function() {
    function checkbox_manip2(x){
       if(x == "Population") { document.getElementById("DashM2Population").checked = true; }
       if(x == "GDP") { document.getElementById("DashM2GDP").checked = true; }
-      if(x == "Absolute") { document.getElementById("DashM2Absolute").checked = true; }
+      if(x == "NoneD") { document.getElementById("DashM2Absolute").checked = true; }
       }
 
       checkbox_param(eval("param"));
