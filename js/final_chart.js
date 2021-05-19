@@ -126,7 +126,7 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
         if (Group == "1") { group_label =  "Top Oil Producing Countries"
         } else if(Group == "3") { group_label =  "Countries w/ the Largest Populations"
         } else if(Group == "4") { group_label =  " Most Technologically Advanced Countries"
-        } else{group_label = "the Countries with Highest Renewable Energy"}
+        } else{group_label = "the Countries with the Most Diverse Energy Mix"}
 
 
     var y_axis_label = parameter_label + manip2_label + manip1_label
@@ -422,7 +422,7 @@ function updateChartParameter(Parameter) {
         if (group_val == "1") { group_label =  "Top Oil Producing Countries"
       } else if(group_val == "3") { group_label =  "Countries w/ the Largest Populations"
       } else if(group_val == "4") { group_label =  " Most Technologically Advanced Countries"
-      } else{group_label = "the Countries with Highest Renewable Energy"}
+      } else{group_label = "the Countries with the Most Diverse Energy Mix"}
 
 
     var y_axis_label = parameter_label + manip2_label + manip1_label
@@ -568,7 +568,7 @@ function updateChartYear(Year) {
         if (group_val == "1") { group_label =  "Top Oil Producing Countries"
       } else if(group_val == "3") { group_label =  "Countries w/ the Largest Populations"
       } else if(group_val == "4") { group_label =  " Most Technologically Advanced Countries"
-      } else{group_label = "the Countries with Highest Renewable Energy"}
+      } else{group_label = "the Countries with the Most Diverse Energy Mix"}
 
 
     var y_axis_label = parameter_label + manip2_label + manip1_label
@@ -711,7 +711,7 @@ function updateChartYear(Year) {
         if (Group == "1") { group_label =  "Top Oil Producing Countries"
       } else if(Group == "3") { group_label =  "Countries w/ the Largest Populations"
       } else if(Group == "4") { group_label =  " Most Technologically Advanced Countries"
-      } else{Group = "the Countries with Highest Renewable Energy"}
+      } else{Group = "the Countries with the Most Diverse Energy Mix"}
 
 
     var y_axis_label = parameter_label + manip2_label + manip1_label
@@ -951,7 +951,7 @@ function updateChartManip1(Manip1) {
         if (group_val == "1") { group_label =  "Top Oil Producing Countries"
       } else if(group_val == "3") { group_label =  "Countries w/ the Largest Populations"
       } else if(group_val == "4") { group_label =  " Most Technologically Advanced Countries"
-      } else{group_label = "the Countries with Highest Renewable Energy"}
+      } else{group_label = "the Countries with the Most Diverse Energy Mix"}
 
 
     var y_axis_label = parameter_label + manip2_label + manip1_label
@@ -1096,7 +1096,7 @@ function updateChartManip2(Manip2) {
         if (group_val == "1") { group_label =  "Top Oil Producing Countries"
       } else if(group_val == "3") { group_label =  "Countries w/ the Largest Populations"
       } else if(group_val == "4") { group_label =  " Most Technologically Advanced Countries"
-      } else{group_label = "the Countries with Highest Renewable Energy"}
+      } else{group_label = "the Countries with the Most Diverse Energy Mix"}
 
 
     var y_axis_label = parameter_label + manip2_label + manip1_label

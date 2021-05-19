@@ -273,6 +273,9 @@ label {
   font-weight: bold;
 }
 
+.chartTitle{
+  font-weight: bold;
+}
 
 /* Section links */
 /* Note this formatting causes problems for the buttons. Fix later */
