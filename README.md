@@ -2,8 +2,8 @@
 Authors: Axelle Clochard and Lama Aoudi
 
 <img width="943" alt="FrontPage" src="https://user-images.githubusercontent.com/10040180/118859573-61d07500-b8a8-11eb-845b-461ef3d668bf.png">
----
 
+---
 ### Abstract:
 
 ##### Link to Paper:
