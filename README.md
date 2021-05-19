@@ -1,4 +1,4 @@
-## Call of Data: Exposing Implicit Biasing in Data Visualization
+## Call of Data: Exposing The Bias in Data Visualization
 Authors: Axelle Clochard and Lama Aoudi
 
 <img width="943" alt="FrontPage" src="https://user-images.githubusercontent.com/10040180/118859573-61d07500-b8a8-11eb-845b-461ef3d668bf.png">
