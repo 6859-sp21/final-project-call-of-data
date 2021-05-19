@@ -3,7 +3,6 @@ Authors: Axelle Clochard and Lama Aoudi
 
 <img width="943" alt="FrontPage" src="https://user-images.githubusercontent.com/10040180/118859573-61d07500-b8a8-11eb-845b-461ef3d668bf.png">
 
----
 ### Abstract:
 
 ##### Link to Paper:
@@ -21,7 +20,7 @@ We then started implementing a “personality quiz”-like structure so that the
 Finally, we split the write up equally as well as the final polishing and tightening of the final product in CSS/HTML.
 
 This ended up being a somewhat challenging experience given that for both of us, A4 had been our first venture into D3 and JavaScript. However, we feel that we were able to flex some new muscles and acquire some new skills and gain some meta-insight into the process of visualization making. We estimate that this amounted to approximately 100 hours worth of work between the two of us. 
-
+----
 #### Coding Sources:
 For the sidebar: “How To Create a Collapsed Sidebar.” W3 Schools. Accessed May 19, 2021. https://www.w3schools.com/howto/howto_js_collapse_sidebar.asp. <br/><br/>
 For the typewriter effect: CodePen. “Multiline Typewriter Effect.”  David Carr. Accessed May 19, 2021. https://codepen.io/daviddcarr/details/XVyQMM. <br/><br/>
