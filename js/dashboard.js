@@ -124,13 +124,13 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
 
     var group_label
         if (Group == "1") { group_label =  "Top Oil Producing Countries"
-        } else if(Group == "3") { group_label =  "Countries w/ Largest Population"
+        } else if(Group == "3") { group_label =  "Countries w/ the Largest Populations"
         } else if(Group == "4") { group_label =  " Most Technologically Advanced Countries"
-        } else{group_label = "Countries with highest renewable energy"}
+        } else{group_label = "the Countries with Highest Renewable Energy"}
 
 
     var y_axis_label = parameter_label + manip2_label + manip1_label
-    var text_title = "The impact of climate change on "+ group_label
+    var text_title = "The Impact of Climate Change on "+ group_label
 
     // necessary to nest data so that keys represent each category
     var res_nested = d3.nest()
@@ -418,15 +418,15 @@ function updateChartParameter(Parameter) {
         } else if(manip2_val == "GDP") { manip2_label =  " per GDP"
         } else{manip2_label = ""}
 
-        var group_label
-        if (Group == "1") { group_label =  "Top Oil Producing Countries"
-        } else if(Group == "3") { group_label =  "Countries w/ Largest Population"
-        } else if(Group == "4") { group_label =  " Most Technologically Advanced Countries"
-        } else{group_label = "Countries with highest renewable energy"}
+    var group_label
+        if (group_val == "1") { group_label =  "Top Oil Producing Countries"
+      } else if(group_val == "3") { group_label =  "Countries w/ the Largest Populations"
+      } else if(group_val == "4") { group_label =  " Most Technologically Advanced Countries"
+      } else{group_label = "the Countries with Highest Renewable Energy"}
 
 
     var y_axis_label = parameter_label + manip2_label + manip1_label
-    var text_title = "The impact of climate change on "+ group_label
+    var text_title = "The Impact of Climate Change on "+ group_label
 
   // Define and Update Y axis
     yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
@@ -566,14 +566,15 @@ function updateChartYear(Year) {
         } else{manip2_label = ""}
 
     var group_label
-        if (Group == "1") { group_label =  "Top Oil Producing Countries"
-        } else if(Group == "3") { group_label =  "Countries w/ Largest Population"
-        } else if(Group == "4") { group_label =  " Most Technologically Advanced Countries"
-        } else{group_label = "Countries with highest renewable energy"}
+        if (group_val == "1") { group_label =  "Top Oil Producing Countries"
+      } else if(group_val == "3") { group_label =  "Countries w/ the Largest Populations"
+      } else if(group_val == "4") { group_label =  " Most Technologically Advanced Countries"
+      } else{group_label = "the Countries with Highest Renewable Energy"}
+
 
 
     var y_axis_label = parameter_label + manip2_label + manip1_label
-    var text_title = "The impact of climate change on "+ group_label
+    var text_title = "The Impact of Climate Change on "+ group_label
 
 // Define and Update Y axis
   yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
@@ -709,15 +710,16 @@ function updateChartYear(Year) {
         } else if(manip2_val == "GDP") { manip2_label =  " per GDP"
         } else{manip2_label = ""}
 
-    var group_label
+      var group_label
         if (Group == "1") { group_label =  "Top Oil Producing Countries"
-        } else if(Group == "3") { group_label =  "Countries w/ Largest Population"
-        } else if(Group == "4") { group_label =  " Most Technologically Advanced Countries"
-        } else{group_label = "Countries with highest renewable energy"}
+      } else if(Group == "3") { group_label =  "Countries w/ the Largest Populations"
+      } else if(Group == "4") { group_label =  " Most Technologically Advanced Countries"
+      } else{group_label = "the Countries with Highest Renewable Energy"}
+
 
 
     var y_axis_label = parameter_label + manip2_label + manip1_label
-    var text_title = "The impact of climate change on "+ group_label
+    var text_title = "The Impact of Climate Change on "+ group_label
 
 // Define and update color scale
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
@@ -949,14 +951,15 @@ function updateChartManip1(Manip1) {
         } else{manip2_label = ""}
 
     var group_label
-        if (Group == "1") { group_label =  "Top Oil Producing Countries"
-        } else if(Group == "3") { group_label =  "Countries w/ Largest Population"
-        } else if(Group == "4") { group_label =  " Most Technologically Advanced Countries"
-        } else{group_label = "Countries with highest renewable energy"}
+        if (group_val == "1") { group_label =  "Top Oil Producing Countries"
+      } else if(group_val == "3") { group_label =  "Countries w/ the Largest Populations"
+      } else if(group_val == "4") { group_label =  " Most Technologically Advanced Countries"
+      } else{group_label = "the Countries with Highest Renewable Energy"}
+
 
 
     var y_axis_label = parameter_label + manip2_label + manip1_label
-    var text_title = "The impact of climate change on "+ group_label
+    var text_title = "The Impact of Climate Change on "+ group_label
     
   // Define and update color scale
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
@@ -1093,15 +1096,16 @@ function updateChartManip2(Manip2) {
         } else if(Manip2 == "GDP") { manip2_label =  " per GDP"
         } else{manip2_label = ""}
 
-        var group_label
-        if (Group == "1") { group_label =  "Top Oil Producing Countries"
-        } else if(Group == "3") { group_label =  "Countries w/ Largest Population"
-        } else if(Group == "4") { group_label =  " Most Technologically Advanced Countries"
-        } else{group_label = "Countries with highest renewable energy"}
+    var group_label
+        if (group_val == "1") { group_label =  "Top Oil Producing Countries"
+      } else if(group_val == "3") { group_label =  "Countries w/ the Largest Populations"
+      } else if(group_val == "4") { group_label =  " Most Technologically Advanced Countries"
+      } else{group_label = "the Countries with Highest Renewable Energy"}
+
 
 
     var y_axis_label = parameter_label + manip2_label + manip1_label
-    var text_title = "The impact of climate change on "+ group_label
+    var text_title = "The Impact of Climate Change on "+ group_label
 
   // Define and update color scale
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
@@ -1167,19 +1171,19 @@ function updateChartManip2(Manip2) {
 
 
 
-     // Update Graph Title
-            svg.selectAll('.chartTitle').remove()
+      // Update Graph Title
+        svg.selectAll('.chartTitle').remove()
 
-            svg.append("text")
-                .attr("class", "chartTitle")             
-                .attr("x", (width / 2))             
-                .attr("y", 0 - (margin.top / 2))
-                .attr("text-anchor", "middle")  
-                .style("font-size", "16px") 
-                .style("fill", "white") 
-                .style("text-decoration", "blink")  
-                .text(text_title);
-    
+        svg.append("text")
+            .attr("class", "chartTitle")             
+            .attr("x", (width / 2))             
+            .attr("y", 0 - (margin.top / 2))
+            .attr("text-anchor", "middle")  
+            .style("font-size", "16px") 
+            .style("fill", "white") 
+            .style("text-decoration", "blink")  
+            .text(text_title);
+
   // Nest  Data:
       var res_nested = d3.nest()
         .key(d=>d.Location)
