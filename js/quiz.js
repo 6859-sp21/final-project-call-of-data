@@ -89,7 +89,7 @@ document.getElementById("form1").onsubmit=function() {
           science = science + 1
        }
      }
-}
+
      function score5(x){
        if (x == "NoneD") {
          if (eval("time") == "1990") {
@@ -233,7 +233,7 @@ document.getElementById("form1").onsubmit=function() {
 
       // renderChart(eval("param"), eval("time"), eval("group"), eval("manip1"), eval("manip2"));
 
-  return false; // required to not refresh the page; just leave this here
+return false; // required to not refresh the page; just leave this here
 
     // end the submit function
       }
