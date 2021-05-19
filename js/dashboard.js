@@ -636,7 +636,7 @@ function updateChartYear(Year) {
 // Y-Axis Label Variables
     var parameter_label
         if (parameter_val == "CO2") { parameter_label =  "CO2"
-        } else{ c =  "Energy"}
+        } else{ parameter_label =  "Energy"}
 
     var manip1_label
         if (manip1_val == "Growth") { manip1_label =  ", Growth (%)"

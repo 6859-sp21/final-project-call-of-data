@@ -479,13 +479,63 @@ p.cursor::after {
 
 
 .reveal_animate{
-  animation: fadeIn linear 12s;
-    -webkit-animation: fadeIn linear 12s;
-    -moz-animation: fadeIn linear 12s;
-    -o-animation: fadeIn linear 12s;
-    -ms-animation: fadeIn linear 12s;
+  animation: fadeIn linear 13s;
+    -webkit-animation: fadeIn linear 13s;
+    -moz-animation: fadeIn linear 13s;
+    -o-animation: fadeIn linear 13s;
+    -ms-animation: fadeIn linear 13s;
 }
 
+
+
+
+#fade-in-text2 {
+  display: inline-block;
+  font-family: "Courier";
+  font-size: 18px;
+  color: #fff;
+}
+
+
+@keyframes fadeIn {
+  0% {opacity:0;}
+  /* for delay */
+  95% { opacity:0; }
+  100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  95% { opacity:0; }
+  100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  95% { opacity:0; }
+  100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+  0% {opacity:0;}
+  95% { opacity:0; }
+  100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+  0% {opacity:0;}
+  95% { opacity:0; }
+  100% {opacity:1;}
+}
+
+
+.reveal_animate2{
+  animation: fadeIn linear 16s;
+    -webkit-animation: fadeIn linear 16s;
+    -moz-animation: fadeIn linear 16s;
+    -o-animation: fadeIn linear 16s;
+    -ms-animation: fadeIn linear 16s;
+}
 
 
 
