@@ -2,12 +2,14 @@
 Authors: Axelle Clochard and Lama Aoudi
 
 <img width="943" alt="FrontPage" src="https://user-images.githubusercontent.com/10040180/118859573-61d07500-b8a8-11eb-845b-461ef3d668bf.png">
+---
 
 ### Abstract:
 
 ##### Link to Paper:
 ##### Link to Visualization: https://6859-sp21.github.io/final-project-call-of-data/
 
+---
 ### Commentary on Process
 Once we agreed that we wanted to build a game that would playfully shed light on how bias works its way into the visualization process, we started by developing and refining a narrative. This was done over conversation between the two team members, and involved going over the class readings we thought were relevant as well as surfing through White-Hat/Black-Hat submissions. We started storyboarding on a shared slide deck how we thought our story could develop, and the various points at which the user would have to make decisions. We also browsed through past submissions and agreed that we liked the structure of Candace Okumko’s final project (https://github.mit.edu/6894-sp20/FP-Ethical-Visualization) - i.e. A narrative with embedded user choices culminating in a dashboard- although we ended up pursuing different implementation techniques.
 
@@ -35,5 +37,5 @@ Chapter 4: What Gets Counted Counts. Catherine D'Ignazio. Data Feminism. 2020. <
 Viral Visualizations: How Coronavirus Skeptics Use Orthodox Data Practices to Promote Unorthodox Science Online. Crystal Lee, Tanya Yang, Gabrielle Inchoco, Graham M. Jones, Arvind Satyanarayan. ACM CHI. 2021. <br/><br/>
 Michael Correll. 2019. Ethical Dimensions of Visualization Research. In CHI Conference on Human Factors in Computing Systems Proceedings (CHI 2019), May 4–9, 2019, Glasgow, Scotland UK. ACM, New York, NY, USA, 13 pages. https://doi.org/10.1145/3290605.3300418 <br/><br/>
 
-#### Data Sources
+#### Data Sources:
 Data on CO2 and Greenhouse Gas Emissions by Our World in Data: https://github.com/owid/co2-data
