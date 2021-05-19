@@ -66,7 +66,7 @@
         <div style="width: 35%; height: 100px; float: left; padding-right: 125px;">
           <img src="data/president.png" align="right" alt="president">
         </div>
-        <div style="margin-left: 35%; height: 100px;">
+        <div style="margin-left: 35%; height: 100px; padding-right: 125px;">
           <div class="output" id="output">
             <h1 class="cursor"></h1>
             <p></p>
@@ -98,7 +98,7 @@
         <div style="width: 35%; height: 100px; float: left; padding-right: 125px;">
           <img src="data/president.png" align="right" alt="president">
         </div>
-        <div style="margin-left: 35%; height: 100px;">
+        <div style="margin-left: 35%; height: 100px; padding-right: 125px;">
           <div class="output" id="output2">
             <h1 class="cursor"></h1>
             <p></p>
@@ -109,7 +109,9 @@
       <br><br><br><br><br><br><br><br><br><br><br><br><br>
 
       <div class="row col-sm-12">
+        <div id="fade-in-text2">
          <a href="#player_selection" style="font-size: 30px; text-align: center; font-family: 'Press Start 2P', sans-serif;">START MISSION</a>
+        </div>
       </div>
       </section>
 
@@ -158,7 +160,7 @@
         <img id="player2_image1" src="player2_image"  class="center" style="display:none;" />
         <img id="player3_image1" src="player3_image"  class="center" style="display:none;" />
 
-        <section class="choice_txt" style="font-size: 18px; margin-bottom: 10px;">
+        <section class="choice_txt" style="font-size: 16px; margin-bottom: 10px;">
         <br><br>
         A team of data enthusiasits have travelled the world to collect information on each countrys Carbon footprint.  <br>
         The team identified <em> energy consumption </em> and <em> carbon dioxide </em> as strong proxies for the escalation of climate change. <br>
@@ -166,7 +168,7 @@
         Your first task is to choose which parameter to measure to help president joe button.
         <br><br> </section>
 
-        <div class="row col-sm-5 col-sm-offset-1" style="margin-left: 110px; margin-right: 20px; border-style: solid; border-color: grey;">
+        <div class="row col-sm-5" style="margin-left: 50px; margin-right: 3px; border-style: solid; border-color: grey; height: 340px; width: 47%;">
         <div class="choice_title"><br>choice one: <em style="color: yellow;"> Carbon Dioxide Produced </em> </div>
 
         <!-- Text for Choice 1A-->
@@ -181,7 +183,7 @@
         <br><br>
         </div>
 
-        <div class="row col-sm-5" style="margin-top: 0px; border-style: solid; border-color: grey;">
+        <div class="row col-sm-5" style="margin-top: 0px; margin-left: 0px; margin-right: 0px; border-style: solid; border-color: grey; height: 340px; width: 47%;">
         <div class="choice_title"><br>choice two: <em style="color: yellow;"> Primary Energy Consumed</em> </div>
 
         <!-- Text for Choice 1B-->
@@ -195,9 +197,9 @@
         you can measure how country energy decisions and consumption habits have impacted climate.</p>
 
         <label><input type="radio" name="Parameter" id="choice1b" value="Primary_Energy_Consumption"/>Make choice two</label>
-        <br><br>
+        <br>
         </div>
-        <div class="row col-sm-12" style="padding-top: 50px;" >
+        <div class="row col-sm-12" style="padding-top: 20px;" >
           <a href="#choice_screen2" style="font-size: 20px; text-align: center; font-family: 'Press Start 2P', sans-serif;">Next</a>
        </div>
 
@@ -217,7 +219,7 @@
         <img id="player3_image2" src="player3_image"  class="center" style="display:none;" />
 
 
-        <br><br>
+        <br>
         Joe button realizes that the world has changed drastically over the last century. <br>
         As we have become a more technologically advanced world our energy use has changed for better or worse.
         <br><br>
@@ -226,7 +228,7 @@
 
         <!-- Text for Choice 2A-->
 
-        <div class="row col-sm-5 col-sm-offset-1" style="margin-left: 110px; margin-right: 20px; border-style: solid; border-color: grey">
+        <div class="row col-sm-5" style="margin-left: 50px; margin-right: 3px; border-style: solid; border-color: grey; height: 25%; width: 47%;">
         <div class="choice_title"><br>choice one: <em style="color: yellow;"> Long Duration {1965-2016}</em> </div>
         <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em> A long-term study of climate change parameters allows for a more complete
         picture of progress (or lack thereof). It also represents the most granular data available for each parameter and thus can be used to infer enduring trends.
@@ -237,7 +239,7 @@
 
         <!-- Text for Choice 2B-->
 
-        <div class="row col-sm-5" style="margin-top: 0px; border-style: solid;border-color: grey">
+        <div class="row col-sm-5" style="margin-top: 0px; margin-left: 0px; margin-right: 0px; border-style: solid; border-color: grey; height: 25%; width: 47%;">
         <div class="choice_title"><br>choice two: <em style="color: yellow;"> post Dot-Com Boom {1990-2016}</em> </div>
         <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em>
         Our social and political world looks very different today than it did before the 90s.
@@ -266,7 +268,7 @@
           <img id="player2_image3" src="player2_image"  class="center" style="display:none;" />
           <img id="player3_image3" src="player3_image"  class="center" style="display:none;" />
 
-          <br><br>
+          <br>
           As a data scientist we know information is only as useful as it is interpertable. <br>
           To avoid inundating our busy world leaders with excessive detail, we recommend you limit your study area to only a few, critical countries.
           <br><br>
@@ -276,8 +278,8 @@
 
           <!-- Text for Choice 3A-->
 
-          <div class="row col-sm-5 col-sm-offset-1" style="margin-left: 120px; margin-right: 20px; border-style: solid; border-color: grey">
-          <div class="choice_title"><br>choice one: <em style="color: yellow;"> Top Oil Producers  </em> </div>
+          <div class="row col-sm-5" style="margin-left: 50px; margin-right: 3px; border-style: solid; border-color: grey; height: 20%; width: 47%;">
+            <div class="choice_title"><br>choice one: <em style="color: yellow;"> Top Oil Producers  </em> </div>
           <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em>
           Nations with rich fossil fuel reserves are likely to be responsible for the highest CO2 emissions.
           Investigating their longtidunal trends may be important for global climate intervention. <br>
@@ -287,7 +289,7 @@
 
           <!-- Text for Choice 3B-->
 
-          <div class="row col-sm-5" style="margin-top: 0px; border-style: solid; border-color: grey">
+          <div class="row col-sm-5" style="margin-top: 0px; margin-left: 0px; margin-right: 0px; border-style: solid; border-color: grey; height: 20%; width: 47%;">
           <div class="choice_title"><br>choice two: <em style="color: yellow;">  Largest Populations </em></div>
           <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em>
           Since CO_2 is tied to energy and energy consumption is tied to people, then countries
@@ -300,8 +302,8 @@
 
           <!-- Text for Choice 3C-->
 
-          <div class="row col-sm-5 col-sm-offset-1" style="margin-left: 120px; margin-right: 20px; border-style: solid; border-color: grey">
-          <div class="choice_title"><br>choice three:<em style="color: yellow;"> Most Technologically Advanced </em> </div>
+          <div class="row col-sm-5" style="margin-left: 50px; margin-right: 3px; border-style: solid; border-color: grey; height: 20%; width: 47%;">
+           <div class="choice_title"><br>choice three:<em style="color: yellow;"> Most Technologically Advanced </em> </div>
           <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em>
           Technological advancement necessitates the consumption of natural resources, therefore an interesting question is whether
           their economies are too energy-intensive and whether they are ostensibly the largest polluters.
@@ -312,8 +314,8 @@
 
           <!-- Text for Choice 3D-->
 
-          <div class="row col-sm-5" style="margin-top: 0px; border-style: solid; border-color: grey">
-          <div class="choice_title"><br>choice four: <em style="color: yellow;"> Most Diverse Energy Mix</em> </div>
+          <div class="row col-sm-5" style="margin-top: 0px; margin-left: 0px; margin-right: 0px; border-style: solid; border-color: grey; height: 20%; width: 47%;">
+           <div class="choice_title"><br>choice four: <em style="color: yellow;"> Most Diverse Energy Mix</em> </div>
           <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em>
           Not all energy is created equal. This subset is useful for investigating whether the hypothesis
           that energy intesive countries are all bad for the environment depends on their fuel composition.
@@ -350,13 +352,13 @@
         <section class="step" id ="choice_screen4" style="height: 1500px; margin-bottom: 10px;">
         <!-- <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div> -->
 
-        <div class="title"> <em style="color: #818181;"> action number four: </em> Manipulating Your Data PT.1 </div>
+        <div class="title"> <em style="color: #818181;"> action number four: </em> Choosing your units </div>
             <br>
-            <img id="player1_image2" src="player1_image"  class="center" style="display:none;" />
-            <img id="player2_image2" src="player2_image"  class="center" style="display:none;" />
-            <img id="player3_image2" src="player3_image"  class="center" style="display:none;" />
+            <img id="player1_image4" src="player1_image"  class="center" style="display:none;" />
+            <img id="player2_image4" src="player2_image"  class="center" style="display:none;" />
+            <img id="player3_image4" src="player3_image"  class="center" style="display:none;" />
 
-            <br><br>
+            <br>
             President joe button is interested in observing a time series of your parameter. <br>
             There are two possible ways to visualize the lontidunal progression: (1) a growth rate or (2) absolute values.
             <br><br>
@@ -365,7 +367,7 @@
 
             <!-- Text for Choice 4A-->
 
-            <div class="row col-sm-5 col-sm-offset-1" style="margin-left: 110px; margin-right: 20px; border-style: solid; border-color: grey">
+            <div class="row col-sm-5" style="margin-left: 50px; margin-right: 3px; border-style: solid; border-color: grey; height: 23%; width: 47%;">
             <div class="choice_title"><br>choice one: <em style="color: yellow;"> Absolute Values </em> </div>
             <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em>
             Absolute measurements avoid any assumptions around when its appropriate to sett time=0.
@@ -379,7 +381,7 @@
 
             <!-- Text for Choice 4B-->
 
-            <div class="row col-sm-5" style="margin-top: 0px; border-style: solid; border-color: grey">
+            <div class="row col-sm-5" style="margin-top: 0px; margin-left: 0px; margin-right: 0px; border-style: solid; border-color: grey; height: 23%; width: 47%;">
             <div class="choice_title"><br>choice two: <em style="color: yellow;"> Relative Growth</em> </div>
             <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em>
             Growth rates are better
@@ -403,15 +405,14 @@
             <section class="step" id ="choice_screen5" style="height: 1500px; margin-bottom: 10px;">
             <!-- <div><button class="openbtn" onclick="openNav()">&#9776; Open Menu</button></div> -->
 
-            <div class="title"> <em style="color: #818181;"> action number five: </em> Manipulate Your Data PT.2 </div>
+            <div class="title"> <em style="color: #818181;"> action number five: </em> Choosing your scale </div>
               <br>
-              <img id="player1_image2" src="player1_image"  class="center" style="display:none;" />
-              <img id="player2_image2" src="player2_image"  class="center" style="display:none;" />
-              <img id="player3_image2" src="player3_image"  class="center" style="display:none;" />
+              <img id="player1_image5" src="player1_image"  class="center" style="display:none;" />
+              <img id="player2_image5" src="player2_image"  class="center" style="display:none;" />
+              <img id="player3_image5" src="player3_image"  class="center" style="display:none;" />
 
 
-            <br><br>
-            A limitation to our visual, so far, is the measuement of only a single parameter.<br> As most data scientists know there are several confounding variables
+            A limitation to our visual, so far, is the measurement of only a single parameter.<br> As most data scientists know there are several confounding variables
             that may bias our observed trends. <br> Without overcomplicating our visuals with additional independent variables, we provide
             you with the option to normalize <br> your data by population or GDP - two variables we have previously established can effect CO_2 emissions and energy consumption.
             <br><br>
@@ -420,34 +421,34 @@
 
             <!-- Text for Choice 5A-->
 
-            <div class="row col-sm-3 col-sm-offset-1" style="margin-left: 210px; margin-right: 20px; border-style: solid; border-color: grey;">
+            <div class="row col-sm-5" style="margin-left: 50px; margin-right: 3px; border-style: solid; border-color: grey; height: 27%; width: 31%;">
             <div class="choice_title"><br>choice one: <em style="color: yellow;"> Divide by Annual Population per Country</em> </div>
             <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em>
             Population numbers vary widely acoss countries, without accounting for this number - possible inferences on how your parameters are
             changing for a particular country may be under- or overestimated.
-            <br>
+            <br><br>
             <label><input type="radio" name="Manip2" id="choice5a" value="Population"/>make choice one</label>
             <br><br>
             </div>
 
             <!-- Text for Choice 5B-->
 
-            <div class="row col-sm-3" style="margin-top: 0px; border-style: solid; margin-right: 20px; border-color: grey;">
+            <div class="row col-sm-5" style="margin-top: 0px; margin-left: 0px; margin-right: 0px; border-style: solid; border-color: grey; height: 27%; width: 31%;">
             <div class="choice_title"><br>choice two: <em style="color: yellow;"> Divide by Annual GDP per Country</em> </div>
             <br> <em style="color: green; font-size: 18px"> Argument For Selection:</em>
             A reasonable assumption is that GDP is correlated with energy production, consumption, and subsequently emissions.
-            To make robust comparisons between countries you should eliminate the causal effect of GDP by normalizing the data.
+            To make robust comparisons between countries you should eliminate the causal effect of GDP by normalizing the data.<br>
 
             <label><input type="radio" name="Manip2" id="choice5b" value="GDP"/>make choice two</label>
             <br><br>
             </div>
 
             <!-- Text for Choice 5C-->
-            <div class="row col-sm-3" style="margin-top: 0px; border-style: solid; border-color: grey">
+            <div class="row col-sm-5" style="margin-top: 0px; margin-left: 0px; margin-right: 0px; border-style: solid; border-color: grey; height: 27%; width: 31%;">
             <div class="choice_title"><br>choice three: <em style="color: yellow;"> NONE </em> </div>
             <br><br> <em style="color: green; font-size: 18px"> Argument For Selection:</em> Neither alternative provides a compelling alternative to
             the data's existing format.
-            <br><br><br><br>
+            <br><br><br><br><br>
             <label><input type="radio" name="Manip2" id="choice5c" value="NoneD"/>make choice three</label>
                 <br><br>
                 </div>
@@ -469,10 +470,9 @@
   <section class="step" id ="results_screen">
     <div class="title" >Mission Results</div><br><br>
 
-    <div  class="row col-sm-12" style="width: 100%;">
+    <div  class="row col-sm-12" style="width: 100%; padding-left: 200px; justify-content: center;">
 
-        <!-- Left Hand Panel -->
-        <!-- <div style="width: 70%; float: left; padding-left: 30px;"> -->
+
 
             <div class="title_dashboard" id="response">You got <span id="answer" style="color: #39ff14;"></span></div>
             <p style="text-align: left; color: #39ff14; font-weight: bold;" id="response2"> Your biases succesfully convinced Earth's leaders to <span id="answer2" style="color: #39ff14;"></span>!</p>
@@ -480,14 +480,12 @@
             <div class="title_dashboard">Your Resulting Visualization:</div>
             <div id="viz_results" style="float: center;"></div>
 
-        <!-- </div> -->
-
+            <br>
+        
       </div>
 
       <div  class="row col-sm-12">
-      <!-- <a href="index.html" class="next" style="font-family: 'Press Start 2P', sans-serif; font-size: 15px; padding-right: 150px;" onclick="window.location.replace('index.html');">Start Over!</a> -->
-      <a href="#final_dashboard" class="next" style="font-family: 'Press Start 2P', sans-serif; font-size: 15px; padding-right: 150px;" >Explore the impact of each variable</a>
-      <!-- <a href="#sources" class="next" style="font-family: 'Press Start 2P', sans-serif; font-size: 15px;"> View Sources </a> -->
+      <a href="#final_dashboard" class="next" style="font-family: 'Press Start 2P', sans-serif; font-size: 15px;" >Explore the impact of each variable</a>
       </div>
   </section>
 
@@ -502,15 +500,17 @@
             <!-- Left Hand Panel -->
             <div style="width: 70%; float: left; padding-left: 30px;">
 
-                <div class="title_dashboard">Your Resulting Visualization:</div>
+                <div class="title_dashboard">Resulting Visualization: <br></div><br>
                 <div id="viz_dashboard" style="float: center;"></div>
+                <div style="text-align: left; font-weight: bold;"><br>Do you think you would have made different decisions had you been able to look at the data and it's impact on the graph?<br></div>
+
 
             </div>
 
           <!-- Right Hand Panel -->
               <div style="margin-left: 70%; padding-right: 15px;">
 
-                <div class="title_dashboard">Toggle your decisions to view how wach of them biased the final visualization</div><br>
+                <div class="title_dashboard" style="font-size: 18px;">Toggle your decisions to view how wach of them biased the final visualization</div><br>
 
                 <!-- CHOICE 1 -->
                 <div class="action_dashboard">A1: Parameter</div>
@@ -529,10 +529,10 @@
 
                 <!-- CHOICE 3 -->
                 <div class="action_dashboard">A3: Countries</div>
-                  <label class="form-check-label"><input style="display: inline" type="radio" name="Group_prime" value="1" id="DashG1" checked>Top Oil Producing Nations </label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Group_prime" value="1" id="DashG1" checked>Top Oil Producing Countries</label>
                   <label class="form-check-label"><input style="display: inline" type="radio" name="Group_prime" value="3" id="DashG2">Countries w/ Largest Population Size</label>
                   <label class="form-check-label"><input style="display: inline" type="radio" name="Group_prime" value="4" id="DashG3">Most Technologically Advanced Countries</label>
-                  <label class="form-check-label"><input style="display: inline" type="radio" name="Group_prime" value="5" id="DashG4">Countries with highest renewable energy </label>
+                  <label class="form-check-label"><input style="display: inline" type="radio" name="Group_prime" value="5" id="DashG4">Countries with Most Diverse Energy Mix</label>
                   <br>
 
                 <!-- CHOICE 4 -->
@@ -551,6 +551,7 @@
           </div>
 
           <div  class="row col-sm-12">
+            <br>
           <a href="index.html" class="next" style="font-family: 'Press Start 2P', sans-serif; font-size: 15px; padding-right: 150px;" onclick="window.location.replace('index.html');">Start Over!</a>
           <a href="#sources" class="next" style="font-family: 'Press Start 2P', sans-serif; font-size: 15px;"> View Sources </a>
           </div>
@@ -608,8 +609,8 @@
   <script src="js/textanimations.js"></script>
   <script src="js/sidebar.js"></script>
   <script src="js/quiz.js"></script>
-  <script src="js/dashboard.js"></script>
   <script src="js/final_chart.js"></script>
+  <script src="js/dashboard.js"></script>
 
 
 

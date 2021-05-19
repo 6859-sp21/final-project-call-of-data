@@ -3,7 +3,7 @@
 // Speed (in milliseconds) of typing.
 var speedForward = 60, //Typing Speed
     speedWait = 1500, // Wait between typing and backspacing
-    speedBetweenLines = 150, //Wait between first and second lines
+    speedBetweenLines = 200, //Wait between first and second lines
     speedBackspace = 20; //Backspace Speed
 
 
@@ -104,8 +104,8 @@ var j = 0,
     Paragraph = false;
 
 var textArray2 = [
-  "I have a meeting with our planet's biggest polluters in 1 week,|and I need to convince them to Save The Planet!",
-  "Your mission is to create an unbiased visual|that tells the true story about climate change."
+  "I have a meeting with our planet's rulers in 1 week, and I need to convince them to Save The Planet!|Your mission is to create a visual that tells the true story of climate change.",
+  "There's only one catch...|The data is top secret, so you won't be able to look at it!"
 ];
 
 // animate element when it is in view
@@ -215,6 +215,19 @@ function reveal_text() {
 }
 
 
+var element3 = document.getElementById('fade-in-text2');
+var elementHeight3 = element3.clientHeight;
+
+document.addEventListener('scroll', reveal_text2);
+
+
+function reveal_text2() {
+  if (inView(element3, elementHeight3)) {
+    element3.classList.add('reveal_animate2');
+  }
+}
+
+
 
 
 
@@ -234,6 +247,12 @@ function picture1(){
 
     document.getElementById('player1_image3').src = pic.replace('30x30', '100x100');
     document.getElementById('player1_image3').style.display='block';
+
+    document.getElementById('player1_image4').src = pic.replace('30x30', '100x100');
+    document.getElementById('player1_image4').style.display='block';
+
+    document.getElementById('player1_image5').src = pic.replace('30x30', '100x100');
+    document.getElementById('player1_image5').style.display='block';
 }
 
 function picture2(){
@@ -246,6 +265,12 @@ function picture2(){
 
     document.getElementById('player2_image3').src = pic.replace('30x30', '100x100');
     document.getElementById('player2_image3').style.display='block';
+
+    document.getElementById('player2_image4').src = pic.replace('30x30', '100x100');
+    document.getElementById('player2_image4').style.display='block';
+
+    document.getElementById('player2_image5').src = pic.replace('30x30', '100x100');
+    document.getElementById('player2_image5').style.display='block';
 }
 
 function picture3(){
@@ -258,4 +283,10 @@ function picture3(){
 
     document.getElementById('player3_image3').src = pic.replace('30x30', '100x100');
     document.getElementById('player3_image3').style.display='block';
+
+    document.getElementById('player3_image4').src = pic.replace('30x30', '100x100');
+    document.getElementById('player3_image4').style.display='block';
+
+    document.getElementById('player3_image5').src = pic.replace('30x30', '100x100');
+    document.getElementById('player3_image5').style.display='block';
 }

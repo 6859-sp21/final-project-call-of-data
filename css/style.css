@@ -120,15 +120,6 @@ p {
   justify-content: center;
 }
 
-.choice_title {
-  font-family: "Courier";
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 2px;
-  color: white;
-  line-height: 1.2em;
-  text-align: center;
-}
 
 .center {
   height:120px;
@@ -167,23 +158,36 @@ p {
   text-align: left;
 }
 
+
+/* Choice Board Formatting */
 .choice_txt{
   font-family: "Courier";
   margin-bottom: 5px;
   color: white;
   line-height: 1.2em;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
 
 }
+
+.choice_title {
+  font-family: "Courier";
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 2px;
+  color: white;
+  line-height: 1.2em;
+  text-align: center;
+}
+
 /* Choice buttons */
 input[type=radio] {
-  display: block;
+  display: inline-block;
 }
 
 label {
   display: inline-block;
-  margin-top: 100px;
+  margin-top: 30px;
   color:#39ff14;
   border:1px solid green;
   padding:2px 10px;
@@ -202,14 +206,53 @@ label {
 }
 
 
-#tooltip{
+
+/* Mission Results Tooltip */
+#tooltip2{
   font-size: 10px;
+  text-align: left;
+  font-weight: bold;
+  background:#444 !important;
+  justify-content: right;
+  left: 15% !important;
+  top: 135px !important;
+  height: 390px !important;
+  width: 160px !important;
+  padding: 5px !important;
+  border:1px solid green;
+}
+
+#tooltip_title2{
+  font-size: 15px;
+  font-weight: bold;
   text-align: left;
   background:#444 !important;
   justify-content: right;
-  left: 135px !important;
-  top: 75px !important;
-  height: 375px !important;
+  left: 15% !important;
+  top: 135px !important;
+  height: 390px !important;
+  width: 160px !important;
+  padding: 5px !important;
+  border:1px solid green;
+}
+
+#tooltip_text2{
+  font-size: 10px;
+  font-weight: bold;
+
+}
+
+/* Final Dashboard Tooltip */
+
+#tooltip{
+  font-size: 10px;
+  text-align: left;
+  font-weight: bold;
+  background:#444 !important;
+  justify-content: right;
+  left: 5% !important;
+  top: 85px !important;
+  height: 390px !important;
   width: 160px !important;
   padding: 5px !important;
   border:1px solid green;
@@ -222,48 +265,19 @@ label {
   background:#444 !important;
   justify-content: right;
   left: 5% !important;
-  top: 75px !important;
-  height: 375px !important;
+  top: 85px !important;
+  height: 390px !important;
   width: 160px !important;
-  padding: 5px !important;
+  padding: 2px !important;
   border:1px solid green;
 }
 #tooltip_text{
   font-size: 10px;
-
-}
-
-#tooltip2{
-  font-size: 10px;
-  text-align: left;
-  background:#444 !important;
-  justify-content: right;
-  left: 135px !important;
-  top: 135px !important;
-  height: 375px !important;
-  width: 160px !important;
-  padding: 5px !important;
-  border:1px solid green;
-}
-
-#tooltip_title2{
-  font-size: 15px;
   font-weight: bold;
-  text-align: left;
-  background:#444 !important;
-  justify-content: right;
-  left: 5% !important;
-  top: 135px !important;
-  height: 375px !important;
-  width: 160px !important;
-  padding: 5px !important;
-  border:1px solid green;
-}
-
-#tooltip_text2{
-  font-size: 10px;
 
 }
+
+/* Chart Labels */
 
 .y_label{
   font-weight: bold;
@@ -273,6 +287,9 @@ label {
   font-weight: bold;
 }
 
+.chartTitle{
+  font-weight: bold;
+}
 
 /* Section links */
 /* Note this formatting causes problems for the buttons. Fix later */
@@ -479,13 +496,63 @@ p.cursor::after {
 
 
 .reveal_animate{
-  animation: fadeIn linear 12s;
-    -webkit-animation: fadeIn linear 12s;
-    -moz-animation: fadeIn linear 12s;
-    -o-animation: fadeIn linear 12s;
-    -ms-animation: fadeIn linear 12s;
+  animation: fadeIn linear 13s;
+    -webkit-animation: fadeIn linear 13s;
+    -moz-animation: fadeIn linear 13s;
+    -o-animation: fadeIn linear 13s;
+    -ms-animation: fadeIn linear 13s;
 }
 
+
+
+
+#fade-in-text2 {
+  display: inline-block;
+  font-family: "Courier";
+  font-size: 18px;
+  color: #fff;
+}
+
+
+@keyframes fadeIn {
+  0% {opacity:0;}
+  /* for delay */
+  95% { opacity:0; }
+  100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  95% { opacity:0; }
+  100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  95% { opacity:0; }
+  100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+  0% {opacity:0;}
+  95% { opacity:0; }
+  100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+  0% {opacity:0;}
+  95% { opacity:0; }
+  100% {opacity:1;}
+}
+
+
+.reveal_animate2{
+  animation: fadeIn linear 16s;
+    -webkit-animation: fadeIn linear 16s;
+    -moz-animation: fadeIn linear 16s;
+    -o-animation: fadeIn linear 16s;
+    -ms-animation: fadeIn linear 16s;
+}
 
 
 

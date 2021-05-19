@@ -15,8 +15,8 @@ var tooltip
 var parseDate = d3.timeParse("%Y-%m-%d")
 
 var margin = {top: 50, right: 100, bottom: 50, left: 200}
-var width = 900 - margin.left - margin.right
-var height = 450 - margin.top - margin.bottom
+var width = 1200 - margin.left - margin.right
+var height = 475 - margin.top - margin.bottom
 
 var lineOpacity = 1
 var lineStroke = "2px"
@@ -122,7 +122,15 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
         } else if(Manip2 == "GDP") { manip2_label =  " per GDP"
         } else{manip2_label = ""}
 
+    var group_label
+        if (Group == "1") { group_label =  "Top Oil Producing Countries"
+        } else if(Group == "3") { group_label =  "Countries w/ the Largest Populations"
+        } else if(Group == "4") { group_label =  " Most Technologically Advanced Countries"
+        } else{group_label = "the Countries with the Most Diverse Energy Mix"}
+
+
     var y_axis_label = parameter_label + manip2_label + manip1_label
+    var text_title = "The Impact of Climate Change on "+ group_label
 
     // necessary to nest data so that keys represent each category
     var res_nested = d3.nest()
@@ -131,7 +139,7 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
 
     // APPEND COLOR AXIS //
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
-    color.domain(category).range(d3.schemePaired)
+    color.domain(category).range(d3.schemeDark2)
 
 
     // CREATE LEGEND //
@@ -246,7 +254,17 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
       .attr("fill", "white")
       .text(y_axis_label);
 
-
+  // ADD GRAPH TITLE
+  // Following http://www.d3noob.org/2013/01/adding-title-to-your-d3js-graph.html
+        svg.append("text")
+        .attr("class", "chartTitle")             
+        .attr("x", (width / 2))             
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px") 
+        .style("fill", "white") 
+        .style("text-decoration", "blink")  
+        .text(text_title);
 
 // CREATE HOVER TOOLTIP WITH VERTICAL LINE //
     mouseG = svg.append("g")
@@ -384,7 +402,7 @@ function updateChartParameter(Parameter) {
 
 // Define and update color scale
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
-    color.domain(category).range(d3.schemePaired)
+    color.domain(category).range(d3.schemeDark2)
 
 // Y-Axis Label Variables
     var parameter_label
@@ -400,7 +418,15 @@ function updateChartParameter(Parameter) {
         } else if(manip2_val == "GDP") { manip2_label =  " per GDP"
         } else{manip2_label = ""}
 
+    var group_label
+        if (group_val == "1") { group_label =  "Top Oil Producing Countries"
+      } else if(group_val == "3") { group_label =  "Countries w/ the Largest Populations"
+      } else if(group_val == "4") { group_label =  " Most Technologically Advanced Countries"
+      } else{group_label = "the Countries with the Most Diverse Energy Mix"}
+
+
     var y_axis_label = parameter_label + manip2_label + manip1_label
+    var text_title = "The Impact of Climate Change on "+ group_label
 
   // Define and Update Y axis
     yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
@@ -456,6 +482,19 @@ function updateChartParameter(Parameter) {
           .attr("transform", "rotate(-90)")
           .attr("fill", "white")
           .text(y_axis_label);
+      
+      // Update Graph Title
+        svg.selectAll('.chartTitle').remove()
+
+        svg.append("text")
+            .attr("class", "chartTitle")             
+            .attr("x", (width / 2))             
+            .attr("y", 0 - (margin.top / 2))
+            .attr("text-anchor", "middle")  
+            .style("font-size", "16px") 
+            .style("fill", "white") 
+            .style("text-decoration", "blink")  
+            .text(text_title);
 
 
   // Nest  Data:
@@ -509,7 +548,7 @@ function updateChartYear(Year) {
 
 // Define and update color scale
   var category = d3.map(resNew, function(d){return d.Location;}).keys()
-  color.domain(category).range(d3.schemePaired)
+  color.domain(category).range(d3.schemeDark2)
 
 // Y-Axis Label Variables
   var parameter_label
@@ -525,7 +564,15 @@ function updateChartYear(Year) {
         } else if(manip2_val == "GDP") { manip2_label =  " per GDP"
         } else{manip2_label = ""}
 
+    var group_label
+        if (group_val == "1") { group_label =  "Top Oil Producing Countries"
+      } else if(group_val == "3") { group_label =  "Countries w/ the Largest Populations"
+      } else if(group_val == "4") { group_label =  " Most Technologically Advanced Countries"
+      } else{group_label = "the Countries with the Most Diverse Energy Mix"}
+
+
     var y_axis_label = parameter_label + manip2_label + manip1_label
+    var text_title = "The Impact of Climate Change on "+ group_label
 
 // Define and Update Y axis
   yScale.domain([d3.min(resNew, d => d.Value), d3.max(resNew, d => d.Value)])
@@ -582,6 +629,19 @@ function updateChartYear(Year) {
           .attr("transform", "rotate(-90)")
           .attr("fill", "white")
           .text(y_axis_label);
+      
+     // Update Graph Title
+        svg.selectAll('.chartTitle').remove()
+
+        svg.append("text")
+            .attr("class", "chartTitle")             
+            .attr("x", (width / 2))             
+            .attr("y", 0 - (margin.top / 2))
+            .attr("text-anchor", "middle")  
+            .style("font-size", "16px") 
+            .style("fill", "white") 
+            .style("text-decoration", "blink")  
+            .text(text_title);
 
  // Nest  Data:
     var res_nested = d3.nest()
@@ -636,7 +696,7 @@ function updateChartYear(Year) {
 // Y-Axis Label Variables
     var parameter_label
         if (parameter_val == "CO2") { parameter_label =  "CO2"
-        } else{ c =  "Energy"}
+        } else{ parameter_label =  "Energy"}
 
     var manip1_label
         if (manip1_val == "Growth") { manip1_label =  ", Growth (%)"
@@ -647,11 +707,19 @@ function updateChartYear(Year) {
         } else if(manip2_val == "GDP") { manip2_label =  " per GDP"
         } else{manip2_label = ""}
 
+    var group_label
+        if (Group == "1") { group_label =  "Top Oil Producing Countries"
+      } else if(Group == "3") { group_label =  "Countries w/ the Largest Populations"
+      } else if(Group == "4") { group_label =  " Most Technologically Advanced Countries"
+      } else{Group = "the Countries with the Most Diverse Energy Mix"}
+
+
     var y_axis_label = parameter_label + manip2_label + manip1_label
+    var text_title = "The Impact of Climate Change on "+ group_label
 
 // Define and update color scale
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
-    color.domain(category).range(d3.schemePaired)
+    color.domain(category).range(d3.schemeDark2)
 
 // Define and update legend
     svgLegend.selectAll('.legend').remove();
@@ -709,6 +777,20 @@ function updateChartYear(Year) {
         .attr("transform", "rotate(-90)")
         .attr("fill", "white")
         .text(y_axis_label);
+
+
+    // Update Graph Title
+        svg.selectAll('.chartTitle').remove()
+
+        svg.append("text")
+            .attr("class", "chartTitle")             
+            .attr("x", (width / 2))             
+            .attr("y", 0 - (margin.top / 2))
+            .attr("text-anchor", "middle")  
+            .style("font-size", "16px") 
+            .style("fill", "white") 
+            .style("text-decoration", "blink")  
+            .text(text_title);
 
     // Nest Data:
         var res_nested = d3.nest()
@@ -865,12 +947,19 @@ function updateChartManip1(Manip1) {
         } else if(manip2_val == "GDP") { manip2_label =  " per GDP"
         } else{manip2_label = ""}
 
-    var y_axis_label = parameter_label + manip2_label + manip1_label
+    var group_label
+        if (group_val == "1") { group_label =  "Top Oil Producing Countries"
+      } else if(group_val == "3") { group_label =  "Countries w/ the Largest Populations"
+      } else if(group_val == "4") { group_label =  " Most Technologically Advanced Countries"
+      } else{group_label = "the Countries with the Most Diverse Energy Mix"}
 
+
+    var y_axis_label = parameter_label + manip2_label + manip1_label
+    var text_title = "The Impact of Climate Change on "+ group_label
 
   // Define and update color scale
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
-    color.domain(category).range(d3.schemePaired)
+    color.domain(category).range(d3.schemeDark2)
 
 
   // Define and Update Y axis
@@ -929,6 +1018,19 @@ function updateChartManip1(Manip1) {
       .attr("fill", "white")
       .text(y_axis_label);
 
+    // Update Graph Title
+        svg.selectAll('.chartTitle').remove()
+
+        svg.append("text")
+            .attr("class", "chartTitle")             
+            .attr("x", (width / 2))             
+            .attr("y", 0 - (margin.top / 2))
+            .attr("text-anchor", "middle")  
+            .style("font-size", "16px") 
+            .style("fill", "white") 
+            .style("text-decoration", "blink")  
+            .text(text_title);
+    
   // Nest  Data:
       var res_nested = d3.nest()
         .key(d=>d.Location)
@@ -990,11 +1092,19 @@ function updateChartManip2(Manip2) {
         } else if(Manip2 == "GDP") { manip2_label =  " per GDP"
         } else{manip2_label = ""}
 
+    var group_label
+        if (group_val == "1") { group_label =  "Top Oil Producing Countries"
+      } else if(group_val == "3") { group_label =  "Countries w/ the Largest Populations"
+      } else if(group_val == "4") { group_label =  " Most Technologically Advanced Countries"
+      } else{group_label = "the Countries with the Most Diverse Energy Mix"}
+
+
     var y_axis_label = parameter_label + manip2_label + manip1_label
+    var text_title = "The Impact of Climate Change on "+ group_label
 
   // Define and update color scale
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
-    color.domain(category).range(d3.schemePaired)
+    color.domain(category).range(d3.schemeDark2)
 
 
   // Define and Update Y axis
@@ -1054,6 +1164,19 @@ function updateChartManip2(Manip2) {
         .attr("fill", "white")
         .text(y_axis_label);
 
+    // Update Graph Title
+        svg.selectAll('.chartTitle').remove()
+
+        svg.append("text")
+            .attr("class", "chartTitle")             
+            .attr("x", (width / 2))             
+            .attr("y", 0 - (margin.top / 2))
+            .attr("text-anchor", "middle")  
+            .style("font-size", "16px") 
+            .style("fill", "white") 
+            .style("text-decoration", "blink")  
+            .text(text_title);
+        
   // Nest  Data:
       var res_nested = d3.nest()
         .key(d=>d.Location)
