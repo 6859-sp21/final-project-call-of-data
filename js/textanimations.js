@@ -247,6 +247,12 @@ function picture1(){
 
     document.getElementById('player1_image3').src = pic.replace('30x30', '100x100');
     document.getElementById('player1_image3').style.display='block';
+
+    document.getElementById('player1_image4').src = pic.replace('30x30', '100x100');
+    document.getElementById('player1_image4').style.display='block';
+
+    document.getElementById('player1_image5').src = pic.replace('30x30', '100x100');
+    document.getElementById('player1_image5').style.display='block';
 }
 
 function picture2(){
@@ -259,6 +265,12 @@ function picture2(){
 
     document.getElementById('player2_image3').src = pic.replace('30x30', '100x100');
     document.getElementById('player2_image3').style.display='block';
+
+    document.getElementById('player2_image4').src = pic.replace('30x30', '100x100');
+    document.getElementById('player2_image4').style.display='block';
+
+    document.getElementById('player2_image5').src = pic.replace('30x30', '100x100');
+    document.getElementById('player2_image5').style.display='block';
 }
 
 function picture3(){
@@ -271,4 +283,10 @@ function picture3(){
 
     document.getElementById('player3_image3').src = pic.replace('30x30', '100x100');
     document.getElementById('player3_image3').style.display='block';
+
+    document.getElementById('player3_image4').src = pic.replace('30x30', '100x100');
+    document.getElementById('player3_image4').style.display='block';
+
+    document.getElementById('player3_image5').src = pic.replace('30x30', '100x100');
+    document.getElementById('player3_image5').style.display='block';
 }
