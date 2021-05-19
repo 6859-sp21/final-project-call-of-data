@@ -16,7 +16,7 @@ var parseDate = d3.timeParse("%Y-%m-%d")
 
 var margin = {top: 50, right: 100, bottom: 50, left: 200}
 var width = 900 - margin.left - margin.right
-var height = 450 - margin.top - margin.bottom
+var height = 465 - margin.top - margin.bottom
 
 var lineOpacity = 1
 var lineStroke = "2px"
@@ -259,7 +259,7 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
   svg.append("text")
           .attr("class", "chartTitle")             
           .attr("x", (width / 2))             
-          .attr("y", 0 - (margin.top / 2))
+          .attr("y", -10 - (margin.top / 2))
           .attr("text-anchor", "middle")  
           .style("font-size", "16px") 
           .style("fill", "white") 
@@ -489,7 +489,7 @@ function updateChartParameter(Parameter) {
         svg.append("text")
             .attr("class", "chartTitle")             
             .attr("x", (width / 2))             
-            .attr("y", 0 - (margin.top / 2))
+            .attr("y", -10 - (margin.top / 2))
             .attr("text-anchor", "middle")  
             .style("font-size", "16px") 
             .style("fill", "white") 
@@ -638,7 +638,7 @@ function updateChartYear(Year) {
         svg.append("text")
             .attr("class", "chartTitle")             
             .attr("x", (width / 2))             
-            .attr("y", 0 - (margin.top / 2))
+            .attr("y", -10 - (margin.top / 2))
             .attr("text-anchor", "middle")  
             .style("font-size", "16px") 
             .style("fill", "white") 
@@ -788,7 +788,7 @@ function updateChartYear(Year) {
         svg.append("text")
             .attr("class", "chartTitle")             
             .attr("x", (width / 2))             
-            .attr("y", 0 - (margin.top / 2))
+            .attr("y", -10 - (margin.top / 2))
             .attr("text-anchor", "middle")  
             .style("font-size", "16px") 
             .style("fill", "white") 
@@ -1028,7 +1028,7 @@ function updateChartManip1(Manip1) {
         svg.append("text")
             .attr("class", "chartTitle")             
             .attr("x", (width / 2))             
-            .attr("y", 0 - (margin.top / 2))
+            .attr("y", -10 - (margin.top / 2))
             .attr("text-anchor", "middle")  
             .style("font-size", "16px") 
             .style("fill", "white") 
@@ -1177,7 +1177,7 @@ function updateChartManip2(Manip2) {
         svg.append("text")
             .attr("class", "chartTitle")             
             .attr("x", (width / 2))             
-            .attr("y", 0 - (margin.top / 2))
+            .attr("y", -10 - (margin.top / 2))
             .attr("text-anchor", "middle")  
             .style("font-size", "16px") 
             .style("fill", "white") 
