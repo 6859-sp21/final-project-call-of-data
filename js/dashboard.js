@@ -373,6 +373,9 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
       updateChartManip2(this.value)
     })
 
+    document.getElementById("SubmissionButton").addEventListener("click", function() {
+      updateChartParameter("CO2")
+    });
 
 
 
