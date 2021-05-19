@@ -44,16 +44,21 @@ document.getElementById("form1").onsubmit=function() {
      function score2(x){
        if(x == "1965") {
          science = science + 1
+         oil = oil + 1
+         tech = tech + 1
        }
        if(x == "1990") {
-         tech = tech + 1
+         science = science + 1
          oil = oil + 1
+         tech = tech + 1
        }
      }
 
      function score3(x){
        if(x == "1") {
          oil = oil + 1
+         science = science + 1
+         tech = tech + 1
        }
        if(x == "3") {
          science = science + 1
@@ -61,31 +66,26 @@ document.getElementById("form1").onsubmit=function() {
          oil = oil + 1
        }
        if(x == "4") {
+         science = science + 1
          tech = tech + 1
+         oil = oil + 1
        }
        if(x = "5") {
          science = science + 1
+         tech = tech + 1
+         oil = oil + 1
        }
      }
 
      function score4(x){
        if(x == "Growth"){
-         if(eval("time") == "1990") {
-           if(eval("param") == "CO2") {
-             oil = oil + 1
-             tech = tech + 1
-           }
-           if(eval("param") == "Primary_Energy_Consumption") {
-             science = science + 1
-             tech = tech + 1
-           }
-         if(eval("time") == "1965") {
-           science = science + 1
-         }
+         science = science + 1
+         tech = tech + 1
+         oil = oil + 1
        }
        if(x == "Absolute") {
           tech = tech + 1
-          oil = oil + 2
+          oil = oil + 1
           science = science + 1
        }
      }
@@ -93,21 +93,64 @@ document.getElementById("form1").onsubmit=function() {
      function score5(x){
        if (x == "NoneD") {
          science = science + 1
-         if (eval("manip1") == "Growth") {
-         science = science + 2
-          }
+         if (eval("param") == "CO2") {
+           if (eval("manip1") == "Growth") {
+             science = science + 10
+           }
+         }
+         if (eval("manip1") == "Absolute") {
+           tech = tech + 10
+         }
+         if (eval("group") == "4") {
+           if (eval("manip1") == "Absolute") {
+             tech = tech + 10
+           } }
+         }
        }
+
+
        if (x == "Population") {
-         if(eval("manip1") == "Absolute") {
-           tech = tech + 2
+         science = science + 1
+         if (eval("param") == "Primary_Energy_Consumption") {
+           oil = oil + 2
+           if (eval("manip1") == "Growth") {
+             if (eval("group") == "4" ) {
+               oil = oil + 10
+             }
+             if (eval("group") == "5") {
+              oil = oil + 10
+            }
          }
-         oil = oil + 1
+         if (eval("time") == "1990") {
+           if (eval("group") == "1") {
+             if (eval("manip1") == "Growth") {
+               oil = oil + 10
+             } } }
        }
-      if (x == "GDP") {
          if(eval("manip1") == "Absolute") {
-           oil = oil + 3
+           tech = tech + 10
          }
-        science = science + 2
+
+         if (eval("param") == "CO2") {
+            if(eval("manip1" == "Growth")) {
+           science = science + 10
+         }
+       }
+     }
+
+      if (x == "GDP") {
+        science = science + 1
+         if (eval("manip1") == "Absolute") {
+           oil = oil + 10
+               }
+
+         if (eval("param") == "CO2") {
+           if (eval("group") == "4") {
+             if (eval("manip1") == "Growth") {
+               oil = oil + 10
+             }
+           }
+         }
       }
      }
 
