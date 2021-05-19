@@ -15,7 +15,7 @@ Authors: Axelle Clochard and Lama Aoudi
 For the sidebar: “How To Create a Collapsed Sidebar.” W3 Schools. Accessed May 19, 2021. https://www.w3schools.com/howto/howto_js_collapse_sidebar.asp. <br/><br/>
 For the typewriter effect: CodePen. “Multiline Typewriter Effect.”  David Carr. Accessed May 19, 2021. https://codepen.io/daviddcarr/details/XVyQMM. <br/><br/>
 For the text reveal: “Trigger Animation When Element Is in View (Pure JS).” JR Cologne. Accessed May 19, 2021. https://codepen.io/jr-cologne/pen/zdYdmx. <br/><br/>
-For the image reveal: Stack Overflow. “Html - How to Display Div after Click the Button in Javascript?” Ahsan Rathod. Accessed May 19, 2021. <br/><br/> https://stackoverflow.com/questions/6957443/how-to-display-div-after-click-the-button-in-javascript. <br/><br/>
+For the image reveal: Stack Overflow. “Html - How to Display Div after Click the Button in Javascript?” Ahsan Rathod. Accessed May 19, 2021. https://stackoverflow.com/questions/6957443/how-to-display-div-after-click-the-button-in-javascript. <br/><br/>
 For the quiz structure: “CodeActually: More Interactive Examples.” Accessed May 19, 2021. https://codeactually.com/examples.html. <br/><br/>
 For the final graph structure: “D3 V4 Multiple-Line Chart: Hover Tooltip.” Dianaow. Accessed May 19, 2021. https://bl.ocks.org/dianaow/0da76b59a7dffe24abcfa55d5b9e163e. <br/><br/>
 For the reactive axes: Holtz, Yan. “Update X Axis Limits in D3.Js Scatterplot.” Accessed May 19, 2021. https://www.d3-graph-gallery.com/graph/scatter_buttonXlim.html. <br/><br/>
