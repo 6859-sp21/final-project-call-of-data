@@ -5,8 +5,8 @@ Authors: Axelle Clochard and Lama Aoudi
 
 ### Abstract:
 
-### Link to Paper:
-### Link to Visualization: https://6859-sp21.github.io/final-project-call-of-data/
+##### Link to Paper:
+##### Link to Visualization: https://6859-sp21.github.io/final-project-call-of-data/
 
 ### Commentary on Process
 Once we agreed that we wanted to build a game that would playfully shed light on how bias works its way into the visualization process, we started by developing and refining a narrative. This was done over conversation between the two team members, and involved going over the class readings we thought were relevant as well as surfing through White-Hat/Black-Hat submissions. We started storyboarding on a shared slide deck how we thought our story could develop, and the various points at which the user would have to make decisions. We also browsed through past submissions and agreed that we liked the structure of Candace Okumko’s final project (https://github.mit.edu/6894-sp20/FP-Ethical-Visualization) - i.e. A narrative with embedded user choices culminating in a dashboard- although we ended up pursuing different implementation techniques.
