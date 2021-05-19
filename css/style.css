@@ -202,14 +202,53 @@ label {
 }
 
 
-#tooltip{
+
+/* Mission Results Tooltip */
+#tooltip2{
   font-size: 10px;
+  text-align: left;
+  font-weight: bold;
+  background:#444 !important;
+  justify-content: right;
+  left: 15% !important;
+  top: 135px !important;
+  height: 390px !important;
+  width: 160px !important;
+  padding: 5px !important;
+  border:1px solid green;
+}
+
+#tooltip_title2{
+  font-size: 15px;
+  font-weight: bold;
   text-align: left;
   background:#444 !important;
   justify-content: right;
-  left: 135px !important;
-  top: 75px !important;
-  height: 375px !important;
+  left: 15% !important;
+  top: 135px !important;
+  height: 390px !important;
+  width: 160px !important;
+  padding: 5px !important;
+  border:1px solid green;
+}
+
+#tooltip_text2{
+  font-size: 10px;
+  font-weight: bold;
+
+}
+
+/* Final Dashboard Tooltip */
+
+#tooltip{
+  font-size: 10px;
+  text-align: left;
+  font-weight: bold;
+  background:#444 !important;
+  justify-content: right;
+  left: 5% !important;
+  top: 85px !important;
+  height: 390px !important;
   width: 160px !important;
   padding: 5px !important;
   border:1px solid green;
@@ -222,48 +261,19 @@ label {
   background:#444 !important;
   justify-content: right;
   left: 5% !important;
-  top: 75px !important;
-  height: 375px !important;
+  top: 85px !important;
+  height: 390px !important;
   width: 160px !important;
-  padding: 5px !important;
+  padding: 2px !important;
   border:1px solid green;
 }
 #tooltip_text{
   font-size: 10px;
-
-}
-
-#tooltip2{
-  font-size: 10px;
-  text-align: left;
-  background:#444 !important;
-  justify-content: right;
-  left: 135px !important;
-  top: 135px !important;
-  height: 375px !important;
-  width: 160px !important;
-  padding: 5px !important;
-  border:1px solid green;
-}
-
-#tooltip_title2{
-  font-size: 15px;
   font-weight: bold;
-  text-align: left;
-  background:#444 !important;
-  justify-content: right;
-  left: 5% !important;
-  top: 135px !important;
-  height: 375px !important;
-  width: 160px !important;
-  padding: 5px !important;
-  border:1px solid green;
-}
-
-#tooltip_text2{
-  font-size: 10px;
 
 }
+
+/* Chart Labels */
 
 .y_label{
   font-weight: bold;

@@ -139,7 +139,7 @@ d3.csv("data/output/reshaped_country_data.csv", data => {
 
     // APPEND COLOR AXIS //
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
-    color.domain(category).range(d3.schemePaired)
+    color.domain(category).range(d3.schemeDark2)
 
 
     // CREATE LEGEND //
@@ -402,7 +402,7 @@ function updateChartParameter(Parameter) {
 
 // Define and update color scale
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
-    color.domain(category).range(d3.schemePaired)
+    color.domain(category).range(d3.schemeDark2)
 
 // Y-Axis Label Variables
     var parameter_label
@@ -549,7 +549,7 @@ function updateChartYear(Year) {
 
 // Define and update color scale
   var category = d3.map(resNew, function(d){return d.Location;}).keys()
-  color.domain(category).range(d3.schemePaired)
+  color.domain(category).range(d3.schemeDark2)
 
 // Y-Axis Label Variables
   var parameter_label
@@ -723,7 +723,7 @@ function updateChartYear(Year) {
 
 // Define and update color scale
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
-    color.domain(category).range(d3.schemePaired)
+    color.domain(category).range(d3.schemeDark2)
 
 // Define and update legend
     svgLegend.selectAll('.legend').remove();
@@ -963,7 +963,7 @@ function updateChartManip1(Manip1) {
     
   // Define and update color scale
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
-    color.domain(category).range(d3.schemePaired)
+    color.domain(category).range(d3.schemeDark2)
 
 
   // Define and Update Y axis
@@ -1109,7 +1109,7 @@ function updateChartManip2(Manip2) {
 
   // Define and update color scale
     var category = d3.map(resNew, function(d){return d.Location;}).keys()
-    color.domain(category).range(d3.schemePaired)
+    color.domain(category).range(d3.schemeDark2)
 
 
   // Define and Update Y axis
