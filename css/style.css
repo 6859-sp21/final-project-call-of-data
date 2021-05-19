@@ -140,7 +140,7 @@ p {
 
 .title_dashboard{
   font-family: "Courier";
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   margin-bottom: 2px;
   color: white;
@@ -216,7 +216,7 @@ label {
   justify-content: right;
   left: 15% !important;
   top: 135px !important;
-  height: 390px !important;
+  height: 365px !important;
   width: 160px !important;
   padding: 5px !important;
   border:1px solid green;
@@ -230,7 +230,7 @@ label {
   justify-content: right;
   left: 15% !important;
   top: 135px !important;
-  height: 390px !important;
+  height: 365px !important;
   width: 160px !important;
   padding: 5px !important;
   border:1px solid green;
@@ -251,8 +251,8 @@ label {
   background:#444 !important;
   justify-content: right;
   left: 5% !important;
-  top: 85px !important;
-  height: 390px !important;
+  top: 100px !important;
+  height: 365px !important;
   width: 160px !important;
   padding: 5px !important;
   border:1px solid green;
@@ -265,10 +265,10 @@ label {
   background:#444 !important;
   justify-content: right;
   left: 5% !important;
-  top: 85px !important;
-  height: 390px !important;
+  top: 100px !important;
+  height: 365px !important;
   width: 160px !important;
-  padding: 2px !important;
+  padding: 5px !important;
   border:1px solid green;
 }
 #tooltip_text{

@@ -14,9 +14,9 @@ var tooltip
 
 var parseDate = d3.timeParse("%Y-%m-%d")
 
-var margin = {top: 50, right: 100, bottom: 50, left: 200}
+var margin = {top: 50, right: 105, bottom: 40, left: 200}
 var width = 900 - margin.left - margin.right
-var height = 465 - margin.top - margin.bottom
+var height = 445 - margin.top - margin.bottom
 
 var lineOpacity = 1
 var lineStroke = "2px"
