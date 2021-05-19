@@ -547,11 +547,11 @@ p.cursor::after {
 
 
 .reveal_animate2{
-  animation: fadeIn linear 16s;
-    -webkit-animation: fadeIn linear 16s;
-    -moz-animation: fadeIn linear 16s;
-    -o-animation: fadeIn linear 16s;
-    -ms-animation: fadeIn linear 16s;
+  animation: fadeIn linear 21s;
+    -webkit-animation: fadeIn linear 21s;
+    -moz-animation: fadeIn linear 21s;
+    -o-animation: fadeIn linear 21s;
+    -ms-animation: fadeIn linear 21s;
 }
 
 
