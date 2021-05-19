@@ -92,46 +92,39 @@ document.getElementById("form1").onsubmit=function() {
 }
      function score5(x){
        if (x == "NoneD") {
-         science = science + 1
-         if (eval("param") == "CO2") {
+         if (eval("time") == "1990") {
            if (eval("manip1") == "Growth") {
              science = science + 10
            }
-         }
-         if (eval("manip1") == "Absolute") {
-           tech = tech + 10
-         }
-         if (eval("group") == "4") {
            if (eval("manip1") == "Absolute") {
              tech = tech + 10
-           } }
+           }
+         }
+         if (eval("time") == "1965") {
+           if (eval("manip1") == "Absolute") {
+             tech = tech + 10
+         }
+           if (eval("manip1") == "Growth") {
+             science = science + 10
+           }
          }
        }
 
 
        if (x == "Population") {
-         science = science + 1
          if (eval("param") == "Primary_Energy_Consumption") {
-           oil = oil + 2
            if (eval("manip1") == "Growth") {
-             if (eval("group") == "4" ) {
-               oil = oil + 10
-             }
-             if (eval("group") == "5") {
-              oil = oil + 10
+             oil = oil + 10
+         }
+           if (eval("manip1")=="Absolute") {
+            science = science + 10
             }
-         }
-         if (eval("time") == "1990") {
-           if (eval("group") == "1") {
-             if (eval("manip1") == "Growth") {
-               oil = oil + 10
-             } } }
        }
-         if(eval("manip1") == "Absolute") {
-           tech = tech + 10
-         }
 
-         if (eval("param") == "CO2") {
+          if (eval("param") == "CO2") {
+           if(eval("manip1") == "Absolute") {
+             tech = tech + 10
+         }
             if(eval("manip1" == "Growth")) {
            science = science + 10
          }
@@ -139,20 +132,29 @@ document.getElementById("form1").onsubmit=function() {
      }
 
       if (x == "GDP") {
-        science = science + 1
-         if (eval("manip1") == "Absolute") {
-           oil = oil + 10
-               }
-
-         if (eval("param") == "CO2") {
-           if (eval("group") == "4") {
-             if (eval("manip1") == "Growth") {
-               oil = oil + 10
-             }
-           }
-         }
+        if (eval("manip1") == "Absolute") {
+          oil = oil + 10
+        }
+        if (eval("manip2") == "Growth") {
+          if (eval("param") == "CO2") {
+            if (eval("group") != "3") {
+              oil = oil + 10
+            }
+            if (eval("group") == "3") {
+              science = science + 10
+            }
+          }
+          if (eval("param") = "Primary_Energy_Consumption") {
+            if (eval("group") != 4) {
+              science = science + 10
+            }
+            if (eval("group") == 4) {
+              oil = oil + 10
+          }
+        }
       }
      }
+   }
 
      // for the above function, you could also change the 1 to a variable so you could give more points for certain questions
 
