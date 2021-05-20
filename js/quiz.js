@@ -7,10 +7,13 @@ document.getElementById("form1").onsubmit=function() {
    //displays the response DOM element
    document.getElementById("response").style.display = "block";
    document.getElementById("response2").style.display = "block";
+   document.getElementById("response3").style.display = "block";
 
    //resets the DOM element on submit
    document.getElementById("answer").innerHTML = "";
    document.getElementById("answer2").innerHTML = "";
+   document.getElementById("answer3").innerHTML = "";
+
 
 
     //Retrieves the value of the user selected choice for each question:
@@ -78,9 +81,8 @@ document.getElementById("form1").onsubmit=function() {
      }
 
      function score4(x){
-       if(x == "Growth"){
+       if(x == "Growth") {
          science = science + 1
-         tech = tech + 1
          oil = oil + 1
        }
        if(x == "Absolute") {
@@ -135,26 +137,13 @@ document.getElementById("form1").onsubmit=function() {
         if (eval("manip1") == "Absolute") {
           oil = oil + 10
         }
-        if (eval("manip2") == "Growth") {
-          if (eval("param") == "CO2") {
-            if (eval("group") != "3") {
-              oil = oil + 10
-            }
-            if (eval("group") == "3") {
-              science = science + 10
-            }
-          }
-          if (eval("param") = "Primary_Energy_Consumption") {
-            if (eval("group") != 4) {
-              science = science + 10
-            }
-            if (eval("group") == 4) {
-              oil = oil + 10
-          }
-        }
-      }
-     }
-   }
+        if (eval("manip1") == "Growth") {
+            if(eval("param") == "CO2") {
+              if(eval("group") == "3") {science = science + 10}
+              else {oil = oil + 10} }
+        else {science = science + 10 } }
+    }
+  }
 
      // for the above function, you could also change the 1 to a variable so you could give more points for certain questions
 
@@ -178,7 +167,11 @@ document.getElementById("form1").onsubmit=function() {
 
    scorez = [{index:0, feedback: "SAVE THE PLANET"},
              {index:1, feedback: "SAVE THE FOSSIL FUEL INDUSTRY"},
-             {index:2, feedback: "SAVE SILICON VALLEY"}];
+             {index:2, feedback: "DON'T CHANGE A THING"}];
+
+   scorey = [{index:0, feedback: "You believe climate change is real,  CO2 emissions are rising, and energy consumption is increasing globally."},
+             {index:1, feedback: "You believe climate change is a hoax, CO2 emissions are declining, energy consumption is tapering off."},
+             {index:2, feedback: "You believe a tech revolution is not associated with negative effects on the climate."}];
 
 
 
@@ -189,6 +182,7 @@ document.getElementById("form1").onsubmit=function() {
       //this gets one answer, the last one it encounters with a match
    document.getElementById("answer").innerHTML = scores[i_prime].feedback;
    document.getElementById("answer2").innerHTML = scorez[i_prime].feedback;
+   document.getElementById("answer3").innerHTML = scorey[i_prime].feedback;
 
 
    //this version would allow for appending multiple answers; replace statement above
