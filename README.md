@@ -7,8 +7,9 @@ Authors: Axelle Clochard and Lama Aoudi
 
 Data exploration is often introduced as a crucial first step to creating a visualization. However, interacting with one’s data throughout the design process introduces a huge potential for bias by increasing the likelihood that designers will make data decisions based on whether the resulting graph agrees with their prior assumptions. Our final project, Call of Data, is an attempt to simulate the experience of creating a visualization in “data-blind” conditions. Throughout the course of this interactive experience, users will be asked to make a number of data decisions guided only by their _a priori_ knowledge of the variables in question. At the conclusion of the experience, they will find out which caricatural personality type the biases of their resulting graph most closely resembled. They will then be able to visualize the impact of each of their decisions in real time, and be prompted to contemplate whether they would have made different decisions had they had access to this knowledge. We hope that this experience will inspire users to consider a new design protocol: one where experimental interaction with data does not drive the creation of a data product, but rather becomes secondary to what we know about the variables at hand.
 
-##### Link to Paper: https://github.com/6859-sp21/final-project-call-of-data/blob/main/FinalPaper_SP21.pdf
+##### Link to Paper: hhttps://github.com/6859-sp21/final-project-call-of-data/blob/main/final/FinalPaper_SP21.pdf 
 ##### Link to Visualization: https://6859-sp21.github.io/final-project-call-of-data/
+##### Link to Video: https://github.com/6859-sp21/final-project-call-of-data/blob/main/final/final-presentation-SP21.mp4 
 
 ---
 ### Commentary on Process
