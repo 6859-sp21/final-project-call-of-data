@@ -496,11 +496,11 @@ p.cursor::after {
 
 
 .reveal_animate{
-  animation: fadeIn linear 13s;
-    -webkit-animation: fadeIn linear 13s;
-    -moz-animation: fadeIn linear 13s;
-    -o-animation: fadeIn linear 13s;
-    -ms-animation: fadeIn linear 13s;
+  animation: fadeIn linear 12s;
+    -webkit-animation: fadeIn linear 12s;
+    -moz-animation: fadeIn linear 12s;
+    -o-animation: fadeIn linear 12s;
+    -ms-animation: fadeIn linear 12s;
 }
 
 
@@ -547,11 +547,11 @@ p.cursor::after {
 
 
 .reveal_animate2{
-  animation: fadeIn linear 21s;
-    -webkit-animation: fadeIn linear 21s;
-    -moz-animation: fadeIn linear 21s;
-    -o-animation: fadeIn linear 21s;
-    -ms-animation: fadeIn linear 21s;
+  animation: fadeIn linear 22s;
+    -webkit-animation: fadeIn linear 22s;
+    -moz-animation: fadeIn linear 22s;
+    -o-animation: fadeIn linear 22s;
+    -ms-animation: fadeIn linear 22s;
 }
 
 
