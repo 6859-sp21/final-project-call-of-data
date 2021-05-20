@@ -204,12 +204,32 @@ data <- data[c("Year", "Year_num", "Location",  "Parameter", "Time", "Group", "M
 data <- subset(data, ! Metric %in% c("Growth_Pop", "Growth_Pop_90s"))
 data <- subset(data, ! Metric %in% c("Share_of_Global_CO2_90s", "CO2_per_Unit_Energy_90s", "Share_of_Global_CO2", "CO2_per_Unit_Energy"))
 
+# Re-format Country names:
+data$Location <- gsub("South", "S.", data$Location)
+data$Location <- gsub("United Kingdom", "U.K.", data$Location)
+data$Location <- gsub("United States", "U.S.A.", data$Location)
+
+
 # Write CSV
 write.csv(data, "reshaped_country_data.csv", row.names = F)
 
 # For Sanity Checks
 test1 <- subset(data, Parameter == "CO2" & Time == 1965 &  Manip1 == "Absolute" & Manip2 == "Absolute")
 test2 <- subset(data, Parameter == "CO2" & Time == 1990 &  Manip1 == "Absolute" & Manip2 == "Absolute")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

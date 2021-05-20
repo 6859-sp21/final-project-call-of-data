@@ -115,7 +115,7 @@ p {
   word-spacing: 1.5px;
   font-size: 14px;
   text-align: center;
-  margin: 120px !important;
+  margin: 90px !important;
   color: white;
   justify-content: center;
 }
@@ -140,7 +140,7 @@ p {
 
 .title_dashboard{
   font-family: "Courier";
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   margin-bottom: 2px;
   color: white;
@@ -212,11 +212,11 @@ label {
   font-size: 10px;
   text-align: left;
   font-weight: bold;
-  background:#444 !important;
+  background:#323232 !important;
   justify-content: right;
   left: 15% !important;
   top: 135px !important;
-  height: 390px !important;
+  height: 365px !important;
   width: 160px !important;
   padding: 5px !important;
   border:1px solid green;
@@ -226,11 +226,11 @@ label {
   font-size: 15px;
   font-weight: bold;
   text-align: left;
-  background:#444 !important;
+  background:#323232 !important;
   justify-content: right;
   left: 15% !important;
   top: 135px !important;
-  height: 390px !important;
+  height: 365px !important;
   width: 160px !important;
   padding: 5px !important;
   border:1px solid green;
@@ -248,11 +248,11 @@ label {
   font-size: 10px;
   text-align: left;
   font-weight: bold;
-  background:#444 !important;
+  background:#323232 !important;
   justify-content: right;
   left: 5% !important;
-  top: 85px !important;
-  height: 390px !important;
+  top: 100px !important;
+  height: 350px !important;
   width: 160px !important;
   padding: 5px !important;
   border:1px solid green;
@@ -262,13 +262,13 @@ label {
   font-size: 15px;
   font-weight: bold;
   text-align: left;
-  background:#444 !important;
+  background:#323232 !important;
   justify-content: right;
   left: 5% !important;
-  top: 85px !important;
-  height: 390px !important;
+  top: 100px !important;
+  height: 350px !important;
   width: 160px !important;
-  padding: 2px !important;
+  padding: 5px !important;
   border:1px solid green;
 }
 #tooltip_text{
@@ -496,11 +496,11 @@ p.cursor::after {
 
 
 .reveal_animate{
-  animation: fadeIn linear 13s;
-    -webkit-animation: fadeIn linear 13s;
-    -moz-animation: fadeIn linear 13s;
-    -o-animation: fadeIn linear 13s;
-    -ms-animation: fadeIn linear 13s;
+  animation: fadeIn linear 12s;
+    -webkit-animation: fadeIn linear 12s;
+    -moz-animation: fadeIn linear 12s;
+    -o-animation: fadeIn linear 12s;
+    -ms-animation: fadeIn linear 12s;
 }
 
 
@@ -547,11 +547,11 @@ p.cursor::after {
 
 
 .reveal_animate2{
-  animation: fadeIn linear 21s;
-    -webkit-animation: fadeIn linear 21s;
-    -moz-animation: fadeIn linear 21s;
-    -o-animation: fadeIn linear 21s;
-    -ms-animation: fadeIn linear 21s;
+  animation: fadeIn linear 22s;
+    -webkit-animation: fadeIn linear 22s;
+    -moz-animation: fadeIn linear 22s;
+    -o-animation: fadeIn linear 22s;
+    -ms-animation: fadeIn linear 22s;
 }
 
 
