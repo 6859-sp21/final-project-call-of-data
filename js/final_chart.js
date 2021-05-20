@@ -16,7 +16,7 @@ var parseDate = d3.timeParse("%Y-%m-%d")
 
 var margin = {top: 50, right: 150, bottom: 50, left: 200}
 var width = 1150 - margin.left - margin.right
-var height = 475 - margin.top - margin.bottom
+var height = 430 - margin.top - margin.bottom
 
 var lineOpacity = 1
 var lineStroke = "2px"

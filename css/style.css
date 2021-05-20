@@ -215,9 +215,9 @@ label {
   background:#323232 !important;
   justify-content: right;
   left: 15% !important;
-  top: 135px !important;
-  height: 365px !important;
-  width: 160px !important;
+  top: 125px !important;
+  height: 340px !important;
+  width: 180px !important;
   padding: 5px !important;
   border:1px solid green;
 }
@@ -229,8 +229,8 @@ label {
   background:#323232 !important;
   justify-content: right;
   left: 15% !important;
-  top: 135px !important;
-  height: 365px !important;
+  top: 180px !important;
+  height: 340px !important;
   width: 160px !important;
   padding: 5px !important;
   border:1px solid green;
@@ -252,7 +252,7 @@ label {
   justify-content: right;
   left: 5% !important;
   top: 100px !important;
-  height: 350px !important;
+  height: 345px !important;
   width: 160px !important;
   padding: 5px !important;
   border:1px solid green;
@@ -266,7 +266,7 @@ label {
   justify-content: right;
   left: 5% !important;
   top: 100px !important;
-  height: 350px !important;
+  height: 345px !important;
   width: 160px !important;
   padding: 5px !important;
   border:1px solid green;
@@ -547,11 +547,11 @@ p.cursor::after {
 
 
 .reveal_animate2{
-  animation: fadeIn linear 22s;
-    -webkit-animation: fadeIn linear 22s;
-    -moz-animation: fadeIn linear 22s;
-    -o-animation: fadeIn linear 22s;
-    -ms-animation: fadeIn linear 22s;
+  animation: fadeIn linear 23s;
+    -webkit-animation: fadeIn linear 23s;
+    -moz-animation: fadeIn linear 23s;
+    -o-animation: fadeIn linear 23s;
+    -ms-animation: fadeIn linear 23s;
 }
 
 

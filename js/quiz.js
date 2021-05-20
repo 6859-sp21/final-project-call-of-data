@@ -161,9 +161,9 @@ document.getElementById("form1").onsubmit=function() {
    maxscore = Math.max.apply(Math,all);
 
    // object holding scores and associated text for that character
-   scores = [{index:0, feedback: "HONEST SCIENTIST"},
-             {index:1, feedback: "OIL TYCOON"},
-             {index:2, feedback: "TECH ENTHUSIAST"}];
+   scores = [{index:0, feedback: "an HONEST SCIENTIST"},
+             {index:1, feedback: "an OIL TYCOON"},
+             {index:2, feedback: "a TECH ENTHUSIAST"}];
 
    scorez = [{index:0, feedback: "SAVE THE PLANET"},
              {index:1, feedback: "SAVE THE FOSSIL FUEL INDUSTRY"},
